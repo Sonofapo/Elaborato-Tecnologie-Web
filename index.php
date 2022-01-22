@@ -1,1 +1,5 @@
-ciao mamma
+<?php
+
+echo "Hello, world!";
+
+?>
