@@ -15,7 +15,7 @@
 		<form action="index.php" method="POST">
 			<h2><?php echo $isLogin ? "Login" : "Registrati" ?></h2>
 
-			<input type="hidden" name="action" value="login" />
+			<input type="hidden" name="action" value="<?php echo $isLogin ? "login" : "subscribe"?>" />
 
 			<label for="username">Username:</label>
 			<input type="text" id="username" name="username" />
