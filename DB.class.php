@@ -25,9 +25,7 @@ class DB {
 	public function login($username, $password) {
 		$password = md5($password);
 		$res = $this->query("SELECT id, username FROM users WHERE username = ? AND password = ?", [$username, $password], "ss");
-		if (count($res) && $res[0]["username"] == $username);
-			return $res[0]["id"];
-		return false;
+		return $res[0]["id"] ?? false;
 	}
 }
 
