@@ -5,31 +5,39 @@
 
 	session_start();
 
-	$action = $_REQUEST["action"] ?? "catalogo";
+	$vars = [];
+	$vars["action"] = $_REQUEST["action"] ?? "catalogo";
 
 	if (isset($_SESSION["uid"])) {
 		echo "SESSIONE ACCETTATA";
 	}
 
-	switch ($action) {
+	switch ($vars["action"]) {
 		case "catalogo":
 			$page = "base.php";
 			$content = "PAGINA BELLISSIMA PRINCIPALISSIMA DE LA MÈR";
 			break;
 		case "login":
-		case "subscribe":
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$usr = $_POST["username"];
 				$psw = $_POST["password"];
-				if ($action == "login" && ($uid = $db->login($usr, $psw)) !== false) {
+				if ($uid = $db->login($usr, $psw) !== false) {
 					$_SESSION["uid"] = $uid;
-				} else if ($action == "subscribe") {
-					$db->subscribe($usr, $psw);
 				}
 				header("Location: index.php");
 			}
 			$page = "login.php";
-			$isLogin = $action == "login" ? true : false;
+			$isLogin = true;
+			break;
+		case "subscribe":
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				$usr = $_POST["username"];
+				$psw = $_POST["password"];
+				$db->subscribe($usr, $psw);
+				header("Location: index.php");
+			}
+			$page = "login.php";
+			$isLogin = false;
 			break;
 		case "logout":
 			session_unset();

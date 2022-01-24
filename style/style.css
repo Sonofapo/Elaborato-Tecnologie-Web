@@ -1,15 +1,24 @@
-header{
-    text-align: center;
+header {
+	text-align: center;
 }
 
-li{
-    list-style: none;
+li {
+	list-style: none;
 }
 
-img{
-    height: 150px;
+img#logo-img {
+	height: 100px;
 }
 
-footer{
-    text-align: center;
+footer {
+	text-align: center;
+}
+
+span#search-icon {
+	position: absolute;
+	right: 5px;
+	margin-left: 5px;
+	height: 25px;
+	display: flex;
+	align-items: center;
 }
