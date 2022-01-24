@@ -16,7 +16,7 @@
 	</header>
 	<main>
 		<div><?php echo $content ?></div>
-		<?php echo isset($_SESSION["uid"]) ? $_SESSION["uid"] : "NON LOGGATO" ?>
+		<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>
 	</main>
 	<footer>
 		<a href="index.php">Torna alla Home</a>

@@ -27,6 +27,11 @@ class DB {
 		$res = $this->query("SELECT id, username FROM users WHERE username = ? AND password = ?", [$username, $password], "ss");
 		return $res[0]["id"] ?? false;
 	}
+
+	public function getUserById($id) {
+		$res = $this->query("SELECT username FROM users WHERE id = ?", [$id], "i");
+		return $res[0]["username"] ?? false;
+	}
 }
 
 ?>

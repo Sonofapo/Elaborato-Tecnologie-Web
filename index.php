@@ -7,13 +7,7 @@
 
 	$action = $_REQUEST["action"] ?? "catalogo";
 
-	if ($_SERVER["REQUEST_METHOD"] == "POST" && $action == "login") {
-		$usr = $_POST["username"];
-		$psw = $_POST["password"];
-		if (($uid = $db->login($usr, $psw)) !== false)
-			$_SESSION["uid"] = $uid;
-		header("Location: index.php");
-	} else if (isset($_SESSION["uid"])) {
+	if (isset($_SESSION["uid"])) {
 		echo "SESSIONE ACCETTATA";
 	}
 
@@ -24,8 +18,14 @@
 			break;
 		case "login":
 		case "subscribe":
-			if ($_SERVER["REQUEST_METHOD"] == "POST" && $action == "subscribe") {
-				$db->subscribe($_POST["username"], $_POST["password"]);
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				$usr = $_POST["username"];
+				$psw = $_POST["password"];
+				if ($action == "login" && ($uid = $db->login($usr, $psw)) !== false) {
+					$_SESSION["uid"] = $uid;
+				} else if ($action == "subscribe") {
+					$db->subscribe($usr, $psw);
+				}
 				header("Location: index.php");
 			}
 			$page = "login.php";
@@ -35,7 +35,6 @@
 			session_unset();
 			session_destroy();
 			header("Location: index.php");
-			break;
 	}
 
 	require $page;
