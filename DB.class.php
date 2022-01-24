@@ -5,7 +5,7 @@ class DB {
 	private $connection;
 
 	public function __construct() {
-		$this->connection = new mysqli("127.0.0.1", "unibonsai", "unibonsai1!", "UniBonsai");
+		$this->connection = new mysqli("127.0.0.1", "unibonsai", "unibonsai1!", "unibonsai");
 	}
 
 	public function query($statement, $vars, $types) {
