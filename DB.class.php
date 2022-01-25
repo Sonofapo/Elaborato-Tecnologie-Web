@@ -18,8 +18,12 @@ class DB {
 	}
 
 	public function subscribe($username, $password) {
-		$password = md5($password);
-		$this->query("INSERT INTO users (username, password, isVendor) VALUES (?, ?, false)", [$username, $password], "ss");
+		if ($this->login($username, $password) === false) {
+			$password = md5($password);
+			$this->query("INSERT INTO users (username, password, isVendor) VALUES (?, ?, false)", [$username, $password], "ss");
+			return true;
+		}
+		return false;
 	}
 
 	public function login($username, $password) {
@@ -32,6 +36,7 @@ class DB {
 		$res = $this->query("SELECT username FROM users WHERE id = ?", [$id], "i");
 		return $res[0]["username"] ?? false;
 	}
+
 }
 
 ?>

@@ -5,13 +5,16 @@ body{
 
 header {
 	text-align: center;
+	background-color:OliveDrab;
 }
 
 li {
 	list-style: none;
 }
 
-li > a, footer > div > a{  
+li > a, footer > div > a, 
+nav > div > div > h1 > a, 
+nav > div > div > h1 > a:hover{  
     text-decoration: none;
     color: white;
 }
@@ -25,20 +28,17 @@ footer{
 	left: 0;
 	bottom: 0;
 	width: 100%;
+	text-align: center;
 }
 
 footer > div{
 	padding: 15px 0;
 }
 
-img#logo-img {
+#base-img {
 	height: 100px;
 }
 
-footer {
-	text-align: center;
-}
-
-header > nav {
-	background-color:OliveDrab;
+#login-img {
+	height: 200px;
 }

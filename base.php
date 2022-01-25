@@ -18,23 +18,27 @@
 				<div class="col-4 navbar-collapse collapse">
 					<div class="navbar-nav">
 						<a class="me-auto" href="index.php">
-							<img id="logo-img" src="./img/logo.png" alt="" />
+							<img id="base-img" src="./img/logo.png" alt="" />
 						</a>
 					</div>
 				</div>
 				<div class="col-4">
-					<a class="navbar-brand m-0" href="#">UniBonsai</a>
+					<h1><a class="m-0" href="index.php">UniBonsai</a></h1>
 				</div>
 				<div class="col-4 navbar-collapse collapse" id="nav-opt">
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item">
-							<a class="nav-link" href="notifiche.php"><i class='fa fa-bell'></i> Notifiche</a>
+							<a class="nav-link" href="notifiche.php"><i class='fa fa-bell-o'></i> Notifiche</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="profilo.php"><i class='fa fa-user'></i> Profilo</a>
+						<li>
+							<a class="nav-link" href="?action=<?php echo $vars["logged"] ? 'profilo' : 'login' ?>"> 
+								<i class="fa fa-<?php echo $vars["logged"] ? 'user-circle-o' : 'sign-in' ?>"></i> <?php echo $vars["user"]?> 
+							</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#"><i class="fa fa-sign-out"></i> Logout</a>
+						<li>
+							<a class="nav-link" href="?action=<?php echo $vars["logged"] ? 'logout' : 'subscribe'?>"> 
+								<i class="fa fa-<?php echo $vars["logged"] ? 'sign-out' : 'id-card-o' ?>"></i> <?php echo $vars["logged"] ? 'Logout' : 'Registrati'?> 
+							</a>
 						</li>
 					</ul>
 				</div>
