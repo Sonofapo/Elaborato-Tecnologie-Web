@@ -4,12 +4,12 @@ header {
 
 li {
 	list-style: none;
-    margin-right: 20px;
+	margin-right: 20px;
 }
 
 li > a {  
-    text-decoration: none;
-    color: white;
+	text-decoration: none;
+	color: white;
 }
 
 
@@ -29,11 +29,7 @@ span#search-icon {
 	display: flex;
 	align-items: center;
 }
-header > nav > div > div > a > span {
-    margin-left: 15px;
-    font-size: larger;
-}
 
-header > nav{
-    background-color:OliveDrab;
+header > nav {
+	background-color:OliveDrab;
 }
