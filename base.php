@@ -50,7 +50,7 @@
 	</main>
 	<footer>
 		<div class="text-center bg-secondary">
-			<a href="index.php"><i class='fas fa-home'></i> Home</a>
+			<a href="index.php"><i class='fa fa-home'></i> Home</a>
 		</div>
 	</footer>
 </body>
