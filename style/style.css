@@ -1,3 +1,8 @@
+body{
+	position: relative;
+  	min-height: 100vh;
+}
+
 header {
 	text-align: center;
 }
@@ -7,18 +12,28 @@ li {
     margin-right: 20px;
 }
 
-li > a {  
+li > a, footer > div > a{  
     text-decoration: none;
     color: white;
 }
 
+main{
+	padding-bottom: 55px;
+}
+
+footer{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+footer > div{
+	padding: 15px 0;
+}
 
 img#logo-img {
 	height: 100px;
-}
-
-footer {
-	text-align: center;
 }
 
 span#search-icon {
@@ -30,7 +45,6 @@ span#search-icon {
 	align-items: center;
 }
 header > nav > div > div > a > span {
-    margin-left: 15px;
     font-size: larger;
 }
 

@@ -13,43 +13,43 @@
 </head>
 <body class="bg-light">
 	<header>
-		<!-- <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:OliveDrab">
-			<a class="navbar-brand" href="index.php">
-				<img id="logo-img" src="./img/logo.png" alt="" /><span>UniBonsai</span>
-			</a>
-			<div class="collapse navbar-collapse ml-5" id="nav-options">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="nav-item">
-						<a href="index.php?action=login" class="nav-link">Effettua login</a>
-					</li>
-					<li class="nav-item">
-						<a href="index.php?action=logout" class="nav-link">Effettua logout</a>
-					</li>
-				</ul>
-			</div>
-		</nav> -->
 		<nav class="navbar navbar-expand-lg navbar-dark">
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="index.php">
-						<img id="logo-img" src="./img/logo.png" alt="" /><span>UniBonsai</span>
-					</a>
+				<div class="navbar-collapse collapse ms-0">
+					<div class="navbar-nav">
+						<a class="navbar-brand" href="index.php"><img id="logo-img" src="./img/logo.png" alt="" /></a>
+					</div>
 				</div>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="nav-item"><a href="notifiche.php"><i class='fas fa-bell'></i> Notifiche </a></li>
-					<li class="nav-item"><a href="profilo.php"><i class='fas fa-user-alt'></i> Profilo </a></li>
-					<li class="nav-item"><a href="#"><i class="fas fa-sign-out-alt"></i></span> Logout </a></li>
-					<!-- <li class="nav-item"><a href="#"><i class="fas fa-sign-in-alt"></i></span> Login</a></li>      check already logged in-->
-				</ul>
-			</div>
-		</nav>
+				<div class="mx-auto">
+					<a class="navbar-brand" href="#">UniBonsai</a>
+				</div>
+				<div class="navbar-collapse collapse" id="nav-opt">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="notifiche.php"><i class='fa fa-bell'></i>Notifiche</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="profilo.php"><i class='fa fa-user'></i>Profilo</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#"><i class="fa fa-sign-out"></i>Logout</a>
+						</li>
+					</ul>
+				</div>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-opt" aria-expanded="false" aria-controls="nav-opt">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+            </div>
+        </nav>
 	</header>
 	<main>
 		<div><?php echo $vars["content"] ?></div>
 		<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>
 	</main>
 	<footer>
-		<a href="index.php"><i class='fas fa-home'></i> Torna alla Home</a>
+		<div class="text-center bg-secondary">
+			<a href="index.php"><i class='fas fa-home'></i> Home</a>
+		</div>
 	</footer>
 </body>
 </html>
