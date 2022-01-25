@@ -49,7 +49,9 @@
 		<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>
 	</main>
 	<footer>
-		<a href="index.php"><i class='fa fa-home'></i> Torna alla Home</a>
+		<div class="text-center bg-secondary">
+			<a href="index.php"><i class='fas fa-home'></i> Home</a>
+		</div>
 	</footer>
 </body>
 </html>
