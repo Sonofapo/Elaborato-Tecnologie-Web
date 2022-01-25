@@ -1,10 +1,11 @@
-header {
+header{
+	margin:0;
+	padding:0;
 	text-align: center;
 }
 
 li {
 	list-style: none;
-	margin-right: 20px;
 }
 
 li > a {  
@@ -19,15 +20,6 @@ img#logo-img {
 
 footer {
 	text-align: center;
-}
-
-span#search-icon {
-	position: absolute;
-	right: 5px;
-	margin-left: 5px;
-	height: 25px;
-	display: flex;
-	align-items: center;
 }
 
 header > nav {

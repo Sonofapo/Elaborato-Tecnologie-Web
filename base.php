@@ -14,16 +14,18 @@
 <body class="bg-light">
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark">
-			<div class="container-fluid">
-				<div class="col-5 navbar-collapse collapse">
+			<div class="container-fluid p-0">
+				<div class="col-4 navbar-collapse collapse">
 					<div class="navbar-nav">
 						<a class="me-auto" href="index.php">
 							<img id="logo-img" src="./img/logo.png" alt="" />
 						</a>
 					</div>
 				</div>
-				<a class="col-2 navbar-brand" href="#">UniBonsai</a>
-				<div class="col-5 navbar-collapse collapse" id="nav-opt">
+				<div class="col-4">
+					<a class="navbar-brand m-0" href="#">UniBonsai</a>
+				</div>
+				<div class="col-4 navbar-collapse collapse" id="nav-opt">
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item">
 							<a class="nav-link" href="notifiche.php"><i class='fa fa-bell'></i> Notifiche</a>
