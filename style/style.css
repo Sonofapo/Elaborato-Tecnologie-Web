@@ -1,17 +1,31 @@
 /* NAVBAR */
-nav {
+header {
 	background-color: rgb(28, 128, 33);
 	overflow: hidden;
 	padding: 12px;
+	text-align: center;
 }
 
-nav a, nav a:hover, footer a, footer a:hover {
+nav a, nav a:hover, footer a, footer a:hover, header a, header a:hover {
 	text-decoration: none;
 	color: white;
 }
 
+main p a {
+	text-decoration: none;
+}
+
+main h2 {
+	padding-bottom: 15px;
+}
+
 a#logo-img {
 	display: none;
+}
+
+img#login-img {
+	width: 85%;
+	padding-bottom: 30px;
 }
 
 ul#menu li {
@@ -57,6 +71,41 @@ body {
 	min-height: 100vh;
 }
 
+/* SIDEBAR */
+div#sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	transition: 0.3s;
+	padding-top: 40px;
+}
+
+div#sidenav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
+
+div#sidenav a:hover {
+	color: #f1f1f1;
+}
+
+span#close-sidebar {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+}
+
 /* MAIN */
 main {
 	padding-bottom: 55px;
@@ -83,6 +132,9 @@ footer > div {
 	a#logo-img {
 		display: block;
 	}
+	img#login-img {
+		width: 8%;
+	}
 
 	button#expand-menu {
 		display: none;
@@ -98,13 +150,20 @@ footer > div {
 	}
 	
 	div.flex-1 {
-		flex: 58%;
+		flex: 55%;
 		align-items: center;
 	}
 	
 	div.flex-2 {
-		flex: 42%;
+		flex: 45%;
 		align-items: center;
 		justify-content: flex-end;
+	}
+}
+
+@media screen and (min-width: 400px) {
+	
+	img#login-img {
+		width: 200px;
 	}
 }

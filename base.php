@@ -19,7 +19,7 @@
 	<header>
 		<nav class="flex-container">
 			<div class="flex-1">
-				<a id="logo-img" href="#"><img style="width:100px" src="./img/logo.png" alt=""></a>
+				<a id="logo-img" href="index.php"><img style="width:100px" src="./img/logo.png" alt=""></a>
 				<h1><a href="index.php">UniBonsai</a></h1>
 				<button id="expand-menu"><i class="fa fa-bars"></i></button>
 			</div>
@@ -38,6 +38,15 @@
 			</div>
 		</nav>
 	</header>
+	<aside>
+		<div id="sidenav">
+			<span style="cursor:pointer" id="close-sidebar" onclick="closeNav()"><i class="fa fa-arrow-left"></i></span>
+			<a href="#">Colore</a>
+			<a href="#">Dimensione</a>
+			<a href="#">Prezzo</a>
+		</div>
+		<span style="cursor:pointer" id="expand-sidebar" onclick="openNav()"><i class="fa fa-search"></i></span>
+	</aside>
 	<main>
 		<div><?php echo $vars["content"] ?></div>
 		<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>

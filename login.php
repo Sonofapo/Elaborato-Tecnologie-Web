@@ -11,47 +11,25 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body id="bg-img">
 	<header>
-		<img id="login-img" src="./img/logo.png"/>
+		<h1><a href="index.php">UniBonsai</a></h1>
 	</header>
 	<main>
-		<!-- <div class="container">
+		<div class="container-fluid">
 			<div class="row text-center">
-				<div class="col-4"></div>
-				<div class="col-4 p-5 mt-4 border border-dark rounded">
-					<h2>Effettua <?php echo $isLogin ? "il login" : "la registrazione" ?></h2>
-					<form action="index.php" method="POST">
-						<input type="hidden" name="action" value="<?php echo $isLogin ? "login" : "subscribe"?>" />
-						<label for="username">Username:</label>
-						<input class="form-control mb-3" type="text" id="username" name="username" />
-						<label for="password">Password:</label>
-						<input class="form-control mb-3" type="password" id="password" name="password" />
-						<input class="btn btn-success mb-4" type="submit" value="<?php echo $isLogin ? "accedi" : "registrati"?>" />
-					</form>
-					<p>
-						oppure
-						<a href="index.php?action=<?php echo $isLogin ? "subscribe" : "login" ?>">
-							<?php echo $isLogin ? "registrati" : "accedi"?>
-						</a>
-					</p>
-				</div>
-				<div class="col-4"></div>
-			</div>
-		</div> -->
-		<div class="container">
-			<div class="row text-center">
-				<div class="col-1 col-md-4"></div>
-				<div class="col-10 col-md-4 p-5 mt-4 border border-dark rounded">
-					<h2>Effettua <?php echo $isLogin ? "il login" : "la registrazione" ?></h2>
+				<div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+				<div class="col-10 col-md-8 col-lg-6 col-xl-4 p-5 mt-4 border border-dark rounded">
+					<img id="login-img" src="./img/logo.png"/>
+					<h2><?php echo $isLogin ? "Accesso" : "Registrazione" ?></h2>
 					<form action="index.php" method="POST">
 						<input type="hidden" name="action" value="<?php echo $isLogin ? "login" : "subscribe"?>" />
 						
 						<label for="username">Username:</label>
-						<input class="form-control mb-3" type="text" id="username" name="username" />
+						<input class="form-control mb-3" type="text" id="username" name="username" required />
 						
 						<label for="password">Password:</label>
-						<input class="form-control mb-3" type="password" id="password" name="password" />
+						<input class="form-control mb-3" type="password" id="password" name="password" required />
 						
 						<input class="btn btn-success mb-4" type="submit" value="<?php echo $isLogin ? "accedi" : "registrati"?>" />
 					</form>
@@ -62,7 +40,7 @@
 						</a>
 					</p>
 				</div>
-				<div class="col-1 col-md-4"></div>
+				<div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
 			</div>
 		</div>
 	</main>
