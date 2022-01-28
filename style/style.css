@@ -1,29 +1,52 @@
-body{
-	position: relative;
-  	min-height: 100vh;
+/* NAVBAR */
+nav {
+	background-color: rgb(28, 128, 33);
+	overflow: hidden;
+	padding: 12px;
 }
 
-header {
+nav a, nav a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+a#logo-img {
+	display: none;
+}
+
+ul#menu li {
+	display: inline;
+	margin: 0 10px;
+}
+
+ul#menu {
+	display: none;
 	text-align: center;
-	background-color:OliveDrab;
+	width: 100%;
+	padding: 0;
+	margin: 0;
 }
 
-li {
-	list-style: none;
+button#expand-menu {
+	border: none;
+	background-color: inherit;
+	color: white;
+	font-size: larger;
 }
 
-li > a, footer > div > a, 
-nav > div > div > h1 > a, 
-nav > div > div > h1 > a:hover{  
-    text-decoration: none;
-    color: white;
+/* BODY */
+body {
+	position: relative;
+	min-height: 100vh;
 }
 
-main{
+/* MAIN */
+main {
 	padding-bottom: 55px;
 }
 
-footer{
+/* FOOTER */
+footer {
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -31,14 +54,29 @@ footer{
 	text-align: center;
 }
 
-footer > div{
+footer > div {
 	padding: 15px 0;
 }
 
-#base-img {
-	height: 100px;
-}
+@media screen and (min-width: 768px) {
+	nav {
+		padding: 10px;
+	}
 
-#login-img {
-	height: 200px;
+	a#logo-img {
+		display: block;
+	}
+
+	ul#menu {
+		display: block;
+		text-align: right;
+	}
+
+	button#expand-menu {
+		display: none;
+	}
+
+	ul#menu {
+		display: block !important;
+	}
 }
