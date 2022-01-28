@@ -5,7 +5,7 @@ nav {
 	padding: 12px;
 }
 
-nav a, nav a:hover {
+nav a, nav a:hover, footer a, footer a:hover {
 	text-decoration: none;
 	color: white;
 }
@@ -21,8 +21,6 @@ ul#menu li {
 
 ul#menu {
 	display: none;
-	text-align: center;
-	width: 100%;
 	padding: 0;
 	margin: 0;
 }
@@ -32,6 +30,25 @@ button#expand-menu {
 	background-color: inherit;
 	color: white;
 	font-size: larger;
+}
+
+nav.flex-container {
+	display: flex;
+	flex-direction: column;
+	vertical-align: middle;
+}
+
+div.flex-1 {
+	flex: 100%;
+	display: flex;
+	justify-content: space-between;
+
+}
+
+div.flex-2 {
+	flex: 100%;
+	display: flex;
+	justify-content: center;
 }
 
 /* BODY */
@@ -67,16 +84,27 @@ footer > div {
 		display: block;
 	}
 
-	ul#menu {
-		display: block;
-		text-align: right;
-	}
-
 	button#expand-menu {
 		display: none;
 	}
 
 	ul#menu {
 		display: block !important;
+		text-align: right;
+	}
+
+	nav.flex-container {
+		flex-direction: row;
+	}
+	
+	div.flex-1 {
+		flex: 58%;
+		align-items: center;
+	}
+	
+	div.flex-2 {
+		flex: 42%;
+		align-items: center;
+		justify-content: flex-end;
 	}
 }

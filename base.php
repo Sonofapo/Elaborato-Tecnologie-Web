@@ -17,23 +17,25 @@
 </head>
 <body>
 	<header>
-		<nav>
-			<div class="d-flex justify-content-between align-items-center">
+		<nav class="flex-container">
+			<div class="flex-1">
 				<a id="logo-img" href="#"><img style="width:100px" src="./img/logo.png" alt=""></a>
-				<h1><a href="#">UniBonsai</a></h1>
+				<h1><a href="index.php">UniBonsai</a></h1>
 				<button id="expand-menu"><i class="fa fa-bars"></i></button>
 			</div>
-			<ul id="menu">
-				<li><a href="notifiche.php"><i class="fa fa-bell-o"></i> Notifiche</a></li>
-				<li><a href="?action=<?php echo $vars["logged"] ? 'profilo' : 'login' ?>">
-					<i class="fa fa-<?php echo $vars["logged"] ? 'user-circle-o' : 'sign-in' ?>"></i> 
-					<?php echo $vars["user"]?> 
-				</a></li>
-				<li><a href="?action=<?php echo $vars["logged"] ? 'logout' : 'subscribe'?>">
-					<i class="fa fa-<?php echo $vars["logged"] ? 'sign-out' : 'id-card-o' ?>"></i> 
-					<?php echo $vars["logged"] ? "Logout" : "Registrati" ?>
-				</a></li>
-			</ul>
+			<div class="flex-2">
+				<ul id="menu">
+					<li><a href="notifiche.php"><i class="fa fa-bell-o"></i> Notifiche</a></li>
+					<li><a href="?action=<?php echo $vars["logged"] ? 'profilo' : 'login' ?>">
+						<i class="fa fa-<?php echo $vars["logged"] ? 'user-circle-o' : 'sign-in' ?>"></i> 
+						<?php echo $vars["user"]?> 
+					</a></li>
+					<li><a href="?action=<?php echo $vars["logged"] ? 'logout' : 'subscribe'?>">
+						<i class="fa fa-<?php echo $vars["logged"] ? 'sign-out' : 'id-card-o' ?>"></i> 
+						<?php echo $vars["logged"] ? "Logout" : "Registrati" ?>
+					</a></li>
+				</ul>
+			</div>
 		</nav>
 	</header>
 	<main>
