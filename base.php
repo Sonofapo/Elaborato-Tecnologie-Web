@@ -21,7 +21,7 @@
 			<div class="flex-1">
 				<a id="logo-img" href="index.php"><img style="width:100px" src="./img/logo.png" alt=""></a>
 				<h1><a href="index.php">UniBonsai</a></h1>
-				<button id="expand-menu"><i class="fa fa-bars"></i></button>
+				<button class="icon" id="expand-menu"><i class="fa fa-bars"></i></button>
 			</div>
 			<div class="flex-2">
 				<ul id="menu">
@@ -41,62 +41,53 @@
 		</nav>
 	</header>
 	<aside>
-		<div id="sidenav">
-			<span style="cursor:pointer" id="close-sidebar" onclick="closeNav()"><i class="fa fa-arrow-left"></i></span>
-			<div id="accordion">
-				<div class="card">
-					<div class="card-header">
-						<h2><a class="btn" data-bs-toggle="collapse" href="#collapseOne">Forma</a></h2>
-					</div>
-					<div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
-						<div class="card-body">
-							<div class="checkbox">
-  								<label><input type="checkbox" value=""> Forma 1</label>
-							</div>
-							<div class="checkbox">
-								<label><input type="checkbox" value=""> Forma 2</label>
-							</div>
-							<div class="checkbox">
-								<label><input type="checkbox" value=""> Forma 3</label>
-							</div>
+		<div id="sidenav" class="pt-3">
+			<button class="icon" id="close-search"><i class="fa fa-arrow-left"></i></button>
+			<div id="accordion" class="mt-3">
+				<div>
+					<h2 class="header m-0">
+						<a class="collapsed" data-bs-toggle="collapse" href="#search-1">Forma</a>
+					</h2>
+					<div id="search-1" class="collapse" data-bs-parent="#accordion">
+						<div class="body m-0 py-3">
+							<label><input type="checkbox" value=""> Forma 1</label>
+							<label><input type="checkbox" value=""> Forma 2</label>
+							<label><input type="checkbox" value=""> Forma 3</label>
 						</div>
 					</div>
 				</div>
-				<div class="card">
-					<div class="card-header">
-						<h2><a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">Dimensione</a></h2>
-					</div>
-					<div id="collapseTwo" class="collapse" data-bs-parent="#accordion"> 
-						<div class="card-body">
-							<div class="checkbox">
-  								<label><input type="checkbox" value=""> Dimensione 1</label>
-							</div>
-							<div class="checkbox">
-								<label><input type="checkbox" value=""> Dimensione 2</label>
-							</div>
-							<div class="checkbox">
-								<label><input type="checkbox" value=""> Dimensione 3</label>
-							</div>
+				<div>
+					<h2 class="header m-0">
+						<a class="collapsed" data-bs-toggle="collapse" href="#search-2">Dimensione</a>
+					</h2>
+					<div id="search-2" class="collapse" data-bs-parent="#accordion"> 
+						<div class="body m-0 py-3">
+							<label><input type="checkbox" value=""> Dimensione 1</label>
+							<label><input type="checkbox" value=""> Dimensione 2</label>
+							<label><input type="checkbox" value=""> Dimensione 3</label>
 						</div>
 					</div>
 				</div>
-				<div class="card">
-					<div class="card-header">
-						<h2><a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">Prezzo</a></h2>
-					</div>
-					<div id="collapseThree" class="collapse" data-bs-parent="#accordion">
-						<div class="card-body">
-							<input type="range" min="1" max="200" value="200" id="slider" onchange="updateValue(this.value);"/>
-							<p>Prezzo max: <span id="value">200</span></p>
+				<div>
+					<h2 class="header m-0">
+						<a class="collapsed" data-bs-toggle="collapse" href="#search-3">Prezzo</a>
+					</h2>
+					<div id="search-3" class="collapse" data-bs-parent="#accordion">
+						<div class="body m-0 py-3">
+							<input type="range" min="1" max="200" value="200" id="slider" />
+							<label>Prezzo max: <span id="search-value">200</span></label>
 						</div>
 					</div>
 				</div>
 			</div>
-			<button type="button" class="btn btn-secondary" id="cerca">Cerca</button>
+			<button type="button" class="btn btn-secondary mt-3" id="cerca">Applica</button>
 		</div>
-		<span style="cursor:pointer" id="expand-sidebar" onclick="openNav()"><i class="fa fa-search"></i></span>
 	</aside>
 	<main>
+		<div id="filters">
+			<button title="Filtri" class="icon" id="search-button"><i class="fa fa-search"></i></button>
+			Filtri correnti: "<span id="current-filters">nessuno</span>"
+		</div>
 		<div><?php echo $vars["content"] ?></div>
 		<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>	
 	</main>

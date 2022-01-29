@@ -1,6 +1,6 @@
 /* NAVBAR */
 header {
-	background-color: rgb(28, 128, 33);
+	background-color: forestgreen;
 	overflow: hidden;
 	padding: 12px;
 	text-align: center;
@@ -11,11 +11,11 @@ nav a, nav a:hover, footer a, footer a:hover, header a, header a:hover {
 	color: white;
 }
 
-nav li a {
+nav li a, footer a {
 	padding: 5px 10px;
 }
 
-nav li a:hover {
+nav li a:hover, footer a:hover {
 	background-color: rgba(234, 234, 247, 0.644);
 	border-radius: 5px;
 	color: black;
@@ -35,7 +35,7 @@ ul#menu {
 	margin: 0;
 }
 
-button#expand-menu {
+button.icon {
 	border: none;
 	background-color: inherit;
 	color: white;
@@ -74,6 +74,20 @@ main {
 	padding-bottom: 55px;
 }
 
+main button#search-button:hover {
+	color: white;
+}
+
+main button.icon {
+	color: black;
+	border-radius: 2px;
+}
+
+main div#filters {
+	background-color: rgba(151, 151, 151, 0.726);
+	padding: 5px 7px;
+}
+
 div.fade-me {
 	display: flex;
 	width: 100%;
@@ -96,10 +110,9 @@ div#sidenav {
 	z-index: 1;
 	top: 0;
 	left: 0;
-	background-color: #111;
+	background-color: #1A5653;
 	overflow-x: hidden;
 	transition: 0.3s;
-	padding-top: 40px;
 	text-align: center;
 }
 
@@ -107,59 +120,49 @@ div#sidenav a {
 	padding: 10px 0;
 	text-decoration: none;
 	font-size: 25px;
-	color: #818181;
+	color: white;
 	display: block;
 	transition: 0.3s;
 }
 
 div#sidenav a:hover {
-	color: #f1f1f1;
+	color: #818181;
 }
 
-span#close-sidebar {
-	position: absolute;
-	top: 0;
-	right: 25px;
-	font-size: 36px;
-	margin-left: 50px;
-}
-
-div#accordion{
-	margin-top: 20px;
-}
-
-div.card-header, div.card-body, 
-div.card-header > h2, div.card-header > h2 > a,
-div.card-body ul {
+button#close-search {
+	position: relative;
+	left: 100px;
 	margin: 0;
-	padding: 0;
-	list-style: none;
 }
-div.card-header {
-	text-align: justify;
-	background-color: black;
+
+div.body label {
+	display: list-item;
+}
+
+h2.header {
+	background-color: #08313A;
 	color: white;
+	padding: 7px 0;
 }
 
-div.card{
-	border: none;
+div#accordion > div:not(:last-of-type) > h2.header {
+	border-bottom: solid #062127 1.2pt;
 }
 
-.slider:hover {
-	opacity: 1;
-}
-
-div.card-body {
+div.body {
+	background-color: #08313ab4;
 	margin: 15px 0;
+	list-style: none;
+	color: white;
 }
 
 input#slider {
 	width: 80%;
 }
 
-div#sidenav button {
-	margin-top: 30px;
+button#cerca {
 	width: 40%;
+	padding: 10px 0;
 }
 
 /* BODY */
@@ -172,11 +175,6 @@ body {
 img#login-img {
 	width: 85%;
 	padding-bottom: 30px;
-}
-
-/* MAIN */
-main {
-	padding-bottom: 55px;
 }
 
 /* FOOTER */
