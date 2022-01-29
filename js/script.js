@@ -21,3 +21,7 @@ function closeNav() {
 	document.getElementById("sidenav").style.width = "0";
 	document.body.style.backgroundColor = "rgba(0,0,0,0)";
 }
+
+function updateValue(val){
+	document.getElementById("value").innerHTML = val;
+}
