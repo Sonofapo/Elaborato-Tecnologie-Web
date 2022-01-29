@@ -25,7 +25,9 @@
 			</div>
 			<div class="flex-2">
 				<ul id="menu">
+					<?php if ($vars["logged"]): ?>
 					<li><a href="notifiche.php"><i class="fa fa-bell-o"></i> Notifiche</a></li>
+					<?php endif ?>
 					<li><a href="?action=<?php echo $vars["logged"] ? 'profilo' : 'login' ?>">
 						<i class="fa fa-<?php echo $vars["logged"] ? 'user-circle-o' : 'sign-in' ?>"></i> 
 						<?php echo $vars["user"]?> 

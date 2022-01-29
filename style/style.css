@@ -15,6 +15,16 @@ nav a, nav a:hover, footer a, footer a:hover, header a, header a:hover {
 	color: white;
 }
 
+nav li a {
+	padding: 5px 10px;
+}
+
+nav li a:hover {
+	background-color: rgba(234, 234, 247, 0.644);
+	border-radius: 5px;
+	color: black;
+}
+
 main p a {
 	text-decoration: none;
 }
@@ -34,7 +44,6 @@ img#login-img {
 
 ul#menu li {
 	display: inline;
-	margin: 0 10px;
 }
 
 ul#menu {
