@@ -20,8 +20,10 @@
 				$psw = $_POST["password"];
 				if (($uid = $db->login($usr, $psw)) !== false) {			
 					$_SESSION["uid"] = $uid;
+					header("Location: index.php");
+				} else {
+					$error = "Credenziali non corrette";
 				}
-				header("Location: index.php");
 			}
 			$vars["page"] = "login.php";
 			$isLogin = true;

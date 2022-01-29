@@ -21,21 +21,8 @@ nav li a:hover {
 	color: black;
 }
 
-main p a {
-	text-decoration: none;
-}
-
-main h2 {
-	padding-bottom: 15px;
-}
-
 a#logo-img {
 	display: none;
-}
-
-img#login-img {
-	width: 85%;
-	padding-bottom: 30px;
 }
 
 ul#menu li {
@@ -74,10 +61,31 @@ div.flex-2 {
 	justify-content: center;
 }
 
-/* BODY */
-body {
-	position: relative;
-	min-height: 100vh;
+/* MAIN */
+main p a {
+	text-decoration: none;
+}
+
+main h2 {
+	padding-bottom: 15px;
+}
+
+main {
+	padding-bottom: 55px;
+}
+
+div.fade-me {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	position: fixed;
+	top: 100px;
+	z-index: 5;
+}
+
+div.fade-me > div {
+	text-align: center;
+	min-width: 35%;
 }
 
 /* SIDEBAR */
@@ -115,9 +123,16 @@ span#close-sidebar {
 	margin-left: 50px;
 }
 
-/* MAIN */
-main {
-	padding-bottom: 55px;
+/* BODY */
+body {
+	position: relative;
+	min-height: 100vh;
+}
+
+/* OTHERS */
+img#login-img {
+	width: 85%;
+	padding-bottom: 30px;
 }
 
 /* FOOTER */

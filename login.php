@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+	<title>UniBonsai - <?php echo ucfirst($vars["action"]) ?></title>
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<title>UniBonsai - <?php echo ucfirst($vars["action"]) ?></title>
-	
 	<link rel="icon" href="./img/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="./style/style.css" type="text/css" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="./js/script.js"></script>
 </head>
-<body id="bg-img">
+<body>
 	<header>
 		<h1><a href="index.php">UniBonsai</a></h1>
 	</header>
 	<main>
+		<?php if (isset($error)): ?>
+		<div class="fade-me">
+			<div class="alert alert-danger">
+				<?php echo $error ?>
+			</div>
+		</div>
+		<?php endif ?>
 		<div class="container-fluid">
 			<div class="row text-center">
 				<div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
