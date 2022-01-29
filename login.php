@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-	<meta charset="UTF-8">
 	<title>UniBonsai - <?php echo ucfirst($vars["action"]) ?></title>
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<link rel="icon" href="./img/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="./style/style.css" type="text/css" />
@@ -11,7 +13,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body id="bg-img">
+<body>
 	<header>
 		<h1><a href="index.php">UniBonsai</a></h1>
 	</header>

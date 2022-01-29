@@ -41,15 +41,62 @@
 	<aside>
 		<div id="sidenav">
 			<span style="cursor:pointer" id="close-sidebar" onclick="closeNav()"><i class="fa fa-arrow-left"></i></span>
-			<a href="#">Colore</a>
-			<a href="#">Dimensione</a>
-			<a href="#">Prezzo</a>
+			<div id="accordion">
+				<div class="card">
+					<div class="card-header">
+						<h2><a class="btn" data-bs-toggle="collapse" href="#collapseOne">Forma</a></h2>
+					</div>
+					<div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+						<div class="card-body">
+							<div class="checkbox">
+  								<label><input type="checkbox" value=""> Forma 1</label>
+							</div>
+							<div class="checkbox">
+								<label><input type="checkbox" value=""> Forma 2</label>
+							</div>
+							<div class="checkbox">
+								<label><input type="checkbox" value=""> Forma 3</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						<h2><a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">Dimensione</a></h2>
+					</div>
+					<div id="collapseTwo" class="collapse" data-bs-parent="#accordion"> 
+						<div class="card-body">
+							<div class="checkbox">
+  								<label><input type="checkbox" value=""> Dimensione 1</label>
+							</div>
+							<div class="checkbox">
+								<label><input type="checkbox" value=""> Dimensione 2</label>
+							</div>
+							<div class="checkbox">
+								<label><input type="checkbox" value=""> Dimensione 3</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						<h2><a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">Prezzo</a></h2>
+					</div>
+					<div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+						<div class="card-body">
+							<input type="range" min="1" max="200" value="200" id="slider" onchange="updateValue(this.value);"/>
+							<p>Prezzo max: <span id="value">200</span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button type="button" class="btn btn-secondary" id="cerca">Cerca</button>
 		</div>
 		<span style="cursor:pointer" id="expand-sidebar" onclick="openNav()"><i class="fa fa-search"></i></span>
 	</aside>
 	<main>
 		<div><?php echo $vars["content"] ?></div>
-		<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>
+		<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>	
 	</main>
 	<footer>
 		<div class="text-center bg-secondary">

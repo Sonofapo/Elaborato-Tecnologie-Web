@@ -1,3 +1,7 @@
+body{
+	font-family: monospace;
+}
+
 /* NAVBAR */
 header {
 	background-color: rgb(28, 128, 33);
@@ -83,10 +87,11 @@ div#sidenav {
 	overflow-x: hidden;
 	transition: 0.3s;
 	padding-top: 40px;
+	text-align: center;
 }
 
 div#sidenav a {
-	padding: 8px 8px 8px 32px;
+	padding: 10px 0;
 	text-decoration: none;
 	font-size: 25px;
 	color: #818181;
@@ -105,6 +110,45 @@ span#close-sidebar {
 	font-size: 36px;
 	margin-left: 50px;
 }
+
+div#accordion{
+	margin-top: 20px;
+}
+
+div.card-header, div.card-body, 
+div.card-header > h2, div.card-header > h2 > a,
+div.card-body ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+div.card-header {
+	text-align: justify;
+	background-color: black;
+	color: white;
+}
+
+div.card{
+	border: none;
+}
+
+.slider:hover {
+	opacity: 1;
+}
+
+div.card-body {
+	margin: 15px 0;
+}
+
+input#slider {
+	width: 80%;
+}
+
+div#sidenav button {
+	margin-top: 30px;
+	width: 40%;
+}
+
 
 /* MAIN */
 main {
