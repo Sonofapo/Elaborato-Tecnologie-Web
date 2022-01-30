@@ -13,7 +13,7 @@ switch ($vars["mode"]) {
 			}
 		}
 		$isLogin = true;
-		$vars["body"] = get_include_contents("./src/login/login.php");
+		$vars["body"] = get_include_contents("./src/login/view.php");
 		break;
 	case "subscribe":
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -27,7 +27,7 @@ switch ($vars["mode"]) {
 			}
 		}
 		$isLogin = false;
-		$vars["body"] = get_include_contents("./src/login/login.php");
+		$vars["body"] = get_include_contents("./src/login/view.php");
 		break;
 	case "logout":
 		session_unset();
