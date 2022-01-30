@@ -28,14 +28,18 @@
 					<?php if ($vars["logged"]): ?>
 					<li><a href="notifiche.php"><i class="fa fa-bell-o"></i> Notifiche</a></li>
 					<?php endif ?>
-					<li><a href="?action=<?php echo $vars["logged"] ? 'profilo' : 'login' ?>">
-						<i class="fa fa-<?php echo $vars["logged"] ? 'user-circle-o' : 'sign-in' ?>"></i> 
-						<?php echo $vars["user"]?> 
-					</a></li>
-					<li><a href="?action=<?php echo $vars["logged"] ? 'logout' : 'subscribe'?>">
-						<i class="fa fa-<?php echo $vars["logged"] ? 'sign-out' : 'id-card-o' ?>"></i> 
-						<?php echo $vars["logged"] ? "Logout" : "Registrati" ?>
-					</a></li>
+					<li>
+						<a href="?action=user&mode=<?php echo $vars["logged"] ? "profile" : "login" ?>">
+							<i class="fa fa-<?php echo $vars["logged"] ? "user-circle-o" : "sign-in" ?>"></i>
+							<?php echo $vars["user"]?>
+						</a>
+					</li>
+					<li>
+						<a href="?action=user&mode=<?php echo $vars["logged"] ? "logout" : "subscribe" ?>">
+							<i class="fa fa-<?php echo $vars["logged"] ? "sign-out" : "id-card-o" ?>"></i>
+							<?php echo $vars["logged"] ? "Logout" : "Registrati" ?>
+						</a>
+					</li>
 				</ul>
 			</div>
 		</nav>
@@ -93,7 +97,7 @@
 	</main>
 	<footer>
 		<div class="text-center bg-secondary">
-			<a href="index.php"><i class='fa fa-home'></i> Home</a>
+			<a href="index.php"><i class="fa fa-home"></i> Home</a>
 		</div>
 	</footer>
 </body>

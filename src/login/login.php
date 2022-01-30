@@ -34,7 +34,8 @@
 					<img id="login-img" src="./img/logo.png"/>
 					<h2><?php echo $isLogin ? "Accesso" : "Registrazione" ?></h2>
 					<form action="index.php" method="POST">
-						<input type="hidden" name="action" value="<?php echo $isLogin ? "login" : "subscribe"?>" />
+						<input type="hidden" name="action" value="user" />
+						<input type="hidden" name="mode" value="<?php echo $isLogin ? "login" : "subscribe"?>" />
 						
 						<label for="username">Username:</label>
 						<input class="form-control mb-3" type="text" id="username" name="username" required />
@@ -57,7 +58,7 @@
 	</main>
 	<footer>
 		<div class="text-center bg-secondary">
-			<a href="index.php"><i class='fa fa-home'></i> Home</a>
+			<a href="index.php"><i class="fa fa-home"></i> Home</a>
 		</div>
 	</footer>
 </body>

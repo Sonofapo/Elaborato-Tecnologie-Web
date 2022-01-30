@@ -1,57 +1,21 @@
 <?php
 
-	require "DB.class.php";
-	$db = new DB();
+	require "./src/configure.php";
 
-	session_start();
-
-	$vars["action"] = $_REQUEST["action"] ?? "catalogo";
-	$vars["user"] = $db->getUserById($_SESSION["uid"] ?? -1) ?: "Login";
-	$vars["logged"] = isset($_SESSION["uid"]) ? true : false;
+	$vars["action"]	= $_REQUEST["action"] ?? "catalogo";
+	$vars["mode"]	= $_REQUEST["mode"] ?? "show";
+	$vars["user"]	= $db->getUserById($_SESSION["uid"] ?? -1) ?: "Login";
+	$vars["logged"]	= isset($_SESSION["uid"]) ? true : false;
 
 	switch ($vars["action"]) {
 		case "catalogo":
-			$vars["page"] = "base.php";
-			$vars["content"] = "";
+			require "./src/catalogo/controller.php";
 			break;
-		case "login":
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				$usr = $_POST["username"];
-				$psw = $_POST["password"];
-				if (($uid = $db->login($usr, $psw)) !== false) {			
-					$_SESSION["uid"] = $uid;
-					header("Location: index.php");
-				} else {
-					$error = "Credenziali non corrette";
-				}
-			}
-			$vars["page"] = "login.php";
-			$isLogin = true;
-			break;
-		case "subscribe":
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				$usr = $_POST["username"];
-				$psw = $_POST["password"];
-				if ($db->subscribe($usr, $psw)) {
-					$_SESSION["uid"] = $db->login($usr, $psw);
-					header("Location: index.php");
-				} else {
-					die("amazzati");
-				}
-			}
-			$vars["page"] = "login.php";
-			$isLogin = false;
-			break;
-		case "logout":
-			session_unset();
-			session_destroy();
-			header("Location: index.php");
-			break;
-		case "profilo":
-			//TO-DO
+		case "user":
+			require "./src/login/controller.php";
 			break;
 		default:
-			die($vars["action"]);
+			die("Pagina non disponibile.");
 	}
 
 	require $vars["page"];
