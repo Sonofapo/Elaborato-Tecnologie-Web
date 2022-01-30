@@ -29,7 +29,7 @@
 				</form>
 				<p>
 					oppure
-					<a href="index.php?action=<?php echo $isLogin ? "subscribe" : "login" ?>">
+					<a href="index.php?action=user&mode=<?php echo $isLogin ? "subscribe" : "login" ?>">
 						<?php echo $isLogin ? "registrati" : "accedi"?>
 					</a>
 				</p>
