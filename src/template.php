@@ -19,7 +19,7 @@
 <?php echo $vars["body"] ?>
 <footer>
 	<div class="text-center bg-secondary">
-		<a href="index.php"><i class="fa fa-home"></i> Home</a>
+		<a href="index.php"><span class="fa fa-home"></span> Home</a>
 	</div>
 </footer>
 </body>
