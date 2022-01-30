@@ -38,8 +38,3 @@
 		</div>
 	</div>
 </main>
-<footer>
-	<div class="text-center bg-secondary">
-		<a href="index.php"><i class="fa fa-home"></i> Home</a>
-	</div>
-</footer>

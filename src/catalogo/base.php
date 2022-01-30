@@ -76,8 +76,3 @@
 	</div>
 	<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>	
 </main>
-<footer>
-	<div class="text-center bg-secondary">
-		<a href="index.php"><i class="fa fa-home"></i> Home</a>
-	</div>
-</footer>

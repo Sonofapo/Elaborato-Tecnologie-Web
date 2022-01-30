@@ -17,5 +17,10 @@
 </head>
 <body>
 <?php echo $vars["body"] ?>
+<footer>
+	<div class="text-center bg-secondary">
+		<a href="index.php"><i class="fa fa-home"></i> Home</a>
+	</div>
+</footer>
 </body>
 </html>
