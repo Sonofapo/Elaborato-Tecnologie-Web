@@ -12,8 +12,8 @@ switch ($vars["mode"]) {
 				$error = "Credenziali non corrette";
 			}
 		}
-		$vars["page"] = "./src/login/login.php";
 		$isLogin = true;
+		$vars["body"] = get_include_contents("./src/login/login.php");
 		break;
 	case "subscribe":
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -26,8 +26,8 @@ switch ($vars["mode"]) {
 				die("Utente già presente.");
 			}
 		}
-		$vars["page"] = "./src/login/login.php";
 		$isLogin = false;
+		$vars["body"] = get_include_contents("./src/login/login.php");
 		break;
 	case "logout":
 		session_unset();
