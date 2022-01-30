@@ -20,7 +20,7 @@ $(document).ready(function() {
 });
 
 function openNav() {
-	document.getElementById("sidenav").style.width = "250px";
+	document.getElementById("sidenav").style.width = "100%";
 	document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 	$("ul#menu").slideUp(200);
 }

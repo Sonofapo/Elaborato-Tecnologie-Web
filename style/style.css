@@ -1,6 +1,6 @@
 /* NAVBAR */
 header {
-	background-color: forestgreen;
+	background-color: #1a5635;
 	overflow: hidden;
 	padding: 12px;
 	text-align: center;
@@ -27,6 +27,7 @@ a#logo-img {
 
 ul#menu li {
 	display: inline;
+	font-size: large;
 }
 
 ul#menu {
@@ -114,6 +115,7 @@ div#sidenav {
 	overflow-x: hidden;
 	transition: 0.3s;
 	text-align: center;
+	
 }
 
 div#sidenav a {
@@ -130,8 +132,8 @@ div#sidenav a:hover {
 }
 
 button#close-search {
-	position: relative;
-	left: 100px;
+	float: right;
+	padding: 0 15px;
 	margin: 0;
 }
 
@@ -145,6 +147,10 @@ h2.header {
 	padding: 7px 0;
 }
 
+div#accordion {
+	width: 100%;
+}
+
 div#accordion > div:not(:last-of-type) > h2.header {
 	border-bottom: solid #062127 1.2pt;
 }
@@ -156,13 +162,20 @@ div.body {
 	color: white;
 }
 
+div.body label.scelta:hover {
+	background-color: #08313A;
+}
+
 input#slider {
 	width: 80%;
 }
 
 button#cerca {
 	width: 40%;
-	padding: 10px 0;
+	max-width: 80px;
+	padding: 5px 0;
+	color: white;
+	background-color: #08313A;
 }
 
 /* BODY */
@@ -192,7 +205,7 @@ footer > div {
 
 @media screen and (min-width: 768px) {
 	nav {
-		padding: 10px;
+		padding: 5px;
 	}
 
 	a#logo-img {
@@ -204,6 +217,10 @@ footer > div {
 
 	button#expand-menu {
 		display: none;
+	}
+
+	div#sidenav {
+		max-width: 200px;
 	}
 
 	ul#menu {

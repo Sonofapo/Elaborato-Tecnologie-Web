@@ -1,7 +1,7 @@
 <header>
 	<nav class="flex-container">
 		<div class="flex-1">
-			<a id="logo-img" href="index.php"><img style="width:100px" src="./img/logo.png" alt="home link"></a>
+			<a id="logo-img" href="index.php"><img style="width:60px" src="./img/logo.png" alt="home link"></a>
 			<h1><a href="index.php">UniBonsai</a></h1>
 			<button class="icon" id="expand-menu"><span class="fa fa-bars"></span></button>
 		</div>
@@ -29,16 +29,16 @@
 <aside>
 	<div id="sidenav" class="pt-3">
 		<button class="icon" id="close-search"><span class="fa fa-arrow-left"></span></button>
-		<div id="accordion" class="mt-3">
+		<div id="accordion" class="mt-5">
 			<div>
 				<h2 class="header m-0">
 					<a class="collapsed" data-bs-toggle="collapse" href="#search-1">Forma</a>
 				</h2>
 				<div id="search-1" class="collapse" data-bs-parent="#accordion">
-					<div class="body m-0 py-3">
-						<label for="f1"><input type="checkbox" value="" id="f1"> Forma 1</label>
-						<label for="f2"><input type="checkbox" value="" id="f2"> Forma 2</label>
-						<label for="f3"><input type="checkbox" value="" id="f3"> Forma 3</label>
+					<div class="body m-0">
+						<label class="scelta py-3" for="f1"><input type="checkbox" value="" id="f1"> Forma 1</label>
+						<label class="scelta py-3" for="f2"><input type="checkbox" value="" id="f2"> Forma 2</label>
+						<label class="scelta py-3" for="f3"><input type="checkbox" value="" id="f3"> Forma 3</label>
 					</div>
 				</div>
 			</div>
@@ -47,10 +47,10 @@
 					<a class="collapsed" data-bs-toggle="collapse" href="#search-2">Dimensione</a>
 				</h2>
 				<div id="search-2" class="collapse" data-bs-parent="#accordion"> 
-					<div class="body m-0 py-3">
-						<label for="d1"><input type="checkbox" value="" id="d1"> Dimensione 1</label>
-						<label for="d2"><input type="checkbox" value="" id="d2"> Dimensione 2</label>
-						<label for="d3"><input type="checkbox" value="" id="d3"> Dimensione 3</label>
+					<div class="body m-0">
+						<label class="scelta py-3" for="d1"><input type="checkbox" value="" id="d1"> Dimensione 1</label>
+						<label class="scelta py-3" for="d2"><input type="checkbox" value="" id="d2"> Dimensione 2</label>
+						<label class="scelta py-3" for="d3"><input type="checkbox" value="" id="d3"> Dimensione 3</label>
 					</div>
 				</div>
 			</div>
@@ -66,7 +66,7 @@
 				</div>
 			</div>
 		</div>
-		<button type="button" class="btn btn-secondary mt-3" id="cerca">Applica</button>
+		<button type="button" class="btn mt-3" id="cerca">Applica</button>
 	</div>
 </aside>
 <main>
@@ -75,4 +75,5 @@
 		Filtri correnti: "<span id="current-filters">nessuno</span>"
 	</div>
 	<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>	
+	
 </main>
