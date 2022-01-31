@@ -26,65 +26,73 @@
 		</div>
 	</nav>
 </header>
-<aside>
-	<div id="sidenav" class="pt-3">
+<aside id="sidenav">
+	<div id="close-button-div">
 		<button class="icon" id="close-search"><span class="fa fa-arrow-left"></span></button>
-		<div id="accordion" class="mt-5">
-			<div>
-				<h2 class="header m-0">
-					<a class="collapsed" data-bs-toggle="collapse" href="#search-1">Forma</a>
-				</h2>
-				<div id="search-1" class="collapse" data-bs-parent="#accordion">
-					<div class="body m-0">
-						<label class="py-3" for="s1"> Rotondo</label>
-						<input form="search-f" type="checkbox" name="shape[]" id="s1" value="tondo" />
-						 
-						<label class="py-3" for="s2"> Rettangolare</label>
-						<input form="search-f" type="checkbox" name="shape[]" id="s2" value="rettangolare" />
-					</div>
-				</div>
+	</div>
+	<div id="accordion">
+		<section>
+			<h2 class="header">
+				<a class="collapsed" data-bs-toggle="collapse" href="#search-1">Forma</a>
+			</h2>
+			<div id="search-1" class="collapse" data-bs-parent="#accordion">
+				<ul class="body">
+					<li>
+						<input form="search-f" type="checkbox" name="shape[]" id="s1" value="rounded" />
+						<label for="s1">Rotondo</label>
+					</li>
+					<li>
+						<input form="search-f" type="checkbox" name="shape[]" id="s2" value="squared" />
+						<label for="s2">Rettangolare</label>
+					</li>
+				</ul>
 			</div>
-			<div>
-				<h2 class="header m-0">
-					<a class="collapsed" data-bs-toggle="collapse" href="#search-2">Dimensione</a>
-				</h2>
-				<div id="search-2" class="collapse" data-bs-parent="#accordion">
-					<div class="body m-0">
-						<label class="py-3" for="d1"> Piccolo</label>
-						<input form="search-f" type="checkbox" name="size[]" id="d1" value="piccolo" />
-
-						<label class="py-3" for="d2"> Medio</label>
-						<input form="search-f" type="checkbox" name="size[]" id="d2" value="medio" />
-
-						<label class="py-3" for="d3"> Grande</label>
-						<input form="search-f" type="checkbox" name="size[]" id="d3" value="grande" />
-					</div>
-				</div>
+		</section>
+		<section>
+			<h2 class="header">
+				<a class="collapsed" data-bs-toggle="collapse" href="#search-2">Dimensione</a>
+			</h2>
+			<div id="search-2" class="collapse" data-bs-parent="#accordion">
+				<ul class="body">
+					<li>
+						<input form="search-f" type="checkbox" name="size[]" id="d1" value="small" />
+						<label for="d1">Piccolo</label>
+					</li>
+					<li>
+						<input form="search-f" type="checkbox" name="size[]" id="d2" value="medium" />
+						<label for="d2">Medio</label>
+					</li>
+					<li>
+						<input form="search-f" type="checkbox" name="size[]" id="d3" value="large" />
+						<label for="d3">Grande</label>
+					</li>
+				</ul>
 			</div>
-			<div>
-				<h2 class="header m-0">
-					<a class="collapsed" data-bs-toggle="collapse" href="#search-3">Prezzo</a>
-				</h2>
-				<div id="search-3" class="collapse" data-bs-parent="#accordion">
-					<div class="body m-0 py-3">
+		</section>
+		<section>
+			<h2 class="header">
+				<a class="collapsed" data-bs-toggle="collapse" href="#search-3">Prezzo</a>
+			</h2>
+			<div id="search-3" class="collapse" data-bs-parent="#accordion">
+				<ul class="body">
+					<li>
 						<input form="search-f" type="range" min="1" max="200" value="100" name="price" id="slider" />
 						<label for="slider">Prezzo max: <span id="search-value">200</span></label>
-					</div>
-				</div>
+					</li>
+				</ul>
 			</div>
-		</div>
-		<form action="index.php" method="post" id="search-f">
-			<input type="hidden" name="action" value="catalogo">
-			<input type="hidden" name="mode" value="filter">
-			<button type="submit" class="btn mt-3" id="cerca">Applica</button>
-		</form>
+		</section>
 	</div>
+	<form action="index.php" method="post" id="search-f">
+		<input type="hidden" name="action" value="catalogo">
+		<input type="hidden" name="mode" value="filter">
+		<button type="submit" class="btn mt-3" id="cerca">Applica</button>
+	</form>
 </aside>
 <main>
 	<div id="filters">
 		<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
 		Filtri correnti: "<span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>"
 	</div>
-	<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>	
-	
+	<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>
 </main>

@@ -97,22 +97,8 @@ main div#filters {
 	padding: 5px 7px;
 }
 
-div.fade-me {
-	display: flex;
-	width: 100%;
-	justify-content: center;
-	position: fixed;
-	top: 100px;
-	z-index: 5;
-}
-
-div.fade-me > div {
-	text-align: center;
-	min-width: 35%;
-}
-
 /* SIDEBAR */
-div#sidenav {
+aside#sidenav {
 	height: 100%;
 	width: 0;
 	position: fixed;
@@ -125,51 +111,51 @@ div#sidenav {
 	text-align: center;
 }
 
-div#sidenav a {
-	padding: 10px 0;
+aside#sidenav h2 > a {
 	text-decoration: none;
 	font-size: 25px;
 	color: white;
 	display: block;
-	transition: 0.3s;
+	transition: 0.1s;
 }
 
-div#sidenav a:hover {
-	color: #818181;
+aside#sidenav h2 > a:hover {
+	color: #949494;
+}
+
+div#close-button-div {
+	text-align: right;
 }
 
 button#close-search {
-	float: right;
-	padding: 0 15px;
-	margin: 0;
+	padding: 20px;
 }
 
-div.body label {
-	display: list-item;
-}
-
-h2.header {
-	background-color: #08313A;
-	color: white;
-	padding: 7px 0;
-}
-
-div#accordion {
-	width: 100%;
-}
-
-div#accordion > div:not(:last-of-type) > h2.header {
+div#accordion > section:not(:last-of-type) > h2.header {
 	border-bottom: solid #062127 1.2pt;
 }
 
-div.body {
-	background-color: #08313ab4;
-	margin: 15px 0;
-	list-style: none;
+h2.header {
 	color: white;
+	margin: 0;
+	padding: 20px 0;
+	background-color: #08313A;
 }
 
-div#search-1 label:hover, div#search-2 label:hover {
+ul.body li {
+	display: list-item;
+	padding: 18px 0;
+}
+
+ul.body {
+	color: white;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background-color: #08313ab4;
+}
+
+div#search-1 li:hover, div#search-2 li:hover {
 	background-color: #08313A;
 }
 
@@ -197,6 +183,20 @@ img#login-img {
 	padding-bottom: 30px;
 }
 
+div.fade-me {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	position: fixed;
+	top: 100px;
+	z-index: 5;
+}
+
+div.fade-me > div {
+	text-align: center;
+	min-width: 35%;
+}
+
 /* FOOTER */
 footer {
 	position: absolute;
@@ -210,6 +210,7 @@ footer > div {
 	padding: 15px 0;
 }
 
+/* MEDIA QUERIES */
 @media screen and (min-width: 768px) {
 	nav {
 		padding: 5px;
@@ -227,8 +228,8 @@ footer > div {
 		display: none;
 	}
 
-	div#sidenav {
-		max-width: 200px;
+	aside#sidenav {
+		max-width: 250px;
 		transition: 1s;
 	}
 
