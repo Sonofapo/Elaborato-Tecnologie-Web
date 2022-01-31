@@ -197,6 +197,17 @@ div.fade-me > div {
 	min-width: 35%;
 }
 
+main h2 {
+	text-align: center;
+	margin: 0;
+	padding: 10px 0;
+}
+
+main div.oggetto {
+	border: solid black 2pt;
+	margin-bottom: 5px;
+}
+
 /* FOOTER */
 footer {
 	position: absolute;

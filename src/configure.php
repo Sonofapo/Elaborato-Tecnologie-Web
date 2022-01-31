@@ -8,6 +8,7 @@ $db = new DB();
 session_start();
 
 # variabili di configurazione
+$vars["IMG_PATH"] = "./img/products/";
 
 # funzioni di supporto
 function get_include_contents(string $file) {

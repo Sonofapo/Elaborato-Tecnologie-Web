@@ -1,13 +1,16 @@
 <?php
 	switch ($vars["mode"]) {
 		case "show":
-			break;
+			$vars["products"] = $db->getProductsById($db->getIdProduct());
+			break;			
 		case "filter":
 			$shapes	= $_REQUEST["shape"] ?? [];
 			$sizes	= $_REQUEST["size"] ?? [];
 			$price	= $_REQUEST["price"] ?? null;
 
 			$filteredIDs = $db->filter($shapes, $sizes, $price);
+			$vars["products"] = $db->getProductsById($filteredIDs);
+
 			$vars["filters"]  = count($shapes) ? "Forma: " . join(", ", $shapes) . " | " : "";
 			$vars["filters"] .= count($sizes) ? "Dimensione: " . join(", ", $sizes) . " | " : "";
 			$vars["filters"] .= $price ? "Prezzo: $price" : "";

@@ -38,12 +38,12 @@
 			<div id="search-1" class="collapse" data-bs-parent="#accordion">
 				<ul class="body">
 					<li>
-						<input form="search-f" type="checkbox" name="shape[]" id="s1" value="rounded" />
-						<label for="s1">Rotondo</label>
+						<input form="search-f" type="checkbox" name="shape[]" id="s1" value="Tondeggiante" />
+						<label for="s1">Tondeggiante</label>
 					</li>
 					<li>
-						<input form="search-f" type="checkbox" name="shape[]" id="s2" value="squared" />
-						<label for="s2">Rettangolare</label>
+						<input form="search-f" type="checkbox" name="shape[]" id="s2" value="Squadrato" />
+						<label for="s2">Squadrato</label>
 					</li>
 				</ul>
 			</div>
@@ -55,15 +55,15 @@
 			<div id="search-2" class="collapse" data-bs-parent="#accordion">
 				<ul class="body">
 					<li>
-						<input form="search-f" type="checkbox" name="size[]" id="d1" value="small" />
+						<input form="search-f" type="checkbox" name="size[]" id="d1" value="Piccolo" />
 						<label for="d1">Piccolo</label>
 					</li>
 					<li>
-						<input form="search-f" type="checkbox" name="size[]" id="d2" value="medium" />
+						<input form="search-f" type="checkbox" name="size[]" id="d2" value="Medio" />
 						<label for="d2">Medio</label>
 					</li>
 					<li>
-						<input form="search-f" type="checkbox" name="size[]" id="d3" value="large" />
+						<input form="search-f" type="checkbox" name="size[]" id="d3" value="Grande" />
 						<label for="d3">Grande</label>
 					</li>
 				</ul>
@@ -77,7 +77,7 @@
 				<ul class="body">
 					<li>
 						<input form="search-f" type="range" min="1" max="200" value="100" name="price" id="slider" />
-						<label for="slider">Prezzo max: <span id="search-value">200</span></label>
+						<label for="slider">Prezzo max: <span id="search-value">100</span></label>
 					</li>
 				</ul>
 			</div>
@@ -94,5 +94,23 @@
 		<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
 		Filtri correnti: "<span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>"
 	</div>
-	<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>
+
+	<h2>Catalogo dei Prodotti</h2>
+
+	<?php foreach($vars["products"] as $product): ?>
+	<div class="oggetto">
+		<img src="<?php echo $vars["IMG_PATH"] . $product["path"]?>" alt="" width="200px"/>
+		<div classe="specifiche">
+			<div classe="specie">
+				Specie: <?php echo $product["name"] ?>
+			</div>
+			<div classe="prezzo">
+				Prezzo: <?php echo $product["price"]?> euri
+			</div>
+			<form action="index.php" method="post" id="buy-form">
+				<button type="submit" class="btn btn-primary" id="aggCarrello">Aggiungi al carrello</button>
+			</form>
+		</div>
+	</div>
+	<?php endforeach ?>
 </main>
