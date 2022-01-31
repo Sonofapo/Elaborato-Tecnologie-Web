@@ -8,10 +8,9 @@ class DB {
 		$this->connection = new mysqli("127.0.0.1", "unibonsai", "unibonsai1!", "unibonsai");
 	}
 
-	public function query($statement, $vars = null, $types = null) {
+	public function query($statement, $vars, $types) {
 		$q = $this->connection->prepare($statement);
-		if (isset($vars) && isset($types))
-			$q->bind_param($types, ...$vars);
+		$q->bind_param($types, ...$vars);
 		$q->execute();
 		if ($res = $q->get_result()) {
 			return $res->fetch_all(MYSQLI_ASSOC);
@@ -40,31 +39,22 @@ class DB {
 
 	public function filter ($shapes, $sizes, $price) {
 		$query = "SELECT id FROM products ";
-        $first = 0;
-        if ($shapes) {
-            $query .= sprintf("WHERE shape in (%s)", "'" . join("','", $shapes) . "'");
-            $first = 1;
-        }
-        if ($sizes) {
-            if ($first) 
-				$query .= " AND ";
-            else {
-                $query .= "WHERE ";
-                $first = 1;
-            }
-            $query .= sprintf("size in (%s)", "'" . join("','", $sizes)  . "'");
-        }
-        if ($price) {
-            if ($first) 
-				$query .= " AND ";
-            else 
-				$query .= "WHERE ";
-            $query .= "price <= " . $price;
-        }
+		if ($shapes)
+			$query .= " WHERE shape IN (" . implode(',', array_fill(0, count($shapes), '?')) . ")";
+		else
+			$query .= "WHERE 1=1";
+		if ($sizes)
+			$query .= " AND size IN (" . implode(',', array_fill(0, count($sizes), '?')) . ")";
+		else
+			$query .= " AND 1=1";
+		if ($price)
+			$query .= " AND price <= ?";
 		
-		foreach ($this->query($query) as $obj)
-			$res[] = $obj["id"];
-		return $res ?? [];
+		$vars  = array_merge($shapes, $sizes, $price ? [$price] : []);
+		$types = str_repeat("s", count($shapes)) . str_repeat("s", count($sizes)) . ($price ? "i" : "");
+		if ($objs = $this->query($query, $vars, $types))
+			return array_column($objs, "id");
+		return [];
 	}
 
 }
