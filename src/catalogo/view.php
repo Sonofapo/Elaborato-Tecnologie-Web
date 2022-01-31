@@ -1,7 +1,7 @@
 <header>
 	<nav class="flex-container">
 		<div class="flex-1">
-			<a id="logo-img" href="index.php"><img style="width:60px" src="./img/logo-bianco.png" alt="home link"></a>
+			<img id="logo-img" src="./img/logo-bianco.png" alt="">
 			<h1><a href="index.php">UniBonsai</a></h1>
 			<button class="icon" id="expand-menu"><span class="fa fa-bars"></span></button>
 		</div>
@@ -36,9 +36,8 @@
 				</h2>
 				<div id="search-1" class="collapse" data-bs-parent="#accordion">
 					<div class="body m-0">
-						<label class="scelta py-3" for="f1"><input type="checkbox" value="" id="f1"> Forma 1</label>
-						<label class="scelta py-3" for="f2"><input type="checkbox" value="" id="f2"> Forma 2</label>
-						<label class="scelta py-3" for="f3"><input type="checkbox" value="" id="f3"> Forma 3</label>
+						<label class="py-3" for="s1"><input form="search-f" type="checkbox" value="" id="s1"> Rotondo</label>
+						<label class="py-3" for="s2"><input form="search-f" type="checkbox" value="" id="s2"> Rettangolare</label>
 					</div>
 				</div>
 			</div>
@@ -48,9 +47,9 @@
 				</h2>
 				<div id="search-2" class="collapse" data-bs-parent="#accordion"> 
 					<div class="body m-0">
-						<label class="scelta py-3" for="d1"><input type="checkbox" value="" id="d1"> Dimensione 1</label>
-						<label class="scelta py-3" for="d2"><input type="checkbox" value="" id="d2"> Dimensione 2</label>
-						<label class="scelta py-3" for="d3"><input type="checkbox" value="" id="d3"> Dimensione 3</label>
+						<label class="py-3" for="d1"><input form="search-f" type="checkbox" value="" id="d1"> Piccolo</label>
+						<label class="py-3" for="d2"><input form="search-f" type="checkbox" value="" id="d2"> Medio</label>
+						<label class="py-3" for="d3"><input form="search-f" type="checkbox" value="" id="d3"> Grande</label>
 					</div>
 				</div>
 			</div>
@@ -60,13 +59,17 @@
 				</h2>
 				<div id="search-3" class="collapse" data-bs-parent="#accordion">
 					<div class="body m-0 py-3">
-						<input type="range" min="1" max="200" value="200" id="slider" />
+						<input form="search-f" type="range" min="1" max="200" value="200" id="slider" />
 						<label for="slider">Prezzo max: <span id="search-value">200</span></label>
 					</div>
 				</div>
 			</div>
 		</div>
-		<button type="button" class="btn mt-3" id="cerca">Applica</button>
+		<form action="index.php" method="post" id="search-f">
+			<input type="hidden" name="action" value="catalogo">
+			<input type="hidden" name="mode" value="filter">
+			<button type="submit" class="btn mt-3" id="cerca">Applica</button>
+		</form>
 	</div>
 </aside>
 <main>

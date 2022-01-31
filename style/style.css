@@ -2,8 +2,8 @@
 header {
 	background-color: #1a5635;
 	overflow: hidden;
-	padding: 12px;
 	text-align: center;
+	padding: 5px 0px 5px 10px;
 }
 
 nav a, nav a:hover, footer a, footer a:hover, header a, header a:hover {
@@ -12,22 +12,29 @@ nav a, nav a:hover, footer a, footer a:hover, header a, header a:hover {
 }
 
 nav li a, footer a {
-	padding: 5px 10px;
+	padding: 6px;
+}
+
+nav li:last-of-type a {
+	margin-right: 4px;
 }
 
 nav li a:hover, footer a:hover {
 	background-color: rgba(234, 234, 247, 0.644);
-	border-radius: 5px;
+	border-radius: 2px;
 	color: black;
 }
 
-a#logo-img {
+img#logo-img {
 	display: none;
+}
+
+img#logo-img {
+	width: 80px;
 }
 
 ul#menu li {
 	display: inline;
-	font-size: large;
 }
 
 ul#menu {
@@ -47,6 +54,7 @@ nav.flex-container {
 	display: flex;
 	flex-direction: column;
 	vertical-align: middle;
+	padding: 0;
 }
 
 div.flex-1 {
@@ -115,7 +123,6 @@ div#sidenav {
 	overflow-x: hidden;
 	transition: 0.3s;
 	text-align: center;
-	
 }
 
 div#sidenav a {
@@ -162,7 +169,7 @@ div.body {
 	color: white;
 }
 
-div.body label.scelta:hover {
+div#search-1 label:hover, div#search-2 label:hover {
 	background-color: #08313A;
 }
 
@@ -208,9 +215,10 @@ footer > div {
 		padding: 5px;
 	}
 
-	a#logo-img {
+	img#logo-img {
 		display: block;
 	}
+
 	img#login-img {
 		width: 8%;
 	}
@@ -221,6 +229,7 @@ footer > div {
 
 	div#sidenav {
 		max-width: 200px;
+		transition: 1s;
 	}
 
 	ul#menu {
@@ -245,7 +254,6 @@ footer > div {
 }
 
 @media screen and (min-width: 400px) {
-	
 	img#login-img {
 		width: 200px;
 	}
