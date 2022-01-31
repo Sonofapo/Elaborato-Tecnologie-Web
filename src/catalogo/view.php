@@ -86,7 +86,7 @@
 	<form action="index.php" method="post" id="search-f">
 		<input type="hidden" name="action" value="catalogo">
 		<input type="hidden" name="mode" value="filter">
-		<button type="submit" class="btn mt-3" id="cerca">Applica</button>
+		<button type="submit" id="cerca">Applica</button>
 	</form>
 </aside>
 <main>

@@ -168,6 +168,9 @@ button#cerca {
 	max-width: 80px;
 	padding: 5px 0;
 	color: white;
+	border: none;
+	margin-top: 20px;
+	border-radius: 2px;
 	background-color: #08313A;
 }
 
