@@ -1,7 +1,7 @@
 <header>
 	<nav class="flex-container">
 		<div class="flex-1">
-			<a id="logo-img" href="index.php"><img style="width:60px" src="./img/logo.png" alt="home link"></a>
+			<a id="logo-img" href="index.php"><img style="width:60px" src="./img/logo-bianco.png" alt="home link"></a>
 			<h1><a href="index.php">UniBonsai</a></h1>
 			<button class="icon" id="expand-menu"><span class="fa fa-bars"></span></button>
 		</div>
