@@ -90,26 +90,34 @@
 	</form>
 </aside>
 <main>
-	<div id="filters">
-		<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
-		Filtri correnti: "<span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>"
-	</div>
-
-	<h2>Catalogo dei Prodotti</h2>
-
-	<section id="product-list">
-		<?php foreach ($vars["products"] as $product) : ?>
-		<div class="product-card">
-			<div class="product-img">
-				<img src="<?php echo $vars["IMG_PATH"].$product["path"] ?>" alt="" />
-			</div>
-			<div class="product-info">
-				<h5><?php echo ucfirst($product["name"]) ?></h5>
-				<h6>Prezzo: <?php echo $product["price"] ?>&euro;</h6>
-				<button class="btn btn-primary">Aggiungi al carrello</button>
-				<!-- mettere id prodotto da mandare al cookie -->
-			</div>
+	<section id="filters" class="d-flex justify-content-between">
+		<div>
+			<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
+			Filtri correnti: "<span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>"
 		</div>
-		<?php endforeach ?>
+		<div>
+			<a href="?action=catalogo&mode=cart">
+				<button class="icon" id="cart"><span class="fa fa-shopping-cart"></span> Carrello</button>
+			</a>
+		</div>
+	</section>
+
+	<section>
+		<h2>Catalogo dei Prodotti</h2>
+		<div id="product-list">
+			<?php foreach ($vars["products"] as $product) : ?>
+			<div class="product-card">
+				<div class="product-img">
+					<img src="<?php echo $vars["IMG_PATH"].$product["path"] ?>" alt="" />
+				</div>
+				<div class="product-info">
+					<h5><?php echo ucfirst($product["name"]) ?></h5>
+					<h6>Prezzo: <?php echo $product["price"] ?>&euro;</h6>
+					<button class="btn btn-primary">Aggiungi al carrello</button>
+					<!-- mettere id prodotto da mandare al cookie -->
+				</div>
+			</div>
+			<?php endforeach ?>
+		</div>
 	</section>
 </main>

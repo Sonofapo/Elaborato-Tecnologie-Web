@@ -2,21 +2,15 @@
 header {
 	background-color: #1a5635;
 	overflow: hidden;
-	text-align: center;
-	padding: 5px 0px 5px 10px;
+	padding: 6px;
 }
 
-nav a, nav a:hover, footer a, footer a:hover, header a, header a:hover {
-	text-decoration: none;
+nav a, nav a:hover, footer a, header a {
 	color: white;
 }
 
 nav li a, footer a {
 	padding: 6px;
-}
-
-nav li:last-of-type a {
-	margin-right: 4px;
 }
 
 nav li a:hover, footer a:hover {
@@ -27,9 +21,6 @@ nav li a:hover, footer a:hover {
 
 img#logo-img {
 	display: none;
-}
-
-img#logo-img {
 	width: 80px;
 }
 
@@ -47,7 +38,6 @@ button.icon {
 	border: none;
 	background-color: inherit;
 	color: white;
-	font-size: larger;
 }
 
 nav.flex-container {
@@ -61,7 +51,6 @@ div.flex-1 {
 	flex: 100%;
 	display: flex;
 	justify-content: space-between;
-
 }
 
 div.flex-2 {
@@ -71,10 +60,6 @@ div.flex-2 {
 }
 
 /* MAIN */
-main p a {
-	text-decoration: none;
-}
-
 main h2 {
 	padding-bottom: 15px;
 }
@@ -83,27 +68,29 @@ main {
 	padding-bottom: 55px;
 }
 
-main button#search-button:hover {
+button#search-button:hover, button#cart:hover{
 	color: white;
-}
-
-main button.icon {
-	color: black;
 	border-radius: 2px;
+	background-color: grey;
 }
 
-main div#filters {
+section#filters button.icon {
+	color: black;
+	padding: 5px 10px;
+}
+
+main section#filters {
 	background-color: rgba(151, 151, 151, 0.726);
 	padding: 5px 7px;
 }
 
-main h2 {
+main section > h2 {
 	text-align: center;
 	margin: 0;
 	padding: 20px 0;
 }
 
-main section#product-list {
+section div#product-list {
 	margin: 0 20px;
 	display: flex;
 	flex-wrap: wrap;
@@ -146,7 +133,6 @@ aside#sidenav {
 }
 
 aside#sidenav h2 > a {
-	text-decoration: none;
 	font-size: 25px;
 	color: white;
 	display: block;
@@ -229,6 +215,10 @@ div.fade-me {
 div.fade-me > div {
 	text-align: center;
 	min-width: 35%;
+}
+
+a {
+	text-decoration: none !important;
 }
 
 /* FOOTER */
