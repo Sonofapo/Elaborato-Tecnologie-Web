@@ -1,9 +1,6 @@
 $(document).ready(function() {
 
-	const UID = $("span#user-id").text();
-
 	$("button#expand-menu").click(function() {
-		closeNav();
 		$("ul#menu").slideToggle(200);	
 	});
 
@@ -20,11 +17,11 @@ $(document).ready(function() {
 	});
 
 	$("button.add-to-cart").click(function() {
-		addToCart($(this).attr("id"), UID);
+		addToCart($(this).attr("id"), $("span#user-id").text());
 	});
 	
 	$("button.remove-from-cart").click(function() {
-		removeFromCart($(this).attr("id"), UID);
+		removeFromCart($(this).attr("id"), $("span#user-id").text());
 	});
 
 });

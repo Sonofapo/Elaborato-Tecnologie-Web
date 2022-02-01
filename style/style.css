@@ -22,7 +22,6 @@ nav li a:hover, footer a:hover {
 
 img#logo-img {
 	display: none;
-	width: 80px;
 }
 
 ul#menu li {
@@ -58,12 +57,10 @@ div.flex-2 {
 	flex: 100%;
 	display: flex;
 	justify-content: center;
+	padding-top: 4px;
 }
 
 /* MAIN */
-main h2 {
-	padding-bottom: 15px;
-}
 
 main {
 	padding-bottom: 55px;
@@ -88,31 +85,38 @@ main section#filters {
 main section > h2 {
 	text-align: center;
 	margin: 0;
-	padding: 20px 0;
+	padding: 10px 0;
 }
 
 section div#product-list {
-	margin: 0 20px;
-	display: flex;
-	flex-wrap: wrap;
+	padding: 0 10px;
 }
 
-section div.product-card {
-	margin: 10px 10px;
-	flex: 1 auto; /* flex grow and flex basis */
-	display: flex;
+section div.product-card {	
+	margin-bottom: 10px;
 	background-color: rgba(199, 199, 199, 0.452);
 	border-radius: 2px;
 }
 
-div.product-img img {
-	max-width: 100px;
+section div.product-card div {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+div.product-img {
+	height: 120px;
 	margin: 5px;
+}
+
+div.product-img img {
+	max-height: 100%;
 	border-radius: 2px;
 }
 
 div.product-info {
-	margin: auto;
+	width: calc(100% - 140px);
+	height: 100%;
+	padding-left: 5px;
 }
 
 div.product-info > button {
@@ -159,8 +163,12 @@ div#accordion > section:not(:last-of-type) > h2.header {
 h2.header {
 	color: white;
 	margin: 0;
-	padding: 20px 0;
+	padding: 10px 0;
 	background-color: #08313A;
+}
+
+h2.header > a {
+	font-size: smaller !important;
 }
 
 ul.body li {
@@ -204,7 +212,7 @@ body {
 /* OTHERS */
 img#login-img {
 	width: 85%;
-	padding-bottom: 30px;
+	padding-bottom: 20px;
 }
 
 div.fade-me {
@@ -223,6 +231,10 @@ div.fade-me > div {
 
 a {
 	text-decoration: none !important;
+}
+
+h1 {
+	margin: 0 !important;
 }
 
 /* FOOTER */
@@ -246,6 +258,8 @@ footer > div {
 
 	img#logo-img {
 		display: block;
+		width: 60px;
+		margin: 2px 10px 2px 0;
 	}
 
 	img#login-img {
@@ -273,6 +287,7 @@ footer > div {
 	div.flex-1 {
 		flex: 55%;
 		align-items: center;
+		justify-content: start;
 	}
 	
 	div.flex-2 {
@@ -281,8 +296,27 @@ footer > div {
 		justify-content: flex-end;
 	}
 
-	div.product-img img {
-		max-width: 180px;
+	div#product-list {
+		margin: 0 30px;
+		text-align: center;
+	}
+
+	div.product-img {
+		height: 170px;
+	}
+
+	section div.product-card {	
+		min-width: 360px;
+		text-align: left;
+	}
+
+	div.product-info {
+		width: calc(100% - 200px);
+		padding: 0;
+	}
+
+	div#product-list div {
+		display: inline-block;
 	}
 }
 
