@@ -113,8 +113,9 @@
 				<div class="product-info">
 					<h5><?php echo ucfirst($product["name"]) ?></h5>
 					<h6>Prezzo: <?php echo $product["price"] ?>&euro;</h6>
-					<button class="btn btn-primary">Aggiungi al carrello</button>
-					<!-- mettere id prodotto da mandare al cookie -->
+					<button class="add-to-cart btn btn-primary" id="prod-<?php echo $product["id"] ?>">
+						Aggiungi al carrello
+					</button>
 				</div>
 			</div>
 			<?php endforeach ?>
