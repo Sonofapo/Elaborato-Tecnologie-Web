@@ -3,9 +3,10 @@ header {
 	background-color: #1a5635;
 	overflow: hidden;
 	padding: 6px;
+	text-align: center;
 }
 
-nav a, nav a:hover, footer a, header a {
+nav a, nav a:hover, footer a, header a, header a:hover {
 	color: white;
 }
 
