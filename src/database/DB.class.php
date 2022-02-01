@@ -8,7 +8,7 @@ class DB {
 		$this->connection = new mysqli("127.0.0.1", "unibonsai", "unibonsai1!", "unibonsai");
 	}
 
-	private function query($statement, $vars = null, $types = null) {
+	private function query($statement, $vars = [], $types = "") {
 		$q = $this->connection->prepare($statement);
 		if ($vars && $types)
 			$q->bind_param($types, ...$vars);
@@ -40,11 +40,11 @@ class DB {
 	public function filter ($shapes, $sizes, $price) {
 		$query = "SELECT id FROM products ";
 		if ($shapes)
-			$query .= " WHERE shape IN (" . implode(',', array_fill(0, count($shapes), '?')) . ")";
+			$query .= " WHERE shape IN (" . join(",", array_fill(0, count($shapes), "?")) . ")";
 		else
 			$query .= "WHERE 1=1";
 		if ($sizes)
-			$query .= " AND size IN (" . implode(',', array_fill(0, count($sizes), '?')) . ")";
+			$query .= " AND size IN (" . join(",", array_fill(0, count($sizes), "?")) . ")";
 		else
 			$query .= " AND 1=1";
 		if ($price)
@@ -57,18 +57,12 @@ class DB {
 		return [];
 	}
 
-	public function getIdProduct() {
-		$res = $this->query("SELECT id FROM products");
-		return array_column($res, "id");
-	}
-
-	public function getProductsById($id) {
-		$query = "SELECT name, price, size, shape, path FROM products, images WHERE products.id = images.product_id ";
-		$query .= " AND products.id IN (" . implode(',', array_fill(0, count($id), '?')) . ")";
-		$types = str_repeat("i", count($id));
-		if ($res = $this->query($query, $id, $types))
-			return $res;
-		return [];
+	public function getProducts($ids = []) {
+		$query = "SELECT products.id as id, name, price, size, shape, path 
+					FROM products, images WHERE products.id = images.product_id ";
+		if ($ids)
+			$query .= " AND products.id IN (" . join(",", array_fill(0, count($ids), "?")) . ")";
+		return $this->query($query, $ids, str_repeat("i", count($ids))) ?: [];
 	}
 
 }

@@ -1,7 +1,7 @@
 <?php
 	switch ($vars["mode"]) {
 		case "show":
-			$vars["products"] = $db->getProductsById($db->getIdProduct());
+			$vars["products"] = $db->getProducts();
 			break;			
 		case "filter":
 			$shapes	= $_REQUEST["shape"] ?? [];
@@ -9,7 +9,7 @@
 			$price	= $_REQUEST["price"] ?? null;
 
 			$filteredIDs = $db->filter($shapes, $sizes, $price);
-			$vars["products"] = $db->getProductsById($filteredIDs);
+			$vars["products"] = $db->getProducts($filteredIDs);
 
 			$vars["filters"]  = count($shapes) ? "Forma: " . join(", ", $shapes) . " | " : "";
 			$vars["filters"] .= count($sizes) ? "Dimensione: " . join(", ", $sizes) . " | " : "";
