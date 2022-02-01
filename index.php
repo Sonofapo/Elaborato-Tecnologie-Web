@@ -18,6 +18,6 @@
 			die("Pagina non disponibile.");
 	}
 
-	require "./src/template.php";
+	require "./src/templates/template.php";
 
 ?>

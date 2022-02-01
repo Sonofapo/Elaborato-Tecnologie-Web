@@ -1,31 +1,4 @@
-<header>
-	<nav class="flex-container">
-		<div class="flex-1">
-			<img id="logo-img" src="./img/logo-bianco.png" alt="">
-			<h1><a href="index.php">UniBonsai</a></h1>
-			<button class="icon" id="expand-menu"><span class="fa fa-bars"></span></button>
-		</div>
-		<div class="flex-2">
-			<ul id="menu">
-				<?php if ($vars["logged"]): ?>
-				<li><a href="notifiche.php"><span class="fa fa-bell-o"></span> Notifiche</a></li>
-				<?php endif ?>
-				<li>
-					<a href="?action=user&mode=<?php echo $vars["logged"] ? "profile" : "login" ?>">
-						<span class="fa fa-<?php echo $vars["logged"] ? "user-circle-o" : "sign-in" ?>"></span>
-						<?php echo $vars["user"]?>
-					</a>
-				</li>
-				<li>
-					<a href="?action=user&mode=<?php echo $vars["logged"] ? "logout" : "subscribe" ?>">
-						<span class="fa fa-<?php echo $vars["logged"] ? "sign-out" : "id-card-o" ?>"></span>
-						<?php echo $vars["logged"] ? "Logout" : "Registrati" ?>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
-</header>
+<?php echo get_include_contents("./src/templates/header.php") ?>
 <aside id="sidenav">
 	<div id="close-button-div">
 		<button class="icon" id="close-search"><span class="fa fa-arrow-left"></span></button>
@@ -38,12 +11,12 @@
 			<div id="search-1" class="collapse" data-bs-parent="#accordion">
 				<ul class="body">
 					<li>
-						<input form="search-f" type="checkbox" name="shape[]" id="s1" value="rounded" />
-						<label for="s1">Rotondo</label>
+						<input form="search-f" type="checkbox" name="shape[]" id="s1" value="Tondeggiante" />
+						<label for="s1">Tondeggiante</label>
 					</li>
 					<li>
-						<input form="search-f" type="checkbox" name="shape[]" id="s2" value="squared" />
-						<label for="s2">Rettangolare</label>
+						<input form="search-f" type="checkbox" name="shape[]" id="s2" value="Squadrato" />
+						<label for="s2">Squadrato</label>
 					</li>
 				</ul>
 			</div>
@@ -55,15 +28,15 @@
 			<div id="search-2" class="collapse" data-bs-parent="#accordion">
 				<ul class="body">
 					<li>
-						<input form="search-f" type="checkbox" name="size[]" id="d1" value="small" />
+						<input form="search-f" type="checkbox" name="size[]" id="d1" value="Piccolo" />
 						<label for="d1">Piccolo</label>
 					</li>
 					<li>
-						<input form="search-f" type="checkbox" name="size[]" id="d2" value="medium" />
+						<input form="search-f" type="checkbox" name="size[]" id="d2" value="Medio" />
 						<label for="d2">Medio</label>
 					</li>
 					<li>
-						<input form="search-f" type="checkbox" name="size[]" id="d3" value="large" />
+						<input form="search-f" type="checkbox" name="size[]" id="d3" value="Grande" />
 						<label for="d3">Grande</label>
 					</li>
 				</ul>
@@ -77,7 +50,7 @@
 				<ul class="body">
 					<li>
 						<input form="search-f" type="range" min="1" max="200" value="100" name="price" id="slider" />
-						<label for="slider">Prezzo max: <span id="search-value">200</span></label>
+						<label for="slider">Prezzo max: <span id="search-value">100</span></label>
 					</li>
 				</ul>
 			</div>
@@ -90,9 +63,35 @@
 	</form>
 </aside>
 <main>
-	<div id="filters">
-		<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
-		Filtri correnti: "<span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>"
-	</div>
-	<?php echo "UTENTE: " . ($db->getUserById($_SESSION["uid"] ?? -1) ?: "NON LOGGATO") ?>
+	<section id="filters" class="d-flex justify-content-between">
+		<div>
+			<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
+			Filtri correnti: "<span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>"
+		</div>
+		<div>
+			<a href="?action=catalogo&mode=cart">
+				<button class="icon" id="cart"><span class="fa fa-shopping-cart"></span> Carrello</button>
+			</a>
+		</div>
+	</section>
+
+	<section>
+		<h2>Catalogo dei Prodotti</h2>
+		<div id="product-list">
+			<?php foreach ($vars["products"] as $product) : ?>
+			<div class="product-card">
+				<div class="product-img">
+					<img src="<?php echo $vars["IMG_PATH"].$product["path"] ?>" alt="" />
+				</div>
+				<div class="product-info">
+					<h5><?php echo ucfirst($product["name"]) ?></h5>
+					<h6>Prezzo: <?php echo $product["price"] ?>&euro;</h6>
+					<button class="add-to-cart btn btn-primary" id="prod-<?php echo $product["id"] ?>">
+						Aggiungi al carrello
+					</button>
+				</div>
+			</div>
+			<?php endforeach ?>
+		</div>
+	</section>
 </main>
