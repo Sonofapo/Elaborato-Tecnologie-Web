@@ -97,20 +97,19 @@
 
 	<h2>Catalogo dei Prodotti</h2>
 
-	<?php foreach($vars["products"] as $product): ?>
-	<div class="oggetto">
-		<img src="<?php echo $vars["IMG_PATH"] . $product["path"]?>" alt="" width="200px"/>
-		<div classe="specifiche">
-			<div classe="specie">
-				Specie: <?php echo $product["name"] ?>
+	<section id="product-list">
+		<?php foreach ($vars["products"] as $product) : ?>
+		<div class="product-card">
+			<div class="product-img">
+				<img src="<?php echo $vars["IMG_PATH"].$product["path"] ?>" alt="" />
 			</div>
-			<div classe="prezzo">
-				Prezzo: <?php echo $product["price"]?> euri
+			<div class="product-info">
+				<h5><?php echo ucfirst($product["name"]) ?></h5>
+				<h6>Prezzo: <?php echo $product["price"] ?></h6>
+				<button class="btn btn-primary">Aggiungi al carrello</button>
+				<!-- mettere id prodotto da mandare al cookie -->
 			</div>
-			<form action="index.php" method="post" id="buy-form">
-				<button type="submit" class="btn btn-primary" id="aggCarrello">Aggiungi al carrello</button>
-			</form>
 		</div>
-	</div>
-	<?php endforeach ?>
+		<?php endforeach ?>
+	</section>
 </main>
