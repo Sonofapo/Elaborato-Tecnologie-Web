@@ -63,20 +63,18 @@
 	</form>
 </aside>
 <main>
-	<section id="filters" class="d-flex justify-content-between">
+	<div id="filters" class="d-flex justify-content-between">
 		<div>
 			<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
 			Filtri correnti: "<span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>"
 		</div>
 		<div>
-			<a href="?action=catalogo&mode=cart">
-				<button class="icon" id="cart"><span class="fa fa-shopping-cart"></span> Carrello</button>
-			</a>
+			<a id="cart" href="?action=catalogo&mode=cart"><span class="fa fa-shopping-cart"></span> Carrello</a>
 		</div>
-	</section>
+	</div>
 
 	<section>
-		<h2>Catalogo dei Prodotti</h2>
+		<h3>Catalogo dei Prodotti</h3>
 		<div id="product-list">
 			<?php foreach ($vars["products"] as $product) : ?>
 			<div class="product-card">
@@ -84,8 +82,8 @@
 					<img src="<?php echo $vars["IMG_PATH"].$product["path"] ?>" alt="" />
 				</div>
 				<div class="product-info">
-					<h5><?php echo ucfirst($product["name"]) ?></h5>
-					<h6>Prezzo: <?php echo $product["price"] ?>&euro;</h6>
+					<p class="product-name"><?php echo ucfirst($product["name"]) ?></p>
+					<p>Prezzo: <?php echo $product["price"] ?>&euro;</p>
 					<button class="add-to-cart btn btn-primary" id="prod-<?php echo $product["id"] ?>">
 						Aggiungi al carrello
 					</button>

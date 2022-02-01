@@ -66,26 +66,26 @@ main {
 	padding-bottom: 55px;
 }
 
-button#search-button:hover, button#cart:hover{
+button#search-button:hover, a#cart:hover{
 	color: white;
 	border-radius: 2px;
 	background-color: grey;
 }
 
-section#filters button.icon {
+div#filters button.icon {
 	color: black;
 	padding: 5px 10px;
 }
 
-main section#filters {
+main div#filters {
 	background-color: rgba(151, 151, 151, 0.726);
 	padding: 5px 7px;
 }
 
-main section > h2 {
+main section > h3, main section > h2 {
 	text-align: center;
 	margin: 0;
-	padding: 10px 0;
+	padding: 15px 0;
 }
 
 section div#product-list {
@@ -117,6 +117,12 @@ div.product-info {
 	width: calc(100% - 140px);
 	height: 100%;
 	padding-left: 5px;
+}
+
+div.product-info > p.product-name {
+	margin:0;
+	font-size: larger;
+	font-weight: bold;
 }
 
 div.product-info > button {

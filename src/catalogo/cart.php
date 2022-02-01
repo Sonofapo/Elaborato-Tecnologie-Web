@@ -10,8 +10,8 @@
 					<img src="<?php echo $vars["IMG_PATH"].$product["path"] ?>" alt="" />
 				</div>
 				<div class="product-info">
-					<h5><?php echo ucfirst($product["name"]) ?></h5>
-					<h6>Prezzo: <?php echo $product["price"] ?>&euro;</h6>
+					<p class="product-name"><?php echo ucfirst($product["name"]) ?></p>
+					<p>Prezzo: <?php echo $product["price"] ?>&euro;</p>
 					<button class="remove-from-cart btn btn-danger" id="prod-<?php echo $product["id"] ?>">
 						Rimuovi
 					</button>
