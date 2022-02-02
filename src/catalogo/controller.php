@@ -20,9 +20,12 @@
 		case "cart":
 			$cname = $_SESSION["uid"] ?? "no-user";
 			if (isset($_COOKIE[$cname]) && $list = json_decode($_COOKIE[$cname])) {
-				foreach ($list as $id)
-					$ids[] = explode("-", $id)[1];
-				$vars["products"] = $db->getProducts($ids);
+				$ids = array_map("split_id", $list);
+				$qty = array_count_values($list);
+				foreach ($db->getProducts($ids) as $product) {
+					$product["quantity"] =  $qty[$product["id"]];
+					$vars["products"][] = $product;
+				}
 			}
 			$content = get_include_contents("./src/catalogo/cart.php");
 			break;

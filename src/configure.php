@@ -11,7 +11,7 @@ session_start();
 $vars["IMG_PATH"] = "./img/products/";
 
 # funzioni di supporto
-function get_include_contents($file) {
+function get_include_contents(string $file) {
 	if (is_file($file)) {
 		extract($GLOBALS, EXTR_REFS);
 		ob_start();
@@ -19,6 +19,10 @@ function get_include_contents($file) {
 		return ob_get_clean();
 	}
 	throw new ErrorException("$file not found");
+}
+
+function split_id($id) {
+	return explode("-", $id)[1];
 }
 
 ?>
