@@ -11,7 +11,7 @@ session_start();
 $vars["IMG_PATH"] = "./img/products/";
 
 # funzioni di supporto
-function get_include_contents(string $file) {
+function get_include_contents($file) {
 	if (is_file($file)) {
 		extract($GLOBALS, EXTR_REFS);
 		ob_start();
