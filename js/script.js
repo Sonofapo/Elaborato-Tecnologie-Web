@@ -24,6 +24,8 @@ $(document).ready(function() {
 		updateCart($(this).attr("id"), $("span#user-id").text(), true);
 	});
 
+	$("input.min-today").prop("min", new Date().toISOString().split("T")[0]);
+
 });
 
 function openNav() {
