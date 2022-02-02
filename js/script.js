@@ -17,11 +17,11 @@ $(document).ready(function() {
 	});
 
 	$("button.add-to-cart").click(function() {
-		addToCart($(this).attr("id"), $("span#user-id").text());
+		updateCart($(this).attr("id"), $("span#user-id").text());
 	});
 	
 	$("button.remove-from-cart").click(function() {
-		removeFromCart($(this).attr("id"), $("span#user-id").text());
+		updateCart($(this).attr("id"), $("span#user-id").text(), true);
 	});
 
 });
@@ -37,19 +37,16 @@ function closeNav() {
 	document.body.style.backgroundColor = "rgba(0,0,0,0)";
 }
 
-function addToCart(productId, cname) {
-	let cart = getCookie(cname);
-	cart = cart ? JSON.parse(cart) : [];
-	cart.push(productId);
-	setCookie(cname, JSON.stringify(cart), 1);
-}
-
-function removeFromCart(productId, cname) {
-	let cart = getCookie(cname);
-	cart = cart ? JSON.parse(cart) : [];
-	cart = cart.filter(function(e) { return e !== productId }); // remove from array
-	deleteCookie(cname);
-	setCookie(cname, JSON.stringify(cart), 1);
+function updateCart(productId, user, remove = false) {
+	let cart = JSON.parse(getCookie(user)) || [];
+	if (remove) {
+		let index = cart.indexOf(productId);
+		if (index > -1)
+			cart.splice(index, 1);
+	} else
+		cart.push(productId)
+	setCookie(user, JSON.stringify(cart), 1);
+	location.reload();
 }
 
 function getCookie(name) {
@@ -60,11 +57,9 @@ function getCookie(name) {
 	return "";
 }
 
-function setCookie(name, value, exp) {
-	const d = new Date();
-	d.setTime(d.getTime() + (exp*24*60*60*1000));
+function setCookie(name, value, days) {
+	const d = new Date((new Date).getTime + (days * 86400000));
 	document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=/`;
-	location.reload();
 }
 
 function deleteCookie(name) {
