@@ -76,6 +76,18 @@ class DB {
 		}
 	}
 
+	public function getOrders($userId) {
+		$query = "SELECT date, id FROM orders WHERE orders.id_user = ? ORDER BY id DESC";
+		return $this->query($query, [$userId], "i");
+	}
+
+	public function getOrderProducts($orderId) {
+		$query = "SELECT name, path, quantity FROM products, images, product_order 
+					WHERE product_order.id_order = ? AND images.product_id = products.id 
+					AND product_order.id_product = products.id";
+		return $this->query($query, [$orderId], "i");
+	}
+
 	public function getCards($userId) {
 		$query = "SELECT id, name, pan, cvv, date FROM cards WHERE user_id = ?";
 		return $this->query($query, [$userId], "i");

@@ -8,11 +8,6 @@
 		<div class="flex-2">
 			<ul id="menu">
 				<li>
-					<a href="notifiche.php">
-						<span class="fa fa-bell-o"></span> Notifiche
-					</a>
-				</li>
-				<li>
 					<a href="?action=user&mode=profile">
 						<span class="fa fa-user-circle-o"></span> <?php echo $vars["user"]?>
 						<span style="display:none" id="user-id"><?php echo $_SESSION["uid"] ?></span>

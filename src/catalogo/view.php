@@ -49,8 +49,8 @@
 			<div id="search-3" class="collapse" data-bs-parent="#accordion">
 				<ul class="body">
 					<li>
-						<input form="search-f" type="range" min="1" max="200" value="100" name="price" id="slider" />
-						<label for="slider">Prezzo max: <span id="search-value">100</span></label>
+						<input form="search-f" type="range" min="1" max="200" value="200" name="price" id="slider" />
+						<label for="slider">Prezzo max: <span id="search-value">200</span></label>
 					</li>
 				</ul>
 			</div>
@@ -67,16 +67,14 @@
 	<div id="filters" class="d-flex justify-content-between">
 		<div>
 			<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
-			Filtri correnti: "<span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>"
+			<span class="bold">Filtri</span> - <span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>
 		</div>
 	</div>
-	<!-- FA VOMITARE -->
-	<div>
-		<a id="cart" href="?action=catalogo&mode=cart"><span class="fa fa-shopping-cart"></span> Carrello</a>
-	</div>
-
 	<section>
-		<h3>Catalogo dei Prodotti</h3>
+		<div id="sec-header">
+			<a href="?action=catalogo&mode=cart"><span class="fa fa-shopping-cart"></span></a>
+			<h3>Catalogo dei Prodotti</h3>
+		</div>
 		<div id="product-list">
 			<?php foreach ($vars["products"] as $product) : ?>
 			<div class="product-card">

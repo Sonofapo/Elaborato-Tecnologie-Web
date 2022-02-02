@@ -25,4 +25,20 @@ function split_id($id) {
 	return explode("-", $id)[1];
 }
 
+function generate_order_list() {
+	global $UID, $db;
+	$orders = $db->getOrders($UID);
+	foreach ($orders as $o) {
+		$orderProd = $db->getOrderProducts($o["id"]);
+		$res[] = ["id_order" => $o["id"], "date" => $o["date"], "prods" => $orderProd];
+	}
+	return $res ?? [];
+}
+
+function get_icon($word) {
+	return ["Squadrato" => '<span class="fa fa-square-o"></span>',
+			"Tondeggiante" => '<span class="fa fa-circle-o"></span>', 
+			"Piccolo" => "S", "Medio" => "M", "Grande" => "L"][$word];
+}
+
 ?>

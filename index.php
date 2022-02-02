@@ -9,8 +9,10 @@
 	} else {
 		$vars["mode"] = "login";
 	}
-	if (isset($_SESSION["uid"]))
-		$vars["user"] = $db->getUserById($_SESSION["uid"]);
+	if (isset($_SESSION["uid"])) {
+		$UID = $_SESSION["uid"];
+		$vars["user"] = $db->getUserById($UID);
+	}
 
 	switch ($vars["action"]) {
 		case "catalogo":

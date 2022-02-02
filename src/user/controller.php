@@ -5,8 +5,8 @@ switch ($vars["mode"]) {
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$usr = $_POST["username"];
 			$psw = $_POST["password"];
-			if (($uid = $db->login($usr, $psw)) !== false) {			
-				$_SESSION["uid"] = $uid;
+			if (($_uid = $db->login($usr, $psw)) !== false) {			
+				$_SESSION["uid"] = $_uid;
 				header("Location: index.php");
 			} else {
 				$error = "Credenziali non corrette";
@@ -34,17 +34,16 @@ switch ($vars["mode"]) {
 		session_destroy();
 		header("Location: index.php");
 	case "buy":
-		$uid = $_SESSION["uid"];
-		if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_COOKIE[$uid])) {
+		if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_COOKIE[$UID])) {
 			$c["name"] = $_POST["name"] ?? "";
 			$c["pan"]  = $_POST["pan"]  ?? "";
 			$c["cvv"]  = $_POST["cvv"]  ?? "";
 			$c["date"] = $_POST["date"] ?? "";
 			if (isset($_POST["cards"]) && !empty($_POST["cards"]) || count(array_filter($c)) == 4) {
 				if (count(array_filter($c)) == 4)
-					$db->addCard($c["name"], $c["pan"], $c["cvv"], $c["date"], $uid);
+					$db->addCard($c["name"], $c["pan"], $c["cvv"], $c["date"], $UID);
 
-				$ids = array_map("split_id", json_decode($_COOKIE[$uid]));
+				$ids = array_map("split_id", json_decode($_COOKIE[$UID]));
 				$qty = array_count_values($ids);
 				$ids = array_unique($ids);
 				foreach ($ids as $p) {
@@ -52,21 +51,23 @@ switch ($vars["mode"]) {
 					$_p["quantity"] =  $qty[$p];
 					$_ids[] = $_p;
 				}
-				$db->addOrder($_ids, $uid);
+				$db->addOrder($_ids, $UID);
 
 				$message = "Acquisto avvenuto correttamente";
 				$vars["products"] = $db->getProducts();
 				$content = get_include_contents("./src/catalogo/view.php");
 			} else {
 				$error = "Errore. Controllare i dati inseriti";
-				$vars["cards"] = $db->getCards($uid);
+				$vars["cards"] = $db->getCards($UID);
 				$content = get_include_contents("./src/catalogo/purchase.php");
 			}
 		}
 		$vars["body"] = $content;
 		break;
 	case "profile": 
-		die("Work in progress...");
+		$vars["orders"] = generate_order_list();
+		$vars["body"] = get_include_contents("./src/user/profile.php");
+		break;
 }
 
 ?>
