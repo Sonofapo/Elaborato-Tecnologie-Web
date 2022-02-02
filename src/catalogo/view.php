@@ -68,9 +68,10 @@
 			<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
 			Filtri correnti: "<span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>"
 		</div>
-		<div>
-			<a id="cart" href="?action=catalogo&mode=cart"><span class="fa fa-shopping-cart"></span> Carrello</a>
-		</div>
+	</div>
+	<!-- FA VOMITARE -->
+	<div>
+		<a id="cart" href="?action=catalogo&mode=cart"><span class="fa fa-shopping-cart"></span> Carrello</a>
 	</div>
 
 	<section>

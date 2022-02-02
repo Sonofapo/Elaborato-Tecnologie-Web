@@ -38,7 +38,8 @@ function closeNav() {
 }
 
 function updateCart(productId, user, remove = false) {
-	let cart = JSON.parse(getCookie(user)) || [];
+	let cookie = getCookie(user);
+	let cart = cookie ? JSON.parse(cookie) : [];
 	if (remove) {
 		let index = cart.indexOf(productId);
 		if (index > -1)

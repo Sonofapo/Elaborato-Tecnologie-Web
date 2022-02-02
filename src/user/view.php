@@ -14,10 +14,10 @@
 			<div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
 			<div class="col-10 col-md-8 col-lg-6 col-xl-4 py-3 px-5 border border-dark rounded">
 				<img id="login-img" src="./img/logo.png" alt="" />
-				<h2><?php echo $isLogin ? "Accesso" : "Registrazione" ?></h2>
+				<h2><?php echo $vars["isLogin"] ? "Accesso" : "Registrazione" ?></h2>
 				<form action="index.php" method="POST">
 					<input type="hidden" name="action" value="user" />
-					<input type="hidden" name="mode" value="<?php echo $isLogin ? "login" : "subscribe"?>" />
+					<input type="hidden" name="mode" value="<?php echo $vars["isLogin"] ? "login" : "subscribe"?>" />
 					
 					<label for="username">Username:</label>
 					<input class="form-control mb-3" type="text" id="username" name="username" required />
@@ -25,12 +25,12 @@
 					<label for="password">Password:</label>
 					<input class="form-control mb-3" type="password" id="password" name="password" required />
 					
-					<input class="btn btn-success mb-3" type="submit" value="<?php echo $isLogin ? "accedi" : "registrati"?>" />
+					<input class="btn btn-success mb-3" type="submit" value="<?php echo $vars["isLogin"] ? "accedi" : "registrati"?>" />
 				</form>
 				<p class="m-0">
 					oppure
-					<a href="index.php?action=user&mode=<?php echo $isLogin ? "subscribe" : "login" ?>">
-						<?php echo $isLogin ? "registrati" : "accedi"?>
+					<a href="index.php?action=user&mode=<?php echo $vars["isLogin"] ? "subscribe" : "login" ?>">
+						<?php echo $vars["isLogin"] ? "registrati" : "accedi"?>
 					</a>
 				</p>
 			</div>

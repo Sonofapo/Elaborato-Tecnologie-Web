@@ -18,8 +18,8 @@
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;
 		case "cart":
-			$cname = $_SESSION["uid"] ?? "no-user";
-			if (isset($_COOKIE[$cname]) && $list = json_decode($_COOKIE[$cname])) {
+			$uid = $_SESSION["uid"];
+			if (isset($_COOKIE[$uid]) && $list = json_decode($_COOKIE[$uid])) {
 				$ids = array_map("split_id", $list);
 				$qty = array_count_values($ids);
 				foreach ($db->getProducts($ids) as $product) {
@@ -28,6 +28,14 @@
 				}
 			}
 			$content = get_include_contents("./src/catalogo/cart.php");
+			break;
+		case "purchase":
+			$uid = $_SESSION["uid"];
+			if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_COOKIE[$uid]) && $list = json_decode($_COOKIE[$uid])) {
+				$content = get_include_contents("./src/catalogo/purchase.php");
+			} else {
+				$content = get_include_contents("./src/catalogo/view.php");
+			}
 			break;
 		default:
 			die("Pagina non disponibile.");

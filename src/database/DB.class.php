@@ -65,6 +65,17 @@ class DB {
 		return $this->query($query, $ids, str_repeat("i", count($ids))) ?: [];
 	}
 
+	public function addOrder($products, $userId) {
+		$query = "INSERT INTO orders (id_user, date) VALUES (?, NOW())";
+		/* $this->query($query, [$userId], "i"); */
+		$query = "SELECT MAX(id) as maxId FROM orders";
+		$maxId = $this->query($query)[0]["maxId"];
+		foreach ($products as $p) {
+			$query = "INSERT INTO product_order (id_order, id_product, quantity) VALUES (?, ?, ?)";
+			/* $this->query($query, [$maxId, $p["id"], $p["quantity"]], "iii"); */
+		}
+	}
+
 }
 
 ?>

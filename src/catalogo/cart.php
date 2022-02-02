@@ -22,6 +22,11 @@
 			</div>
 			<?php endforeach ?>
 		</div>
+		<form action="index.php" method="post">
+			<input type="hidden" name="action" value="catalogo" />
+			<input type="hidden" name="mode" value="purchase" />
+			<button class="btn btn-success">Acquista</button>
+		</form>
 		<?php else: ?>
 		<h2>Il tuo carrello è vuoto</h2>
 		<?php endif ?>

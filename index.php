@@ -1,18 +1,23 @@
 <?php
 
 	require "./src/configure.php";
-
-	$vars["action"]	= $_REQUEST["action"] ?? "catalogo";
-	$vars["mode"]	= $_REQUEST["mode"] ?? "show";
-	$vars["user"]	= $db->getUserById($_SESSION["uid"] ?? -1) ?: "Login";
-	$vars["logged"]	= isset($_SESSION["uid"]) ? true : false;
+	$vars["action"] = isset($_SESSION["uid"]) ? ($_REQUEST["action"] ?? "catalogo") : "user";
+	if (isset($_SESSION["uid"])) {
+		$vars["mode"] = $_REQUEST["mode"] ?? "show";
+	} else if (isset($_REQUEST["mode"]) && $_REQUEST["mode"] == "subscribe") {
+		$vars["mode"] = "subscribe";
+	} else {
+		$vars["mode"] = "login";
+	}
+	if (isset($_SESSION["uid"]))
+		$vars["user"] = $db->getUserById($_SESSION["uid"]);
 
 	switch ($vars["action"]) {
 		case "catalogo":
 			require "./src/catalogo/controller.php";
 			break;
 		case "user":
-			require "./src/login/controller.php";
+			require "./src/user/controller.php";
 			break;
 		default:
 			die("Pagina non disponibile.");
