@@ -92,7 +92,7 @@ section div#product-list {
 	padding: 0 10px;
 }
 
-section div.product-card {	
+section div.product-card {
 	margin-bottom: 10px;
 	background-color: rgba(199, 199, 199, 0.452);
 	border-radius: 2px;
@@ -127,6 +127,7 @@ div.product-info > p.product-name {
 
 div.product-info > button {
 	font-size: small;
+	float: right;
 }
 
 /* SIDEBAR */

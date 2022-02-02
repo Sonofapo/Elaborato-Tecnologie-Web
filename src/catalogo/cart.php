@@ -11,8 +11,10 @@
 				</div>
 				<div class="product-info">
 					<p class="product-name"><?php echo ucfirst($product["name"]) ?></p>
-					<p>Prezzo: <?php echo $product["price"] ?>&euro;</p>
-					<p>Quantità: <?php echo $product["quantity"] ?></p>
+					<p>
+						Quantità: <?php echo $product["quantity"] ?> -
+						Prezzo: <?php echo $product["price"] * $product["quantity"] ?>&euro;
+					</p>
 					<button class="remove-from-cart btn btn-danger" id="prod-<?php echo $product["id"] ?>">
 						Rimuovi
 					</button>
