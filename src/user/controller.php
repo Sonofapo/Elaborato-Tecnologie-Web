@@ -34,27 +34,36 @@ switch ($vars["mode"]) {
 		session_destroy();
 		header("Location: index.php");
 	case "buy":
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			//in the case
-			$card["name"] = $_POST["name"];
-			$card["pan"] = $_POST["pan"];
-			$card["cvv"] = $_POST["cvv"];
-			$card["date"] = $_POST["date"];
-			//fine in the case
-			$uid = $_SESSION["uid"];
-			if (isset($_COOKIE[$uid]) && $list = json_decode($_COOKIE[$uid])) {
-				$ids = array_map("split_id", $list);
+		$uid = $_SESSION["uid"];
+		if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_COOKIE[$uid])) {
+			$c["name"] = $_POST["name"] ?? "";
+			$c["pan"]  = $_POST["pan"]  ?? "";
+			$c["cvv"]  = $_POST["cvv"]  ?? "";
+			$c["date"] = $_POST["date"] ?? "";
+			if (isset($_POST["cards"]) && !empty($_POST["cards"]) || count(array_filter($c)) == 4) {
+				if (count(array_filter($c)) == 4)
+					$db->addCard($c["name"], $c["pan"], $c["cvv"], $c["date"], $uid);
+
+				$ids = array_map("split_id", json_decode($_COOKIE[$uid]));
 				$qty = array_count_values($ids);
+				$ids = array_unique($ids);
 				foreach ($ids as $p) {
 					$_p["id"] = $p;
 					$_p["quantity"] =  $qty[$p];
 					$_ids[] = $_p;
 				}
 				$db->addOrder($_ids, $uid);
+
+				$message = "Acquisto avvenuto correttamente";
+				$vars["products"] = $db->getProducts();
+				$content = get_include_contents("./src/catalogo/view.php");
+			} else {
+				$error = "Errore. Controllare i dati inseriti";
+				$vars["cards"] = $db->getCards($uid);
+				$content = get_include_contents("./src/catalogo/purchase.php");
 			}
 		}
-		//$message = "Acquisto avvenuto correttamente";
-		$vars["body"] = get_include_contents("./src/catalogo/view.php");
+		$vars["body"] = $content;
 		break;
 	case "profile": 
 		die("Work in progress...");

@@ -63,6 +63,7 @@
 	</form>
 </aside>
 <main>
+<?php echo get_include_contents("./src/templates/prompt.php") ?>
 	<div id="filters" class="d-flex justify-content-between">
 		<div>
 			<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>

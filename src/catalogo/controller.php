@@ -22,7 +22,7 @@
 			if (isset($_COOKIE[$uid]) && $list = json_decode($_COOKIE[$uid])) {
 				$ids = array_map("split_id", $list);
 				$qty = array_count_values($ids);
-				foreach ($db->getProducts($ids) as $product) {
+				foreach ($db->getProducts(array_unique($ids)) as $product) {
 					$product["quantity"] =  $qty[$product["id"]];
 					$vars["products"][] = $product;
 				}
@@ -32,6 +32,7 @@
 		case "purchase":
 			$uid = $_SESSION["uid"];
 			if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_COOKIE[$uid]) && $list = json_decode($_COOKIE[$uid])) {
+				$vars["cards"] = $db->getCards($_SESSION["uid"]);
 				$content = get_include_contents("./src/catalogo/purchase.php");
 			} else {
 				$content = get_include_contents("./src/catalogo/view.php");

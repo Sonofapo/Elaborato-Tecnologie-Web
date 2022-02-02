@@ -67,13 +67,23 @@ class DB {
 
 	public function addOrder($products, $userId) {
 		$query = "INSERT INTO orders (id_user, date) VALUES (?, NOW())";
-		/* $this->query($query, [$userId], "i"); */
+		$this->query($query, [$userId], "i");
 		$query = "SELECT MAX(id) as maxId FROM orders";
 		$maxId = $this->query($query)[0]["maxId"];
 		foreach ($products as $p) {
 			$query = "INSERT INTO product_order (id_order, id_product, quantity) VALUES (?, ?, ?)";
-			/* $this->query($query, [$maxId, $p["id"], $p["quantity"]], "iii"); */
+			$this->query($query, [$maxId, $p["id"], $p["quantity"]], "iii");
 		}
+	}
+
+	public function getCards($userId) {
+		$query = "SELECT id, name, pan, cvv, date FROM cards WHERE user_id = ?";
+		return $this->query($query, [$userId], "i");
+	}
+
+	public function addCard($name, $pan, $cvv, $exp, $userId) {
+		$query = "INSERT INTO cards (name, pan, cvv, date, user_id) VALUES (?, ?, ?, ?, ?)";
+		$this->query($query, [$name, $pan, $cvv, $exp, $userId], "ssssi");
 	}
 
 }

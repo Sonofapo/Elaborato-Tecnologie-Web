@@ -2,13 +2,7 @@
 	<h1><a href="index.php">UniBonsai</a></h1>
 </header>
 <main>
-	<?php if (isset($error)): ?>
-	<div class="fade-me">
-		<div class="alert alert-danger">
-			<?php echo $error ?>
-		</div>
-	</div>
-	<?php endif ?>
+<?php echo get_include_contents("./src/templates/prompt.php") ?>
 	<div class="container-fluid mt-3">
 		<div class="row text-center">
 			<div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
