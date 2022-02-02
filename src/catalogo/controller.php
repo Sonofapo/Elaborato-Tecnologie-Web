@@ -21,7 +21,7 @@
 			$cname = $_SESSION["uid"] ?? "no-user";
 			if (isset($_COOKIE[$cname]) && $list = json_decode($_COOKIE[$cname])) {
 				$ids = array_map("split_id", $list);
-				$qty = array_count_values($list);
+				$qty = array_count_values($ids);
 				foreach ($db->getProducts($ids) as $product) {
 					$product["quantity"] =  $qty[$product["id"]];
 					$vars["products"][] = $product;
