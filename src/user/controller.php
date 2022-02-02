@@ -56,6 +56,7 @@ switch ($vars["mode"]) {
 
 				$message = "Acquisto avvenuto correttamente";
 				$vars["products"] = $db->getProducts();
+				setcookie($uid, "", time() - 3600, "/");
 				$content = get_include_contents("./src/catalogo/view.php");
 			} else {
 				$error = "Errore. Controllare i dati inseriti";
