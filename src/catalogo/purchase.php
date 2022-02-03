@@ -35,7 +35,7 @@
 			</select>
 
 			<div class="text-center">
-				<button class="btn btn-success mt-4" type="submit">Acquista</button>
+				<button class="btn btn-success mt-4" type="submit">Paga</button>
 			</div>
 		</form>
 	</div>

@@ -1,0 +1,169 @@
+main {
+	padding-bottom: 55px;
+}
+
+/********** FILTER BAR ***********/
+div#filter {
+	padding: 0 10px;
+	background-color: rgba(151, 151, 151, 0.726);
+}
+
+div#filter button {
+	padding: 5px 9px;
+	margin-right: 5px;
+	border-radius: 2px;
+	color: black;
+	background-color: rgba(151, 151, 151);
+}
+
+div#filter > div {
+	padding: 5px 0;
+	white-space: nowrap;
+	overflow-y: scroll;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+div#filter div::-webkit-scrollbar {
+	display: none;
+}
+
+div#filter > div > div {
+	padding: 3px 5px;
+	margin: 0 2px;
+	display: inline-block;
+	border-radius: 4px;
+	background-color: rgb(151, 151, 151);
+}
+
+/********** PAGE TITLE ***********/
+div#sec-header {
+	position: relative;
+	text-align: center;
+}
+
+div#sec-header a {
+	padding: 4px 6px;
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	border-radius: 2px;
+	font-size: larger;
+}
+
+button#search-button:hover, div#sec-header a:hover{
+	color: white;
+	background-color: grey;
+	transition: 0.2s;
+}
+
+main section h3, main section h2 {
+	text-align: center;
+	margin: 0;
+	padding: 15px 0;
+}
+
+/********** PRODUCT LIST ***********/
+div#product-list {
+	padding: 0 10px;
+}
+
+div.product-card {
+	margin-bottom: 10px;
+	border-radius: 2px;
+	background-color: rgba(199, 199, 199, 0.452);
+}
+
+div.product-card div {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+div.product-img {
+	height: 120px;
+	margin: 5px;
+}
+
+div.product-img img {
+	max-height: 100%;
+	border-radius: 2px;
+}
+
+div.product-info {
+	width: calc(100% - 140px);
+	height: 100%;
+	padding-left: 5px;
+}
+
+div.product-info > p.product-name {
+	margin: 0;
+	font-size: larger;
+	font-weight: bold;
+}
+
+div.product-info > button {
+	font-size: small;
+	float: right;
+}
+
+/********** ORDER LIST ***********/
+section#orders {
+	text-align: center;
+	background-color: rgba(199, 199, 199, 0.452);
+}
+
+table {
+	border: solid #08313a 1px !important;
+}
+
+table th, table td.tot-price {
+	background-color: #08313a !important;
+	color: white !important;
+}
+
+table td, table th {
+	vertical-align: middle;
+	border: none;
+}
+
+img.order-img {
+	height: 50px;
+	border-radius: 2px;
+}
+
+@media screen and (min-width: 768px) {
+	div#product-list {
+		margin: 0 30px;
+		text-align: center;
+	}
+
+	div.product-img {
+		height: 170px;
+	}
+
+	div.product-card {
+		min-width: 360px;
+		text-align: left;
+	}
+
+	div.product-info {
+		width: calc(100% - 200px);
+		padding: 0;
+	}
+
+	div#product-list div {
+		display: inline-block;
+	}
+
+	section#orders div {
+		max-width: 50%;
+	}
+
+	div#sec-header a {
+		right: 20px;
+	}
+
+	div#sec-header a:after {
+		content: " Carrello";
+	}
+}
