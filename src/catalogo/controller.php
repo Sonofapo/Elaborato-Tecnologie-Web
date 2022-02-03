@@ -34,6 +34,23 @@
 				header("Location: index.php");
 			}
 			break;
+		case "update" or "add":
+			if ($_SERVER["REQUEST_METHOD"] == "POST"){
+				if (empty($_POST["id"])) {
+					$db->addProduct($_POST["name"], $_POST["price"], $_POST["size"], $_POST["shape"]);
+					$message = "Prodotto aggiunto correttamente";
+				} else {
+					$db->updateProduct($_POST["id"], $_POST["name"], $_POST["price"], $_POST["size"], $_POST["shape"]);
+					$message = "Prodotto modificato correttamente";
+				}
+				$vars["products"] = $db->getProducts();
+				$content = get_include_contents("./src/catalogo/view.php");
+			} else {
+				if (isset($_REQUEST["id"])) 
+					$vars["item"] = $db->getProducts([$_REQUEST["id"]])[0];
+				$content = get_include_contents("./src/catalogo/update.php");
+			}
+			break;
 		default:
 			die("Pagina non disponibile.");
 	}

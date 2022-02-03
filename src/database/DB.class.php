@@ -82,7 +82,9 @@ class DB {
 	}
 
 	public function getOrders($userId) {
-		$query = "SELECT date, id FROM orders WHERE orders.id_user = ? ORDER BY id DESC";
+		$query = "SELECT orders.date, orders.id, SUM(products.price * product_order.quantity) AS total 
+			FROM orders, products, product_order WHERE orders.id_user = ? AND orders.id = product_order.id_order 
+			AND products.id = product_order.id_product GROUP by (orders.id);";
 		return $this->query($query, [$userId], "i");
 	}
 
@@ -101,6 +103,21 @@ class DB {
 	public function addCard($name, $pan, $cvv, $exp, $userId) {
 		$query = "INSERT INTO cards (name, pan, cvv, date, user_id) VALUES (?, ?, ?, ?, ?)";
 		$this->query($query, [$name, $pan, $cvv, $exp, $userId], "ssssi");
+	}
+
+	public function isVendor($userId) {
+		$query = "SELECT isVendor FROM users WHERE id = ?";
+		return $this->query($query, [$userId], "i")[0]["isVendor"] ? true : false;
+	}
+
+	public function updateProduct($id, $name, $price, $size, $shape) {
+		$query = "UPDATE products SET name = ?, price = ?, size = ?, shape = ? WHERE id = ?";
+		$this->query($query, [$name, $price, $size, $shape, $id], "sdssi");
+	}
+
+	public function addProduct($name, $price, $size, $shape) {
+		$query = "INSERT INTO products (name, price, size, shape) VALUES (?, ?, ?, ?)";
+		$this->query($query, [$name, $price, $size, $shape], "sdss");
 	}
 
 }

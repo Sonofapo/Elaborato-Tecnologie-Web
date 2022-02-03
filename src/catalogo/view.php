@@ -81,7 +81,11 @@
 	</div>
 	<section>
 		<div id="sec-header">
-			<a href="?action=catalogo&mode=cart"><span class="fa fa-shopping-cart"></span></a>
+			<?php if($vars["isVendor"]): ?>
+				<a href="?action=catalogo&mode=add" id="add"><span class="fa fa-plus"></span></a>
+			<?php else: ?>			
+				<a href="?action=catalogo&mode=cart" id="cart"><span class="fa fa-shopping-cart"></span></a>
+			<?php endif ?>
 			<h3>Catalogo dei Prodotti</h3>
 		</div>
 		<div id="product-list">
@@ -93,11 +97,15 @@
 				<div class="product-info">
 					<p class="product-name"><?php echo ucfirst($product["name"]) ?></p>
 					<p>Prezzo: <?php echo $product["price"] ?>&euro;</p>
-					<button class="btn btn-primary add-to-cart" id="prod-<?php echo $product["id"] ?>">
-						<span class="button-text">Aggiungi al carrello</span>
-						<span class="added"><span class="fa fa-check"></span></span>
-						<span class="cart-ico fa fa-shopping-cart"></span>
-					</button>
+					<?php if($vars["isVendor"]): ?>
+						<a class="btn btn-primary" href="?action=catalogo&mode=update&id=<?php echo $product["id"] ?>">Modifica</a>
+					<?php else: ?>			
+						<button class="btn btn-primary add-to-cart" id="prod-<?php echo $product["id"] ?>">
+							<span class="button-text">Aggiungi al carrello</span>
+							<span class="added"><span class="fa fa-check"></span></span>
+							<span class="cart-ico fa fa-shopping-cart"></span>
+						</button>
+					<?php endif ?>
 				</div>
 			</div>
 			<?php endforeach ?>
