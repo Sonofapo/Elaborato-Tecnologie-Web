@@ -14,8 +14,8 @@
 
 			$shapes = array_map("get_icon", $shapes);
 			$sizes  = array_map("get_icon", $sizes);
-			$vars["filters"]  = count($shapes) ? join(", ", $shapes) . " | " : "";
-			$vars["filters"] .= count($sizes) ? join(", ", $sizes) . " | " : "";
+			$vars["filters"]  = $shapes ? join(", ", $shapes) . " | " : "";
+			$vars["filters"] .= $sizes ? join(", ", $sizes) . " | " : "";
 			$vars["filters"] .= $price ? "Max: ${price}€" : "";
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;

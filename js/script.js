@@ -22,9 +22,18 @@ $(document).ready(function() {
 	
 	$("button.remove-from-cart").click(function() {
 		updateCart($(this).attr("id"), $("span#user-id").text(), true);
+		location.reload();
 	});
 
 	$("input.min-today").prop("min", new Date().toISOString().split("T")[0]);
+
+	$("input#pan").on("input", function () {
+		$(this).val(function (index, value) {
+			return value.replace(/[^0-9]/g, "").
+				replace(/\W/gi, '').
+				replace(/(.{4})/g, '$1 ').trim();
+		});
+	});
 
 });
 
@@ -49,7 +58,6 @@ function updateCart(productId, user, remove = false) {
 	} else
 		cart.push(productId)
 	setCookie(user, JSON.stringify(cart), 1);
-	location.reload();
 }
 
 function getCookie(name) {

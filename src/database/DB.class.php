@@ -40,29 +40,34 @@ class DB {
 	public function filter ($shapes, $sizes, $price) {
 		$query = "SELECT id FROM products ";
 		if ($shapes)
-			$query .= " WHERE shape IN (" . join(",", array_fill(0, count($shapes), "?")) . ")";
+			$query .= " WHERE shape IN " . get_in_params($shapes);
 		else
 			$query .= "WHERE 1=1";
 		if ($sizes)
-			$query .= " AND size IN (" . join(",", array_fill(0, count($sizes), "?")) . ")";
+			$query .= " AND size IN " . get_in_params($sizes);
 		else
 			$query .= " AND 1=1";
 		if ($price)
 			$query .= " AND price <= ?";
 		
 		$vars  = array_merge($shapes, $sizes, $price ? [$price] : []);
-		$types = str_repeat("s", count($shapes)) . str_repeat("s", count($sizes)) . ($price ? "i" : "");
+		$types = str_repeat("s", count($shapes) + count($sizes)) . ($price ? "i" : "");
 		if ($objs = $this->query($query, $vars, $types))
 			return array_column($objs, "id");
 		return [];
 	}
 
-	public function getProducts($ids = []) {
+	public function getProducts($ids = null) {
 		$query = "SELECT products.id as id, name, price, size, shape, path 
-					FROM products, images WHERE products.id = images.product_id ";
-		if ($ids)
-			$query .= " AND products.id IN (" . join(",", array_fill(0, count($ids), "?")) . ")";
-		return $this->query($query, $ids, str_repeat("i", count($ids))) ?: [];
+			FROM products, images WHERE products.id = images.product_id";
+		if ($ids === null) {
+			return $this->query($query);
+		} else if (empty($ids)) {
+			return [];
+		} else {
+			$query .= " AND products.id IN ". get_in_params($ids);
+			return $this->query($query, $ids, str_repeat("i", count($ids))) ?: [];
+		}
 	}
 
 	public function addOrder($products, $userId) {

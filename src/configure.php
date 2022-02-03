@@ -41,4 +41,8 @@ function get_icon($word) {
 			"Piccolo" => "S", "Medio" => "M", "Grande" => "L"][$word];
 }
 
+function get_in_params($array) {
+	return "(".rtrim(str_repeat("?,", count($array)), ",").")";
+}
+
 ?>

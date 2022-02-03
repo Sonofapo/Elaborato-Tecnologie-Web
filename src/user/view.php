@@ -5,8 +5,9 @@
 <?php echo get_include_contents("./src/templates/prompt.php") ?>
 	<div class="container-fluid mt-3">
 		<div class="row text-center">
-			<div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
-			<div class="col-10 col-md-8 col-lg-6 col-xl-4 py-3 px-5 border border-dark rounded">
+			<div class="col-10 col-md-8 col-lg-6 col-xl-4
+				offset-1 offset-md-2 offset-lg-3 offset-xl-4 
+				py-3 px-5 border border-dark rounded">
 				<img id="login-img" src="./img/logo.png" alt="" />
 				<h2><?php echo $vars["isLogin"] ? "Accesso" : "Registrazione" ?></h2>
 				<form action="index.php" method="POST">
@@ -28,7 +29,6 @@
 					</a>
 				</p>
 			</div>
-			<div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
 		</div>
 	</div>
 </main>
