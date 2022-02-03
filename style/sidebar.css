@@ -28,7 +28,7 @@ div#close-button-div {
 
 button#close-search {
 	padding: 20px;
-    color: white;
+	color: white;
 }
 
 div#accordion > section:not(:last-of-type) > h2.header {
@@ -43,7 +43,7 @@ h2.header {
 }
 
 h2.header a {
-    font-size: 20px !important;
+	font-size: 20px !important;
 }
 
 ul.body li {

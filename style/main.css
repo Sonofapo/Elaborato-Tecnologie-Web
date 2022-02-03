@@ -45,8 +45,8 @@ div#sec-header {
 div#sec-header a {
 	padding: 4px 6px;
 	position: absolute;
-	top: 15px;
-	right: 10px;
+	top: 11px;
+	right: 15px;
 	border-radius: 2px;
 	font-size: larger;
 }
