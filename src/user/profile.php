@@ -32,6 +32,11 @@
 							</td>
 						</tr>
 					<?php endforeach ?>
+					<tr>
+						<td class="tot-price" colspan="3" header="order-<?php echo $o ?>">
+							Totale: <?php echo round($order["total"], 2)?>&euro;
+						</td>
+					</tr>
 				</table>
 			</div>
 		<?php endforeach ?>

@@ -30,7 +30,7 @@ function generate_order_list() {
 	$orders = $db->getOrders($UID);
 	foreach ($orders as $o) {
 		$orderProd = $db->getOrderProducts($o["id"]);
-		$res[] = ["id_order" => $o["id"], "date" => $o["date"], "prods" => $orderProd];
+		$res[] = ["id_order" => $o["id"], "date" => $o["date"], "total" => $o["total"], "prods" => $orderProd];
 	}
 	return $res ?? [];
 }
