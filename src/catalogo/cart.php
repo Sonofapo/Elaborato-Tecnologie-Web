@@ -4,7 +4,9 @@
 		<?php if (isset($vars["products"])) : ?>
 		<h2>Il tuo carrello</h2>
 		<div id="product-list">
+			<?php $total = 0 ?>
 			<?php foreach ($vars["products"] as $product) : ?>
+			<?php $total += $product["price"] * $product["quantity"] ?>
 			<div class="product-card">
 				<div class="product-img">
 					<img src="<?php echo $vars["IMG_PATH"].$product["path"] ?>" alt="" />
@@ -22,11 +24,10 @@
 			</div>
 			<?php endforeach ?>
 		</div>
-		<form action="index.php" method="post">
-			<input type="hidden" name="action" value="catalogo" />
-			<input type="hidden" name="mode" value="purchase" />
-			<button class="btn btn-success">Acquista</button>
-		</form>
+		<div class="text-center mt-4">
+			<p>Totale: <?php echo $total ?>&euro;</p>
+			<a class="btn btn-success" href="?action=catalogo&mode=purchase">Acquista</a>
+		</div>
 		<?php else: ?>
 		<h2>Il tuo carrello è vuoto</h2>
 		<?php endif ?>

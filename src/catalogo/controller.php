@@ -31,11 +31,11 @@
 			$content = get_include_contents("./src/catalogo/cart.php");
 			break;
 		case "purchase":
-			if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_COOKIE[$UID]) && $list = json_decode($_COOKIE[$UID])) {
+			if (isset($_COOKIE[$UID]) && json_decode($_COOKIE[$UID])) {
 				$vars["cards"] = $db->getCards($_SESSION["uid"]);
 				$content = get_include_contents("./src/catalogo/purchase.php");
 			} else {
-				$content = get_include_contents("./src/catalogo/view.php");
+				header("Location: index.php");
 			}
 			break;
 		default:
