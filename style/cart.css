@@ -1,0 +1,73 @@
+.add-to-cart {
+	position: relative;
+	overflow: hidden;
+}
+
+.add-to-cart:active {
+	transform: scale(0.9);
+}
+
+.added, .cart-ico {
+	position: absolute;
+	z-index: 3;
+	left: 50%;
+	top: 50%;
+	font-size: 1.2em;
+	color: #fff;
+	transform: translate(-50%, -50%);
+}
+
+.add-to-cart .cart-ico {
+	position: absolute;
+	z-index: 2;
+	top: 50%;
+	left: -10%;
+	font-size: 2em;
+	transform: translate(-50%, -50%);
+}
+
+.add-to-cart span.added {
+	opacity: 0;
+}
+
+.add-to-cart.clicked span.button-text {
+	animation: hide 1.5 ease-in-out forwards;
+}
+
+.add-to-cart.clicked .cart-ico {
+	animation: cart 1.5s ease-in-out forwards;
+}
+
+.add-to-cart.clicked span.added {
+	animation: check 1.5s ease-in-out forwards;
+}
+
+@keyframes hide {
+	0%, 80% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes cart {
+	0% {
+		left: -10%;
+	}
+	40%, 60% {
+		left: 50%;
+	}
+	100% {
+		left: 110%;
+	}
+}
+
+@keyframes check {
+	0%, 80% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

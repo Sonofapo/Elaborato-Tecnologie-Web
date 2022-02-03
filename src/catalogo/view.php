@@ -93,8 +93,10 @@
 				<div class="product-info">
 					<p class="product-name"><?php echo ucfirst($product["name"]) ?></p>
 					<p>Prezzo: <?php echo $product["price"] ?>&euro;</p>
-					<button class="add-to-cart btn btn-primary" id="prod-<?php echo $product["id"] ?>">
-						Aggiungi al carrello
+					<button class="btn btn-primary add-to-cart" id="prod-<?php echo $product["id"] ?>">
+						<span class="button-text">Aggiungi al carrello</span>
+						<span class="added"><span class="fa fa-check"></span></span>
+						<span class="cart-ico fa fa-shopping-cart"></span>
 					</button>
 				</div>
 			</div>

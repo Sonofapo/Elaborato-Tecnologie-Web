@@ -18,8 +18,12 @@ $(document).ready(function() {
 
 	$("button.add-to-cart").click(function() {
 		updateCart($(this).attr("id"), $("span#user-id").text());
+		$(this).addClass("clicked");
+		setTimeout(function() {
+			$("button.add-to-cart").removeClass('clicked');
+		}, 3000);
 	});
-	
+
 	$("button.remove-from-cart").click(function() {
 		updateCart($(this).attr("id"), $("span#user-id").text(), true);
 		location.reload();
