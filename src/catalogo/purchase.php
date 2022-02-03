@@ -10,18 +10,18 @@
 
 			<label for="name">Titolare</label>
 			<input class="form-control mb-3" type="text" id="name" name="name"
-				pattern="[a-zA-Z\s]{1,50}" maxlength="16" required />
+				pattern="[a-zA-Z\s]{1,50}" maxlength="16" />
 
 			<label for="pan">Numero carta</label>
 			<input class="form-control mb-3" type="tel" id="pan" name="pan"
-				inputmode="numeric" maxlength="19" required />
+				inputmode="numeric" maxlength="19" />
 
 			<label for="cvv">CVV</label>
 			<input class="form-control mb-3" type="tel" id="cvv" name="cvv"	
-				inputmode="numeric" pattern="[0-9]{3}" maxlength="3" required />
+				inputmode="numeric" pattern="[0-9]{3}" maxlength="3" />
 
 			<label for="date">Data di scadenza</label>
-			<input class="form-control mb-3 min-today" type="date" id="date" name="date" required />
+			<input class="form-control mb-3 min-today" type="date" id="date" name="date" />
 			
 			<div class="text-center my-4">oppure</div>
 			<label for="cards">Seleziona una delle tue carte</label>
