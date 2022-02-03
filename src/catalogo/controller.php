@@ -7,16 +7,12 @@
 		case "filter":
 			$shapes	= $_REQUEST["shape"] ?? [];
 			$sizes	= $_REQUEST["size"] ?? [];
-			$price	= $_REQUEST["price"] ?? null;
-
-			$filteredIDs = $db->filter($shapes, $sizes, $price);
-			$vars["products"] = $db->getProducts($filteredIDs);
-
-			$shapes = array_map("get_icon", $shapes);
-			$sizes  = array_map("get_icon", $sizes);
-			$vars["filters"]  = $shapes ? join(", ", $shapes) . " | " : "";
-			$vars["filters"] .= $sizes ? join(", ", $sizes) . " | " : "";
-			$vars["filters"] .= $price ? "Max: ${price}€" : "";
+			$price	= $_REQUEST["price"] ?? "";
+			$filteredIds = $db->filter($shapes, $sizes, $price);
+			$vars["filters"]["shape"] = join(", ", $shapes) ?: "tutte";
+			$vars["filters"]["size"] = join(", ", $sizes) ?: "tutte";
+			$vars["filters"]["price"] = $price;
+			$vars["products"] = $db->getProducts($filteredIds);
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;
 		case "cart":

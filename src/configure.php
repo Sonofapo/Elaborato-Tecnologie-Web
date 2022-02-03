@@ -35,12 +35,6 @@ function generate_order_list() {
 	return $res ?? [];
 }
 
-function get_icon($word) {
-	return ["Squadrato" => '<span class="fa fa-square-o"></span>',
-			"Tondeggiante" => '<span class="fa fa-circle-o"></span>', 
-			"Piccolo" => "S", "Medio" => "M", "Grande" => "L"][$word];
-}
-
 function get_in_params($array) {
 	return "(".rtrim(str_repeat("?,", count($array)), ",").")";
 }

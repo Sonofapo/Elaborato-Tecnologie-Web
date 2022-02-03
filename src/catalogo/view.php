@@ -59,15 +59,22 @@
 	<form action="index.php" method="post" id="search-f">
 		<input type="hidden" name="action" value="catalogo">
 		<input type="hidden" name="mode" value="filter">
-		<button type="submit" id="cerca">Applica</button>
+		<button type="submit" id="apply-filter">Applica</button>
 	</form>
 </aside>
 <main>
 <?php echo get_include_contents("./src/templates/prompt.php") ?>
-	<div id="filters" class="d-flex justify-content-between">
+	<div id="filter">
 		<div>
 			<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
-			<span class="bold">Filtri</span> - <span id="current-filters"><?php echo $vars["filters"] ?? "nessuno" ?></span>
+			<span class="bold">Filtri:</span>
+			<?php if (isset($vars["filters"])): ?>
+			<div id="shape-filter">Forma: <?php echo $vars["filters"]["shape"] ?></div>
+			<div id="size-filter">Misura: <?php echo $vars["filters"]["size"] ?></div>
+			<div id="price-filter">Prezzo: <?php echo $vars["filters"]["price"] ?>&euro;</div>
+			<?php else: ?>
+			<span>nessuno</span>
+			<?php endif ?>
 		</div>
 	</div>
 	<section>
