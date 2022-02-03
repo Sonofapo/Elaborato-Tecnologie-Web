@@ -67,6 +67,8 @@
 	<div id="filter">
 		<div>
 			<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
+		</div>
+		<div>
 			<span class="bold">Filtri:</span>
 			<?php if (isset($vars["filters"])): ?>
 			<div id="shape-filter">Forma: <?php echo $vars["filters"]["shape"] ?></div>

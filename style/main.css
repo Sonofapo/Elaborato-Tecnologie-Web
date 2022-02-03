@@ -4,20 +4,22 @@ main {
 
 /********** FILTER BAR ***********/
 div#filter {
-	padding: 0 10px;
+	padding: 5px 10px;
 	background-color: rgba(151, 151, 151, 0.726);
+	display: grid;
+	grid-template-columns: min-content auto;
+	align-items: center;
 }
 
 div#filter button {
-	padding: 5px 9px;
-	margin-right: 5px;
+	margin-right: 10px;
+	padding: 2px 6px;
 	border-radius: 2px;
 	color: black;
 	background-color: rgba(151, 151, 151);
 }
 
 div#filter > div {
-	padding: 5px 0;
 	white-space: nowrap;
 	overflow-y: scroll;
 	-ms-overflow-style: none;
@@ -29,8 +31,7 @@ div#filter div::-webkit-scrollbar {
 }
 
 div#filter > div > div {
-	padding: 3px 5px;
-	margin: 0 2px;
+	padding: 2px 3px;
 	display: inline-block;
 	border-radius: 4px;
 	background-color: rgb(151, 151, 151);
