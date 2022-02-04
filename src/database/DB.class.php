@@ -84,7 +84,7 @@ class DB {
 	public function getOrders($userId) {
 		$query = "SELECT orders.date, orders.id, SUM(products.price * product_order.quantity) AS total 
 			FROM orders, products, product_order WHERE orders.id_user = ? AND orders.id = product_order.id_order 
-			AND products.id = product_order.id_product GROUP by (orders.id);";
+			AND products.id = product_order.id_product GROUP by (orders.id) ORDER BY orders.id DESC";
 		return $this->query($query, [$userId], "i");
 	}
 
