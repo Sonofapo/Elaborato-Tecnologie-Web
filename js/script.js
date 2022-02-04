@@ -17,12 +17,15 @@ $(document).ready(function() {
 	});
 
 	$("button.add-to-cart").click(function() {
-		updateCart($(this).attr("id"), $("span#user-id").text());
+		let input = $(this).parent().siblings().find("input.prod-qty");
+		let qty = input.val();
+		input.val(1);
+		updateCart($(this).attr("id"), qty, $("span#user-id").text());
 		toggleAnimation($(this), "clicked", 3000);
 	});
 
 	$("button.remove-from-cart").click(function() {
-		updateCart($(this).attr("id"), userId(), true);
+		updateCart($(this).attr("id"), 0, userId(), true);
 		location.reload();
 	});
 
@@ -56,14 +59,15 @@ function closeNav() {
 	document.body.style.backgroundColor = "rgba(0,0,0,0)";
 }
 
-function updateCart(productId, user, remove = false) {
+function updateCart(productId, quantity, user, remove = false) {
 	let cart = getCookie(user);
 	if (remove) {
 		let index = cart.indexOf(productId);
 		if (index > -1)
 			cart.splice(index, 1);
 	} else
-		cart.push(productId)
+		for (let i = 0; i < quantity; i++)
+			cart.push(productId);
 	setCookie(user, JSON.stringify(cart), 1);
 	setCounter();
 }
