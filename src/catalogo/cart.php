@@ -2,7 +2,12 @@
 <main>
 	<section>
 		<?php if (isset($vars["products"])) : ?>
-		<h2>Il tuo carrello</h2>
+		<div id="sec-header">
+			<h3>Il tuo carrello</h3>
+			<div>
+				<button class="btn btn-danger" id="empty-cart">Svuota</button>
+			</div>
+		</div>
 		<div id="product-list">
 			<?php $total = 0 ?>
 			<?php foreach ($vars["products"] as $product) : ?>

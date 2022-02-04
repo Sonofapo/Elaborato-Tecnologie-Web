@@ -29,6 +29,11 @@ $(document).ready(function() {
 		location.reload();
 	});
 
+	$("button#empty-cart").click(function() {
+		deleteCookie($("span#user-id").text());
+		location.reload();
+	});
+
 	$("input.min-today").prop("min", new Date().toISOString().split("T")[0]);
 
 	$("input#pan").on("input", function () {
