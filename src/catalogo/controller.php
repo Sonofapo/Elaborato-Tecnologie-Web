@@ -2,17 +2,29 @@
 	switch ($vars["mode"]) {
 		case "show":
 			$vars["products"] = $db->getProducts();
+			$vars["filters"] = generate_filters();
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;			
 		case "filter":
 			$shapes	= $_REQUEST["shape"] ?? [];
 			$sizes	= $_REQUEST["size"] ?? [];
 			$price	= $_REQUEST["price"] ?? "";
-			$filteredIds = $db->filter($shapes, $sizes, $price);
-			$vars["filters"]["shape"] = join(", ", $shapes) ?: "tutte";
-			$vars["filters"]["size"] = join(", ", $sizes) ?: "tutte";
-			$vars["filters"]["price"] = $price;
-			$vars["products"] = $db->getProducts($filteredIds);
+			$vars["searched"] = true;
+			$_filters = generate_filters();
+			$text1 = $text2 = [];
+			foreach ($shapes as $s) {
+				$_filters["shape"]["values"][$s]["active"] = true;
+				$text1[] = $_filters["shape"]["values"][$s]["name"];
+			}
+			foreach ($sizes as $s) {
+				$_filters["size"]["values"][$s]["active"] = true;
+				$text2[] = $_filters["size"]["values"][$s]["name"];
+			}
+			$vars["filters"] = $_filters;
+			$vars["filters"]["shape"]["text"] = join(", ", $text1) ?: "tutte";
+			$vars["filters"]["size"]["text"] = join(", ", $text2) ?: "tutte";
+			$vars["price"] = $price;
+			$vars["products"] = $db->getProducts($db->filter($text1, $text2, $price));
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;
 		case "cart":

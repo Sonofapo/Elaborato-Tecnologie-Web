@@ -39,4 +39,20 @@ function get_in_params($array) {
 	return "(".rtrim(str_repeat("?,", count($array)), ",").")";
 }
 
+function generate_filters() {
+	$filter1 = [
+		[ "active" => false, "name" => "Tondeggiante" ],
+		[ "active" => false, "name" => "Squadrato" ]
+	];
+	$filter2 = [
+		[ "active" => false, "name" => "Piccolo" ],
+		[ "active" => false, "name" => "Medio" ],
+		[ "active" => false, "name" => "Grande" ]
+	];
+	return [
+		"shape" => [ "values" => $filter1, "name" => "Forma" ],
+		"size" =>  [ "values" => $filter2, "name" => "Misura" ]
+	];
+}
+
 ?>

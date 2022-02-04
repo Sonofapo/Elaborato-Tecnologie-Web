@@ -14,7 +14,7 @@
 
 			<label for="pan">Numero carta</label>
 			<input class="form-control mb-3" type="tel" id="pan" name="pan"
-				inputmode="numeric" maxlength="19" />
+				inputmode="numeric" pattern="[0-9\s]{19}" maxlength="19" />
 
 			<label for="cvv">CVV</label>
 			<input class="form-control mb-3" type="tel" id="cvv" name="cvv"	

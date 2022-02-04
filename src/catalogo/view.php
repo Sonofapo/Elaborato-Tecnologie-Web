@@ -4,44 +4,7 @@
 		<button class="icon" id="close-search"><span class="fa fa-arrow-left"></span></button>
 	</div>
 	<div id="accordion">
-		<section>
-			<h2 class="header">
-				<a class="collapsed" data-bs-toggle="collapse" href="#search-1">Forma</a>
-			</h2>
-			<div id="search-1" class="collapse" data-bs-parent="#accordion">
-				<ul class="body">
-					<li>
-						<input form="search-f" type="checkbox" name="shape[]" id="s1" value="Tondeggiante" />
-						<label for="s1">Tondeggiante</label>
-					</li>
-					<li>
-						<input form="search-f" type="checkbox" name="shape[]" id="s2" value="Squadrato" />
-						<label for="s2">Squadrato</label>
-					</li>
-				</ul>
-			</div>
-		</section>
-		<section>
-			<h2 class="header">
-				<a class="collapsed" data-bs-toggle="collapse" href="#search-2">Dimensione</a>
-			</h2>
-			<div id="search-2" class="collapse" data-bs-parent="#accordion">
-				<ul class="body">
-					<li>
-						<input form="search-f" type="checkbox" name="size[]" id="d1" value="Piccolo" />
-						<label for="d1">Piccolo</label>
-					</li>
-					<li>
-						<input form="search-f" type="checkbox" name="size[]" id="d2" value="Medio" />
-						<label for="d2">Medio</label>
-					</li>
-					<li>
-						<input form="search-f" type="checkbox" name="size[]" id="d3" value="Grande" />
-						<label for="d3">Grande</label>
-					</li>
-				</ul>
-			</div>
-		</section>
+		<?php echo get_include_contents("./src/templates/filters.php") ?>
 		<section>
 			<h2 class="header">
 				<a class="collapsed" data-bs-toggle="collapse" href="#search-3">Prezzo</a>
@@ -49,8 +12,11 @@
 			<div id="search-3" class="collapse" data-bs-parent="#accordion">
 				<ul class="body">
 					<li>
-						<input form="search-f" type="range" min="1" max="200" value="200" name="price" id="slider" />
-						<label for="slider">Prezzo max: <span id="search-value">200</span></label>
+						<input form="search-f" type="range" name="price" id="slider" 
+							min="1" max="200" value="<?php echo $vars["price"] ?? "200" ?>" />
+						<label for="slider">Prezzo max:
+							<span id="search-value"><?php echo $vars["price"] ?? "200" ?>&euro;</span>
+						</label>
 					</li>
 				</ul>
 			</div>
@@ -70,10 +36,10 @@
 		</div>
 		<div>
 			<span class="bold">Filtri:</span>
-			<?php if (isset($vars["filters"])): ?>
-			<div id="shape-filter">Forma: <?php echo $vars["filters"]["shape"] ?></div>
-			<div id="size-filter">Misura: <?php echo $vars["filters"]["size"] ?></div>
-			<div id="price-filter">Prezzo: <?php echo $vars["filters"]["price"] ?>&euro;</div>
+			<?php if (isset($vars["searched"])): ?>
+			<div id="shape-filter">Forma: <?php echo $vars["filters"]["shape"]["text"] ?></div>
+			<div id="size-filter">Misura: <?php echo $vars["filters"]["size"]["text"] ?></div>
+			<div id="price-filter">Prezzo max: <?php echo $vars["price"] ?>&euro;</div>
 			<?php else: ?>
 			<span>nessuno</span>
 			<?php endif ?>
