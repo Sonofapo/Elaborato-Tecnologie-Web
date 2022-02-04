@@ -59,7 +59,7 @@ ul.body {
 	background-color: #08313ab4;
 }
 
-div#search-1 li:hover, div#search-2 li:hover {
+div#accordion section:not(:last-of-type) li:hover {
 	background-color: #08313A;
 }
 
