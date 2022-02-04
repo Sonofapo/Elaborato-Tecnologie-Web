@@ -43,16 +43,22 @@ div#sec-header {
 	text-align: center;
 }
 
-div#sec-header a {
-	padding: 4px 6px;
+div#sec-header div {
 	position: absolute;
-	top: 11px;
+	top: 15px;
 	right: 15px;
-	border-radius: 2px;
-	font-size: larger;
 }
 
-button#search-button:hover, div#sec-header a:hover{
+div#sec-header a {
+	border-radius: 2px;
+	padding: 4px 6px;
+}
+
+div#sec-header a#cart > span {
+	font-size: 1.4em;
+}
+
+button#search-button:hover, div#sec-header a:hover {
 	color: white;
 	background-color: grey;
 	transition: 0.2s;
@@ -102,7 +108,7 @@ div.product-info > p.product-name {
 	font-weight: bold;
 }
 
-div.product-info > button {
+div.product-info > button, div.product-info > a {
 	font-size: small;
 	float: right;
 }
@@ -164,7 +170,11 @@ img.order-img {
 		right: 20px;
 	}
 
-	div#sec-header a:after {
+	a#cart:after {
 		content: " Carrello";
+	}
+
+	a#add:after {
+		content: " Aggiungi";
 	}
 }

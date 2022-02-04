@@ -18,19 +18,16 @@ $(document).ready(function() {
 
 	$("button.add-to-cart").click(function() {
 		updateCart($(this).attr("id"), $("span#user-id").text());
-		$(this).addClass("clicked");
-		setTimeout(function() {
-			$("button.add-to-cart").removeClass('clicked');
-		}, 3000);
+		toggleAnimation($(this), "clicked", 3000);
 	});
 
 	$("button.remove-from-cart").click(function() {
-		updateCart($(this).attr("id"), $("span#user-id").text(), true);
+		updateCart($(this).attr("id"), userId(), true);
 		location.reload();
 	});
 
 	$("button#empty-cart").click(function() {
-		deleteCookie($("span#user-id").text());
+		deleteCookie(userId());
 		location.reload();
 	});
 
@@ -43,6 +40,8 @@ $(document).ready(function() {
 				replace(/(.{4})/g, '$1 ').trim();
 		});
 	});
+
+	setCounter();
 
 });
 
@@ -58,8 +57,7 @@ function closeNav() {
 }
 
 function updateCart(productId, user, remove = false) {
-	let cookie = getCookie(user);
-	let cart = cookie ? JSON.parse(cookie) : [];
+	let cart = getCookie(user);
 	if (remove) {
 		let index = cart.indexOf(productId);
 		if (index > -1)
@@ -67,14 +65,17 @@ function updateCart(productId, user, remove = false) {
 	} else
 		cart.push(productId)
 	setCookie(user, JSON.stringify(cart), 1);
+	setCounter();
 }
 
 function getCookie(name) {
 	const value = `; ${document.cookie}`;
 	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2)
-		return parts.pop().split(";").shift();
-	return "";
+	if (parts.length === 2) {
+		let arr = parts.pop().split(";").shift();
+		return JSON.parse(arr);
+	}
+	return [];
 }
 
 function setCookie(name, value, days) {
@@ -82,6 +83,28 @@ function setCookie(name, value, days) {
 	document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=/`;
 }
 
+function setCounter() {
+	let cart = getCookie(userId());
+	if (cart.length) {
+		$("span#cart-counter").text(cart.length);
+		$("span#cart-counter").css("opacity", "1");
+		toggleAnimation($("span#cart-counter"), "bounce-twice", 2000);
+	} else {
+		$("span#cart-counter").css("opacity", "0");
+	}
+}
+
+function userId() {
+	return $("span#user-id").text();
+}
+
 function deleteCookie(name) {
 	document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+function toggleAnimation(object, name, timeout) {
+	object.addClass(name);
+	setTimeout(function() {
+		object.removeClass(name);
+	}, timeout);
 }

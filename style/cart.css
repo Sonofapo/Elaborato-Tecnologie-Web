@@ -73,3 +73,35 @@
 		opacity: 1;
 	}
 }
+
+/********** COUNTER **********/
+span#cart-counter {
+	position: relative;
+	opacity: 0;
+	left: 20px;
+	top: -10px;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 0.7em;
+	border-radius: 50%;
+	display: inline-block;
+	color: white;
+	background: red;
+}
+
+.bounce-twice {
+	animation: bounce-2 2s ease forwards;
+}
+
+@keyframes bounce-2 {
+	0%, 20%, 50%, 80%, 100% {
+		transform: translateY(0);
+	}
+	40% {
+		transform: translateY(-7px);
+	}
+	60% {
+		transform: translateY(-3px);
+	}
+}
