@@ -23,11 +23,8 @@
 	top: 50%;
 	left: -10%;
 	font-size: 2em;
-	transform: translate(-50%, -50%);
-}
-
-.add-to-cart span.added {
 	opacity: 0;
+	transform: translate(-50%, -50%);
 }
 
 .add-to-cart.clicked span.button-text {

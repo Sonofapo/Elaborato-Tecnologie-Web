@@ -106,7 +106,7 @@
 						</a>
 					<?php else: ?>			
 						<button class="btn btn-primary add-to-cart" id="prod-<?php echo $product["id"] ?>">
-							<span class="button-text">Aggiungi al carrello</span>
+							<span class="button-text">Agg. al carrello</span>
 							<span class="added"><span class="fa fa-check"></span></span>
 							<span class="cart-ico fa fa-shopping-cart"></span>
 						</button>
