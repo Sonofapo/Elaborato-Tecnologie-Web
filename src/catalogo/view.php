@@ -86,7 +86,7 @@
 				<?php if($vars["isVendor"]): ?>
 				<a href="?action=catalogo&mode=add" id="add"><span class="fa fa-plus"></span></a>
 				<?php else: ?>
-				<span id="cart-counter">12</span>
+				<span id="cart-counter"></span>
 				<a href="?action=catalogo&mode=cart" id="cart"><span class="fa fa-shopping-cart"></span></a>
 				<?php endif ?>
 			</div>
