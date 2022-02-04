@@ -25,7 +25,9 @@
 						<div class="input-group line">
 							<label class="input-group-text"
 								for="qty-<?php echo $product["id"] ?>">Qta</label>
-							<input class="form-control" type="number" name="quantity" min="1" value="1"
+							<input class="form-control remove-qty" type="number" name="quantity" 
+								min="1" max="99" pattern="\d{2}"
+								value="<?php echo  $product["quantity"] ?>"
 								id="qty-<?php echo $product["id"] ?>" />
 						</div>
 					</div>

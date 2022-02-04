@@ -17,7 +17,7 @@ $(document).ready(function() {
 	});
 
 	$("button.add-to-cart").click(function() {
-		let input = $(this).parent().siblings().find("input.prod-qty");
+		let input = $(this).parent().siblings().find("input.add-qty");
 		let qty = input.val();
 		input.val(1);
 		updateCart($(this).attr("id"), qty, $("span#user-id").text());
@@ -25,7 +25,13 @@ $(document).ready(function() {
 	});
 
 	$("button.remove-from-cart").click(function() {
-		updateCart($(this).attr("id"), 0, userId(), true);
+		updateCart($(this).attr("id"), 0, userId());
+		location.reload();
+	});
+
+	$("input.remove-qty").on("change", function() {
+		let input = $(this).val();
+		updateCart($(this).attr("id"), input, userId());
 		location.reload();
 	});
 
@@ -59,15 +65,12 @@ function closeNav() {
 	document.body.style.backgroundColor = "rgba(0,0,0,0)";
 }
 
-function updateCart(productId, quantity, user, remove = false) {
+function updateCart(productId, quantity, user) {
 	let cart = getCookie(user);
-	if (remove) {
-		let index = cart.indexOf(productId);
-		if (index > -1)
-			cart.splice(index, 1);
-	} else
-		for (let i = 0; i < quantity; i++)
-			cart.push(productId);
+	productId = "prod-" + productId.split("-")[1];
+	cart = cart.filter(e => { return e != productId });
+	for (let i = 0; i < quantity; i++)
+		cart.push(productId);
 	setCookie(user, JSON.stringify(cart), 1);
 	setCounter();
 }
