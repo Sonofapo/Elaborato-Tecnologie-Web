@@ -84,10 +84,14 @@
 			<h3>Catalogo dei Prodotti</h3>
 			<div>
 				<?php if($vars["isVendor"]): ?>
-				<a href="?action=catalogo&mode=add" id="add"><span class="fa fa-plus"></span></a>
+				<a href="?action=catalogo&mode=add" id="add" title="Aggiungi">
+					<span class="fa fa-plus"></span>
+				</a>
 				<?php else: ?>
 				<span id="cart-counter"></span>
-				<a href="?action=catalogo&mode=cart" id="cart"><span class="fa fa-shopping-cart"></span></a>
+				<a href="?action=catalogo&mode=cart" id="cart" title="Carrello">
+					<span class="fa fa-shopping-cart"></span>
+				</a>
 				<?php endif ?>
 			</div>
 		</div>
@@ -98,19 +102,32 @@
 					<img src="<?php echo $vars["IMG_PATH"].$product["path"] ?>" alt="" />
 				</div>
 				<div class="product-info">
-					<p class="product-name"><?php echo ucfirst($product["name"]) ?></p>
-					<p>Prezzo: <?php echo $product["price"] ?>&euro;</p>
-					<?php if($vars["isVendor"]): ?>
-						<a class="btn btn-primary" href="?action=catalogo&mode=update&id=<?php echo $product["id"] ?>">
-							Modifica
-						</a>
-					<?php else: ?>			
+					<div class="d-flex justify-content-between align-items-center">
+						<div>
+							<p class="bold"><?php echo ucfirst($product["name"]) ?></p>
+							<p><?php echo $product["price"] ?>&euro;</p>
+						</div>
+						<?php if (!$vars["isVendor"]): ?>
+						<div class="input-group line">
+							<label class="input-group-text"
+								for="qty-<?php echo $product["id"] ?>">Qta</label>
+							<input class="form-control" type="number" name="quantity" min="1" value="1"
+								id="qty-<?php echo $product["id"] ?>" />
+						</div>
+						<?php endif  ?>
+					</div>
+					<div>
+						<?php if ($vars["isVendor"]): ?>
+						<a class="btn btn-primary" 
+							href="?action=catalogo&mode=update&id=<?php echo $product["id"] ?>">Modifica</a>
+						<?php else: ?>
 						<button class="btn btn-primary add-to-cart" id="prod-<?php echo $product["id"] ?>">
 							<span class="button-text">Agg. al carrello</span>
 							<span class="added"><span class="fa fa-check"></span></span>
 							<span class="cart-ico fa fa-shopping-cart"></span>
 						</button>
-					<?php endif ?>
+						<?php endif ?>
+					</div>
 				</div>
 			</div>
 			<?php endforeach ?>

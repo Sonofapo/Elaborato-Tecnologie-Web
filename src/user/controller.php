@@ -40,8 +40,10 @@ switch ($vars["mode"]) {
 			$c["cvv"]  = $_POST["cvv"]  ?? "";
 			$c["date"] = $_POST["date"] ?? "";
 			if (isset($_POST["cards"]) && !empty($_POST["cards"]) || count(array_filter($c)) == 4) {
-				if (count(array_filter($c)) == 4)
+				if (count(array_filter($c)) == 4) {
+					$c["pan"] = str_replace(' ', '', $c["pan"]);
 					$db->addCard($c["name"], $c["pan"], $c["cvv"], $c["date"], $UID);
+				}
 
 				$ids = array_map("split_id", json_decode($_COOKIE[$UID]));
 				$qty = array_count_values($ids);

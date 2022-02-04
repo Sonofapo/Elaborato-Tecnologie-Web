@@ -10,7 +10,7 @@
 
 			<label for="name">Titolare</label>
 			<input class="form-control mb-3" type="text" id="name" name="name"
-				pattern="[a-zA-Z\s]{1,50}" maxlength="16" />
+				pattern="[a-zA-Z\s]{1,50}" maxlength="50" />
 
 			<label for="pan">Numero carta</label>
 			<input class="form-control mb-3" type="tel" id="pan" name="pan"
