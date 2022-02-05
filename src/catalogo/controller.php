@@ -25,6 +25,8 @@
 			$vars["filters"]["size"]["text"] = join(", ", $text2) ?: "tutte";
 			$vars["price"] = $price;
 			$vars["products"] = $db->getProducts($db->filter($text1, $text2, $price));
+			if (empty($vars["products"]) && $vars["searched"])
+				$error = "Non sono state trovate corrispondenze"; 
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;
 		case "cart":
