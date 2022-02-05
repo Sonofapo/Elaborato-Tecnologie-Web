@@ -37,6 +37,10 @@ div#filter > div > div {
 	background-color: rgb(151, 151, 151);
 }
 
+span.clear-filter {
+	cursor: pointer;
+}
+
 /********** PAGE TITLE ***********/
 div#sec-header {
 	position: relative;

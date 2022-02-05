@@ -8,9 +8,9 @@
 			<?php echo get_include_contents("./src/templates/filters.php") ?>
 			<section>
 				<h2 class="header">
-					<a class="collapsed" data-bs-toggle="collapse" href="#search-price" title="price">Prezzo</a>
+					<a class="collapsed" data-bs-toggle="collapse" href="#price-search" title="price">Prezzo</a>
 				</h2>
-				<div id="search-price" class="collapse" data-bs-parent="#accordion">
+				<div id="price-search" class="collapse" data-bs-parent="#accordion">
 					<ul class="body">
 						<li>
 							<input form="search-f" type="range" name="price" id="slider" 
@@ -38,13 +38,24 @@
 			<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
 		</div>
 		<div>
-			<span class="bold">Filtri:</span>
-			<?php if (isset($vars["searched"])): ?>
-			<div id="shape-filter">Forma: <?php echo $vars["filters"]["shape"]["text"] ?></div>
-			<div id="size-filter">Misura: <?php echo $vars["filters"]["size"]["text"] ?></div>
-			<div id="price-filter">Prezzo max: <?php echo $vars["price"] ?>&euro;</div>
-			<?php else: ?>
-			<span>nessuno</span>
+			<span class="bold">Filtri</span>
+			<?php if (isset($vars["filters"]["shape"]["text"])) : ?>
+			<div id="shape-filter">
+				<span class="clear-filter">&times;</span>
+				Forma: <?php echo $vars["filters"]["shape"]["text"] ?>
+			</div>
+			<?php endif ?>
+			<?php if (isset($vars["filters"]["size"]["text"])) : ?>
+			<div id="size-filter">
+				<span class="clear-filter">&times;</span>
+				Misura: <?php echo $vars["filters"]["size"]["text"] ?>
+			</div>
+			<?php endif ?>
+			<?php if (isset($vars["price"])) : ?>
+			<div id="price-filter">
+				<span class="clear-filter">&times;</span>
+				Prezzo max: <?php echo $vars["price"] ?>&euro;
+			</div>
 			<?php endif ?>
 		</div>
 	</div>

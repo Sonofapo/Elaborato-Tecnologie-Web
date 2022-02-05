@@ -9,7 +9,7 @@
 			$shapes	= $_REQUEST["shape"] ?? [];
 			$sizes	= $_REQUEST["size"] ?? [];
 			$price	= $_REQUEST["price"] ?? "";
-			$vars["searched"] = true;
+			$searched = true;
 			$_filters = generate_filters();
 			$text1 = $text2 = [];
 			foreach ($shapes as $s) {
@@ -21,11 +21,14 @@
 				$text2[] = $_filters["size"]["values"][$s]["name"];
 			}
 			$vars["filters"] = $_filters;
-			$vars["filters"]["shape"]["text"] = join(", ", $text1) ?: "tutte";
-			$vars["filters"]["size"]["text"] = join(", ", $text2) ?: "tutte";
-			$vars["price"] = $price;
+			if ($_text = join(", ", $text1))
+				$vars["filters"]["shape"]["text"] = $_text;
+			if ($_text = join(", ", $text2))
+				$vars["filters"]["size"]["text"] = $_text;
+			if ($price != 200)
+				$vars["price"] = $price;
 			$vars["products"] = $db->getProducts($db->filter($text1, $text2, $price));
-			if (empty($vars["products"]) && $vars["searched"])
+			if (empty($vars["products"]) && $searched)
 				$error = "Non sono state trovate corrispondenze"; 
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;
