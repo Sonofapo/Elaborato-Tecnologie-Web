@@ -52,25 +52,35 @@
 			}
 			break;
 		case "update" or "add":
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				if (!$_FILES["image"]["error"]) {
-					$img = strtolower($_POST["name"])."-".$_POST["shape"]."-".$_POST["size"].".jpg";
-					unlink($vars["IMG_PATH"].$db->getProducts([$_POST["id"]])[0]["path"]);
-					move_uploaded_file($_FILES["image"]["tmp_name"], $vars["IMG_PATH"].$img);
-				} else {
-					$img = "";
-				}
-				if (empty($_POST["id"])) {
-					$db->addProduct($_POST["name"], $_POST["price"],
-						$_POST["size"], $_POST["shape"], $img);
-					$message = "Prodotto aggiunto correttamente";
-				} else {
-					$db->updateProduct($_POST["id"], $_POST["name"], 
-						$_POST["price"], $_POST["size"], $_POST["shape"], $img);
-					$message = "Prodotto modificato correttamente";
-				}
+			/*if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$vars["products"] = $db->getProducts();
-				$content = get_include_contents("./src/catalogo/view.php");
+				if (pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION) == "jpg") {
+					if (!$_FILES["image"]["error"]) {
+						$img = strtolower($_POST["name"])."-".$_POST["shape"]."-".$_POST["size"].".jpg";
+						unlink($vars["IMG_PATH"].$db->getProducts([$_POST["id"]])[0]["path"]);
+						move_uploaded_file($_FILES["image"]["tmp_name"], $vars["IMG_PATH"].$img);
+					} else {
+						$img = "";
+					}
+					if (empty($_POST["id"])) {
+						$db->addProduct($_POST["name"], $_POST["price"],
+							$_POST["size"], $_POST["shape"], $img);
+						$message = "Prodotto aggiunto correttamente";
+					} else {
+						$db->updateProduct($_POST["id"], $_POST["name"], 
+							$_POST["price"], $_POST["size"], $_POST["shape"], $img);
+						$message = "Prodotto modificato correttamente";
+					}
+					$content = get_include_contents("./src/catalogo/view.php");
+				} else {
+					if (isset($_POST["id"]))
+						$vars["item"] = $db->getProducts([$_REQUEST["id"]])[0];
+					else 
+						$vars["item"] = ["id" => "", "name" => "", "price" => "", 
+							"size" => "", "shape" => "", "path" => ""];
+					$error = "Sono ammesse solo immagini .jpg";
+					$content = get_include_contents("./src/catalogo/update.php");
+				}
 			} else {
 				if (isset($_REQUEST["id"])) 
 					$vars["item"] = $db->getProducts([$_REQUEST["id"]])[0];
@@ -78,7 +88,9 @@
 					$vars["item"] = ["id" => "", "name" => "", "price" => "", 
 						"size" => "", "shape" => "", "path" => ""];
 				$content = get_include_contents("./src/catalogo/update.php");
-			}
+			}*/
+			$vars["products"] = $db->getProducts();
+			$content = get_include_contents("./src/catalogo/view.php");
 			break;
 		default:
 			die("Pagina non disponibile.");

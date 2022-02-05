@@ -24,7 +24,7 @@
 			</div>
 
 			<label for="image">Immagine</label>
-			<input type="file" class="form-control mb-3" id="image" name="image"
+			<input type="file" class="form-control mb-3" id="image" name="image" accept=".jpg"
 				<?php  if (!$vars["item"]["id"]) echo "required" ?> />
 
 			<label for="size">Misura</label>

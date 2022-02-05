@@ -17,9 +17,12 @@ $(document).ready(function() {
 	$("button.add-to-cart").click(function() {
 		let input = $(this).parent().siblings().find("input.add-qty");
 		let qty = input.val();
+		if (qty <= 50) {
+			updateCart($(this).attr("id"), qty, $("span#user-id").text(), false);
+			toggleAnimation($(this), "clicked", 3000);
+		} else
+			displayError("Puoi inserire al massimo 50 oggetti per volta");
 		input.val(1);
-		updateCart($(this).attr("id"), qty, $("span#user-id").text(), false);
-		toggleAnimation($(this), "clicked", 3000);
 	});
 
 	$("button.remove-from-cart").click(function() {
@@ -63,13 +66,18 @@ $(document).ready(function() {
 
 function updateCart(productId, quantity, user, remove = true) {
 	let cart = getCookie(user);
-	productId = "prod-" + productId.split("-")[1];
-	if (remove)
-		cart = cart.filter(e => { return e != productId });
-	for (let i = 0; i < quantity; i++)
-		cart.push(productId);
-	setCookie(user, JSON.stringify(cart), 1);
-	setCounter();
+	console.log(cart.length + Number(quantity));
+	if (!remove && cart.length + Number(quantity) > 100) {
+		displayError("Puoi inserire al massimo 100 prodotti nel carrello");
+	} else {
+		productId = "prod-" + productId.split("-")[1];
+		if (remove)
+			cart = cart.filter(e => { return e != productId });
+		for (let i = 0; i < quantity; i++)
+			cart.push(productId);
+		setCookie(user, JSON.stringify(cart), 1);
+		setCounter();
+	}
 }
 
 function getCookie(name) {
@@ -111,4 +119,10 @@ function toggleAnimation(object, name, timeout) {
 	setTimeout(function() {
 		object.removeClass(name);
 	}, timeout);
+}
+
+function displayError(message) {
+	let prompt = `<div class="fade-me"><div class="alert alert-danger">${message}</div></div>`;
+	setTimeout(() => $("div.fade-me").slideUp(200), 3000);
+	$("main").prepend(prompt);
 }
