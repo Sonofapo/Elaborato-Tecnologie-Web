@@ -10,6 +10,10 @@ $(document).ready(function() {
 		$("span#search-value").html($(this).val());
 	});
 
+	$("h2.header").click(function() {
+		$(this).find("a")[0].click();
+	});
+
 	$("button.add-to-cart").click(function() {
 		let input = $(this).parent().siblings().find("input.add-qty");
 		let qty = input.val();
