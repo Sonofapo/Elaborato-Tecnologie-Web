@@ -9,7 +9,7 @@
 			$shapes	= $_REQUEST["shape"] ?? [];
 			$sizes	= $_REQUEST["size"] ?? [];
 			$price	= $_REQUEST["price"] ?? "";
-			$vars["searched"] = true;
+			$searched = true;
 			$_filters = generate_filters();
 			$text1 = $text2 = [];
 			foreach ($shapes as $s) {
@@ -21,11 +21,14 @@
 				$text2[] = $_filters["size"]["values"][$s]["name"];
 			}
 			$vars["filters"] = $_filters;
-			$vars["filters"]["shape"]["text"] = join(", ", $text1) ?: "tutte";
-			$vars["filters"]["size"]["text"] = join(", ", $text2) ?: "tutte";
-			$vars["price"] = $price;
+			if ($_text = join(", ", $text1))
+				$vars["filters"]["shape"]["text"] = $_text;
+			if ($_text = join(", ", $text2))
+				$vars["filters"]["size"]["text"] = $_text;
+			if ($price != 200)
+				$vars["price"] = $price;
 			$vars["products"] = $db->getProducts($db->filter($text1, $text2, $price));
-			if (empty($vars["products"]) && $vars["searched"])
+			if (empty($vars["products"]) && $searched)
 				$error = "Non sono state trovate corrispondenze"; 
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;
@@ -49,12 +52,21 @@
 			}
 			break;
 		case "update" or "add":
-			if ($_SERVER["REQUEST_METHOD"] == "POST"){
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				if (!$_FILES["image"]["error"]) {
+					$img = strtolower($_POST["name"])."-".$_POST["shape"]."-".$_POST["size"].".jpg";
+					unlink($vars["IMG_PATH"].$db->getProducts([$_POST["id"]])[0]["path"]);
+					move_uploaded_file($_FILES["image"]["tmp_name"], $vars["IMG_PATH"].$img);
+				} else {
+					$img = "";
+				}
 				if (empty($_POST["id"])) {
-					$db->addProduct($_POST["name"], $_POST["price"], $_POST["size"], $_POST["shape"]);
+					$db->addProduct($_POST["name"], $_POST["price"],
+						$_POST["size"], $_POST["shape"], $img);
 					$message = "Prodotto aggiunto correttamente";
 				} else {
-					$db->updateProduct($_POST["id"], $_POST["name"], $_POST["price"], $_POST["size"], $_POST["shape"]);
+					$db->updateProduct($_POST["id"], $_POST["name"], 
+						$_POST["price"], $_POST["size"], $_POST["shape"], $img);
 					$message = "Prodotto modificato correttamente";
 				}
 				$vars["products"] = $db->getProducts();
@@ -62,6 +74,9 @@
 			} else {
 				if (isset($_REQUEST["id"])) 
 					$vars["item"] = $db->getProducts([$_REQUEST["id"]])[0];
+				else 
+					$vars["item"] = ["id" => "", "name" => "", "price" => "", 
+						"size" => "", "shape" => "", "path" => ""];
 				$content = get_include_contents("./src/catalogo/update.php");
 			}
 			break;

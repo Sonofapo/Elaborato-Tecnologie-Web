@@ -34,8 +34,8 @@
 				<?php endforeach ?>
 			</select>
 
-			<div class="text-center">
-				<button class="btn btn-success mt-4" type="submit" title="acquista">Acquista</button>
+			<div class="text-center mt-4">
+				<button class="btn btn-success" type="submit" title="acquista">Acquista</button>
 			</div>
 		</form>
 	</div>

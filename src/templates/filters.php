@@ -1,11 +1,12 @@
 <?php foreach ($vars["filters"] as $name => $f): ?>
 	<section>
 		<h2 class="header">
-			<a class="collapsed" data-bs-toggle="collapse" href="#search-<?php echo $name ?>" title="<?php echo $name ?>">
+			<a class="collapsed" href="#<?php echo $name ?>-search"
+				data-bs-toggle="collapse" title="<?php echo $name ?>">
 				<?php echo $f["name"] ?>
 			</a>
 		</h2>
-		<div id="search-<?php echo $name ?>" class="collapse" data-bs-parent="#accordion">
+		<div id="<?php echo $name ?>-search" class="collapse" data-bs-parent="#accordion">
 			<ul class="body">
 			<?php $c = 0 ?>
 			<?php foreach ($f["values"] as $value): ?>
