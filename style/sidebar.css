@@ -2,24 +2,24 @@ aside#sidenav {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
 	width: 0;
 	height: 100%;
+	z-index: 1;
+	display: flex;
 	overflow-x: hidden;
 	transition: 0.3s;
+}
+
+div#left-side {
+	width: 100%;
+	flex-grow: 1;
 	text-align: center;
 	background-color: #1A5653;
 }
 
-aside#sidenav h2 > a {
-	font-size: 25px;
-	color: white;
-	display: block;
-	transition: 0.1s;
-}
-
-aside#sidenav h2 > a:hover {
-	color: #949494;
+div#bg-overlay {
+	display: none;
+	background-color: rgba(94, 94, 94, 0.5);
 }
 
 div#close-button-div {
@@ -31,14 +31,19 @@ button#close-search {
 	color: white;
 }
 
-div#accordion > section:not(:last-of-type) > h2.header {
-	border-bottom: solid #062127 1.2pt;
+div#left-side h2 > a {
+	font-size: 25px;
+	color: white;
+	transition: 0.1s;
+}
+
+div#left-side h2 > a:hover {
+	color: #949494;
 }
 
 h2.header {
 	margin: 0;
 	padding: 15px 0;
-	color: white;
 	background-color: #08313A;
 }
 
@@ -46,9 +51,8 @@ h2.header a {
 	font-size: 20px !important;
 }
 
-ul.body li {
-	display: list-item;
-	padding: 18px 0;
+div#accordion > section:not(:last-of-type) > h2.header {
+	border-bottom: solid #062127 1.2pt;
 }
 
 ul.body {
@@ -59,12 +63,17 @@ ul.body {
 	background-color: #08313ab4;
 }
 
+ul.body li {
+	display: list-item;
+	padding: 18px 0;
+}
+
 div#accordion section:not(:last-of-type) li:hover {
 	background-color: #08313A;
 }
 
 input#slider {
-	width: 80%;
+	width: 75%;
 }
 
 button#apply-filter {
@@ -80,8 +89,12 @@ button#apply-filter {
 
 /* MEDIA QUERIES */
 @media screen and (min-width: 768px) {
-	aside#sidenav {
-		max-width: 250px;
-		transition: 1s;
+	div#left-side {
+		width: 250px;
+	}
+
+	div#bg-overlay {
+		min-width: calc(100% - 250px);
+		display: block;
 	}
 }

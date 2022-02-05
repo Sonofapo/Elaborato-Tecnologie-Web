@@ -1,16 +1,10 @@
 $(document).ready(function() {
 
-	$("button#expand-menu").click(function() {
-		$("ul#menu").slideToggle(200);	
-	});
+	$("button#expand-menu").click(() => $("ul#menu").slideToggle(200));
+	$("button#search-button").click(() => $("aside#sidenav").width("100%"));
+	$("button#close-search").click(() => $("aside#sidenav").width("0"));
 
-	$("button#search-button").click(openNav);
-
-	$("button#close-search").click(closeNav);
-
-	setTimeout(() => { 
-		$("div.fade-me").slideUp(200); 
-	}, 3000);
+	setTimeout(() => $("div.fade-me").slideUp(200), 3000);
 
 	$("input#slider").on("input", function() {
 		$("span#search-value").html($(this).val());
@@ -53,17 +47,6 @@ $(document).ready(function() {
 	setCounter();
 
 });
-
-function openNav() {
-	document.getElementById("sidenav").style.width = "100%";
-	document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-	$("ul#menu").slideUp(200);
-}
-
-function closeNav() {
-	document.getElementById("sidenav").style.width = "0";
-	document.body.style.backgroundColor = "rgba(0,0,0,0)";
-}
 
 function updateCart(productId, quantity, user) {
 	let cart = getCookie(user);

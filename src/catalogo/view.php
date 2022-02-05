@@ -1,32 +1,35 @@
 <?php echo get_include_contents("./src/templates/header.php") ?>
 <aside id="sidenav">
-	<div id="close-button-div">
-		<button class="icon" id="close-search"><span class="fa fa-arrow-left"></span></button>
+	<div id="left-side">
+		<div id="close-button-div">
+			<button class="icon" id="close-search"><span class="fa fa-arrow-left"></span></button>
+		</div>
+		<div id="accordion">
+			<?php echo get_include_contents("./src/templates/filters.php") ?>
+			<section>
+				<h2 class="header">
+					<a class="collapsed" data-bs-toggle="collapse" href="#search-3">Prezzo</a>
+				</h2>
+				<div id="search-3" class="collapse" data-bs-parent="#accordion">
+					<ul class="body">
+						<li>
+							<input form="search-f" type="range" name="price" id="slider" 
+								min="1" max="200" value="<?php echo $vars["price"] ?? "200" ?>" />
+							<label for="slider">Prezzo max:
+								<span id="search-value"><?php echo $vars["price"] ?? "200" ?>&euro;</span>
+							</label>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+		<form action="index.php" method="post" id="search-f">
+			<input type="hidden" name="action" value="catalogo">
+			<input type="hidden" name="mode" value="filter">
+			<button type="submit" id="apply-filter">Applica</button>
+		</form>
 	</div>
-	<div id="accordion">
-		<?php echo get_include_contents("./src/templates/filters.php") ?>
-		<section>
-			<h2 class="header">
-				<a class="collapsed" data-bs-toggle="collapse" href="#search-3">Prezzo</a>
-			</h2>
-			<div id="search-3" class="collapse" data-bs-parent="#accordion">
-				<ul class="body">
-					<li>
-						<input form="search-f" type="range" name="price" id="slider" 
-							min="1" max="200" value="<?php echo $vars["price"] ?? "200" ?>" />
-						<label for="slider">Prezzo max:
-							<span id="search-value"><?php echo $vars["price"] ?? "200" ?>&euro;</span>
-						</label>
-					</li>
-				</ul>
-			</div>
-		</section>
-	</div>
-	<form action="index.php" method="post" id="search-f">
-		<input type="hidden" name="action" value="catalogo">
-		<input type="hidden" name="mode" value="filter">
-		<button type="submit" id="apply-filter">Applica</button>
-	</form>
+	<div id="bg-overlay"></div>
 </aside>
 <main>
 <?php echo get_include_contents("./src/templates/prompt.php") ?>
