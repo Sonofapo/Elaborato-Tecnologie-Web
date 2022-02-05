@@ -58,14 +58,13 @@ class DB {
 	}
 
 	public function getProducts($ids = null) {
-		$query = "SELECT products.id as id, name, price, size, shape, path 
-			FROM products, images WHERE products.id = images.product_id";
+		$query = "SELECT id, name, price, size, shape, path FROM products";
 		if ($ids === null) {
 			return $this->query($query);
 		} else if (empty($ids)) {
 			return [];
 		} else {
-			$query .= " AND products.id IN ". get_in_params($ids);
+			$query .= " WHERE id IN ". get_in_params($ids);
 			return $this->query($query, $ids, str_repeat("i", count($ids))) ?: [];
 		}
 	}
@@ -90,9 +89,8 @@ class DB {
 	}
 
 	public function getOrderProducts($orderId) {
-		$query = "SELECT name, path, quantity FROM products, images, product_order 
-					WHERE product_order.id_order = ? AND images.product_id = products.id 
-					AND product_order.id_product = products.id";
+		$query = "SELECT name, path, quantity FROM products, product_order 
+					WHERE product_order.id_order = ? AND product_order.id_product = products.id";
 		return $this->query($query, [$orderId], "i");
 	}
 
@@ -111,14 +109,18 @@ class DB {
 		return $this->query($query, [$userId], "i")[0]["isVendor"] ? true : false;
 	}
 
-	public function updateProduct($id, $name, $price, $size, $shape) {
+	public function updateProduct($id, $name, $price, $size, $shape, $path) {
 		$query = "UPDATE products SET name = ?, price = ?, size = ?, shape = ? WHERE id = ?";
 		$this->query($query, [$name, $price, $size, $shape, $id], "sdssi");
+		if ($path) {
+			$query = "UPDATE products SET path = ? WHERE id = ?";
+			$this->query($query, [$path, $id], "si");
+		}
 	}
 
-	public function addProduct($name, $price, $size, $shape) {
-		$query = "INSERT INTO products (name, price, size, shape) VALUES (?, ?, ?, ?)";
-		$this->query($query, [$name, $price, $size, $shape], "sdss");
+	public function addProduct($name, $price, $size, $shape, $path) {
+		$query = "INSERT INTO products (name, price, size, shape, path) VALUES (?, ?, ?, ?, ?)";
+		$this->query($query, [$name, $price, $size, $shape, $path], "sdsss");
 	}
 
 	public function addMessage($userId, $message) {

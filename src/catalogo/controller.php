@@ -52,12 +52,21 @@
 			}
 			break;
 		case "update" or "add":
-			if ($_SERVER["REQUEST_METHOD"] == "POST"){
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				if (!$_FILES["image"]["error"]) {
+					$img = strtolower($_POST["name"])."-".$_POST["shape"]."-".$_POST["size"].".jpg";
+					unlink($vars["IMG_PATH"].$db->getProducts([$_POST["id"]])[0]["path"]);
+					move_uploaded_file($_FILES["image"]["tmp_name"], $vars["IMG_PATH"].$img);
+				} else {
+					$img = "";
+				}
 				if (empty($_POST["id"])) {
-					$db->addProduct($_POST["name"], $_POST["price"], $_POST["size"], $_POST["shape"]);
+					$db->addProduct($_POST["name"], $_POST["price"],
+						$_POST["size"], $_POST["shape"], $img);
 					$message = "Prodotto aggiunto correttamente";
 				} else {
-					$db->updateProduct($_POST["id"], $_POST["name"], $_POST["price"], $_POST["size"], $_POST["shape"]);
+					$db->updateProduct($_POST["id"], $_POST["name"], 
+						$_POST["price"], $_POST["size"], $_POST["shape"], $img);
 					$message = "Prodotto modificato correttamente";
 				}
 				$vars["products"] = $db->getProducts();

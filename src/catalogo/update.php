@@ -17,11 +17,15 @@
 
 			<label for="price">Prezzo</label>
 			<div class="input-group mb-3">
-				<input type="number" class="form-control" id="price" name="price" 
-					pattern="^\d+(?:\.\d{1,2})?$" min="0" max="200.00" required step="0.01"
-					value="<?php echo $vars["item"]["price"] ?>" />
 				<span class="input-group-text">€</span>
+				<input type="number" class="form-control" id="price" name="price" 
+					pattern="^\d+(?:\.\d{1,2})?$" min="0.01" max="200.00" required step="0.01"
+					value="<?php echo $vars["item"]["price"] ?>" />
 			</div>
+
+			<label for="image">Immagine</label>
+			<input type="file" class="form-control mb-3" id="image" name="image"
+				<?php  if (!$vars["item"]["id"]) echo "required" ?> />
 
 			<label for="size">Misura</label>
 			<select name="size" class="form-select mb-3" id="size" required>
