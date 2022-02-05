@@ -1,7 +1,7 @@
 <?php foreach ($vars["filters"] as $name => $f): ?>
 	<section>
 		<h2 class="header">
-			<a class="collapsed" data-bs-toggle="collapse" href="#search-<?php echo $name ?>">
+			<a class="collapsed" data-bs-toggle="collapse" href="#search-<?php echo $name ?>" title="<?php echo $name ?>">
 				<?php echo $f["name"] ?>
 			</a>
 		</h2>

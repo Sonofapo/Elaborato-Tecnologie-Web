@@ -2,15 +2,15 @@
 <aside id="sidenav">
 	<div id="left-side">
 		<div id="close-button-div">
-			<button class="icon" id="close-search"><span class="fa fa-arrow-left"></span></button>
+			<button class="icon" id="close-search" title="chiudi"><span class="fa fa-arrow-left"></span></button>
 		</div>
 		<div id="accordion">
 			<?php echo get_include_contents("./src/templates/filters.php") ?>
 			<section>
 				<h2 class="header">
-					<a class="collapsed" data-bs-toggle="collapse" href="#search-3">Prezzo</a>
+					<a class="collapsed" data-bs-toggle="collapse" href="#search-price" title="price">Prezzo</a>
 				</h2>
-				<div id="search-3" class="collapse" data-bs-parent="#accordion">
+				<div id="search-price" class="collapse" data-bs-parent="#accordion">
 					<ul class="body">
 						<li>
 							<input form="search-f" type="range" name="price" id="slider" 
@@ -26,13 +26,13 @@
 		<form action="index.php" method="post" id="search-f">
 			<input type="hidden" name="action" value="catalogo">
 			<input type="hidden" name="mode" value="filter">
-			<button type="submit" id="apply-filter">Applica</button>
+			<button type="submit" id="apply-filter" title="applica filtri">Applica</button>
 		</form>
 	</div>
 	<div id="bg-overlay"></div>
 </aside>
 <main>
-<?php echo get_include_contents("./src/templates/prompt.php") ?>
+	<?php echo get_include_contents("./src/templates/prompt.php") ?>
 	<div id="filter">
 		<div>
 			<button title="Filtri" class="icon" id="search-button"><span class="fa fa-search"></span></button>
@@ -64,42 +64,6 @@
 				<?php endif ?>
 			</div>
 		</div>
-		<div id="product-list">
-			<?php foreach ($vars["products"] as $product) : ?>
-			<div class="product-card">
-				<div class="product-img">
-					<img src="<?php echo $vars["IMG_PATH"].$product["path"] ?>" alt="" />
-				</div>
-				<div class="product-info">
-					<div class="d-flex justify-content-between align-items-center">
-						<div>
-							<p class="bold"><?php echo ucfirst($product["name"]) ?></p>
-							<p><?php echo $product["price"] ?>&euro;</p>
-						</div>
-						<?php if (!$vars["isVendor"]): ?>
-						<div class="input-group line">
-							<label class="input-group-text"
-								for="qty-<?php echo $product["id"] ?>">Qta</label>
-							<input class="form-control add-qty" type="number" name="quantity" min="1" value="1"
-								id="qty-<?php echo $product["id"] ?>" />
-						</div>
-						<?php endif  ?>
-					</div>
-					<div>
-						<?php if ($vars["isVendor"]): ?>
-						<a class="btn btn-primary" 
-							href="?action=catalogo&mode=update&id=<?php echo $product["id"] ?>">Modifica</a>
-						<?php else: ?>
-						<button class="btn btn-primary add-to-cart" id="prod-<?php echo $product["id"] ?>">
-							<span class="button-text">Agg. al carrello</span>
-							<span class="added"><span class="fa fa-check"></span></span>
-							<span class="cart-ico fa fa-shopping-cart"></span>
-						</button>
-						<?php endif ?>
-					</div>
-				</div>
-			</div>
-			<?php endforeach ?>
-		</div>
+		<?php echo get_include_contents("./src/catalogo/list.php") ?>
 	</section>
 </main>

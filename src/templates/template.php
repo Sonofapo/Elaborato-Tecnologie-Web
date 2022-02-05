@@ -22,10 +22,11 @@
 	<script src="./js/script.js"></script>
 </head>
 <body>
-<?php echo $vars["body"] ?>
+	<div id="top"></div>
+	<?php echo $vars["body"] ?>
 <footer>
 	<div class="text-center bg-secondary">
-		<a href="index.php"><span class="fa fa-home"></span> Home</a>
+		<a href="#top" title="Torna ad inizio pagina"><span class="fa fa-home"></span> Home</a>
 	</div>
 </footer>
 </body>

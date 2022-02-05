@@ -44,7 +44,7 @@
 				</option>
 			</select>
 
-			<button type="submit" class="btn btn-primary">
+			<button type="submit" class="btn btn-primary" title="<?php echo isset($vars["item"]) ? "modifica" : "aggiungi" ?>">
 				<?php echo isset($vars["item"]) ? "Modifica" : "Aggiungi" ?>
 			</button>
 		</form>

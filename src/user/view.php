@@ -1,5 +1,5 @@
 <header>
-	<h1><a href="index.php">UniBonsai</a></h1>
+	<h1><a href="index.php" title="home">UniBonsai</a></h1>
 </header>
 <main>
 <?php echo get_include_contents("./src/templates/prompt.php") ?>

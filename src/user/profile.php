@@ -4,7 +4,12 @@
         <h2>Le tue Notifiche</h2>
     </section>
     <section id="orders">
-		<h2><?php echo count($vars["orders"]) ? "I tuoi Ordini" : "Non ci sono ordini" ?></h2>
+		<?php ?>
+		<?php if($vars["isVendor"]): ?>
+			<h2><?php echo count($vars["orders"]) ? "Ordini processati" : "Non ci sono ordini" ?></h2>
+		<?php else: ?>
+			<h2><?php echo count($vars["orders"]) ? "I tuoi Ordini" : "Non ci sono ordini" ?></h2>
+		<?php endif ?>
 		<?php foreach($vars["orders"] as $order): ?>
 			<?php $o = $order["id_order"] ?>
 			<div class="container py-3">

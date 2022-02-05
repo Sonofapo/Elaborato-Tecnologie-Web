@@ -18,7 +18,7 @@ $(document).ready(function() {
 		let input = $(this).parent().siblings().find("input.add-qty");
 		let qty = input.val();
 		input.val(1);
-		updateCart($(this).attr("id"), qty, $("span#user-id").text());
+		updateCart($(this).attr("id"), qty, $("span#user-id").text(), false);
 		toggleAnimation($(this), "clicked", 3000);
 	});
 
@@ -52,10 +52,11 @@ $(document).ready(function() {
 
 });
 
-function updateCart(productId, quantity, user) {
+function updateCart(productId, quantity, user, remove = true) {
 	let cart = getCookie(user);
 	productId = "prod-" + productId.split("-")[1];
-	cart = cart.filter(e => { return e != productId });
+	if (remove)
+		cart = cart.filter(e => { return e != productId });
 	for (let i = 0; i < quantity; i++)
 		cart.push(productId);
 	setCookie(user, JSON.stringify(cart), 1);
