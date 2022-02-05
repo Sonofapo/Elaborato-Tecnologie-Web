@@ -121,6 +121,16 @@ class DB {
 		$this->query($query, [$name, $price, $size, $shape], "sdss");
 	}
 
+	public function addMessage($userId, $message) {
+		$query = "INSERT INTO messages (message, user_id, date) VALUES (?, ?, NOW())";
+		$this->query($query, [$message, $userId], "si");
+	}
+
+	public function getMessages($userId) {
+		$query = "SELECT message, date FROM messages WHERE user_id = ?";
+		return $this->query($query, [$userId], "i");
+	}
+
 }
 
 ?>
