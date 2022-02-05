@@ -65,6 +65,9 @@
 			} else {
 				if (isset($_REQUEST["id"])) 
 					$vars["item"] = $db->getProducts([$_REQUEST["id"]])[0];
+				else 
+					$vars["item"] = ["id" => "", "name" => "", "price" => "", 
+						"size" => "", "shape" => "", "path" => ""];
 				$content = get_include_contents("./src/catalogo/update.php");
 			}
 			break;
