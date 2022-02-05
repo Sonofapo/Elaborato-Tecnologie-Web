@@ -26,7 +26,7 @@
 		<form action="index.php" method="post" id="search-f">
 			<input type="hidden" name="action" value="catalogo">
 			<input type="hidden" name="mode" value="filter">
-			<button type="submit" id="apply-filter" title="applica filtri">Applica</button>
+			<button class="btn btn-primary" type="submit" id="apply-filter" title="applica filtri">Applica</button>
 		</form>
 	</div>
 	<div id="bg-overlay"></div>

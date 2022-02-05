@@ -11,7 +11,7 @@ $(document).ready(function() {
 	});
 
 	$("h2.header").click(function() {
-		$(this).find("a")[0].click();
+		$(this).toggleClass("selected");
 	});
 
 	$("button.add-to-cart").click(function() {
