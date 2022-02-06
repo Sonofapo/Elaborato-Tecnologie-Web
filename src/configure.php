@@ -6,9 +6,12 @@ $db = new DB();
 
 # abilitazione della sessione
 session_start();
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 # variabili di configurazione
-$vars["IMG_PATH"] = "./img/products/";
+$IMG_PATH = "./img/products/";
 
 # funzioni di supporto
 function get_include_contents(string $file) {
@@ -53,6 +56,18 @@ function generate_filters() {
 		"shape" => [ "values" => $filter1, "name" => "Forma" ],
 		"size" =>  [ "values" => $filter2, "name" => "Misura" ]
 	];
+}
+
+define("FILE_OK", 1);
+define("NO_FILE", 2);
+define("EXT_ERROR", 3);
+
+function checkImage($file) {
+	if (!$file["error"] && $file["type"] == "image/jpeg") {
+		return FILE_OK;
+	} else if ($file["type"] != "image/jpeg")
+		return EXT_ERROR;
+	return NO_FILE;
 }
 
 ?>

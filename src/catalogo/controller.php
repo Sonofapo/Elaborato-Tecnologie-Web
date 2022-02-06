@@ -54,32 +54,45 @@
 			}
 			break;
 		case "update" or "add":
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				if (!$_FILES["image"]["error"] && $_FILES["image"]["type"] ==  "image/jpeg") {
-					if ($_POST["id"]) {
-						$id = $_POST["id"];
-						$message = "Prodotto modificato correttamente";
-					} else {
-						$id = $db->addProduct($_POST["name"], $_POST["price"],
-							$_POST["size"], $_POST["shape"]);
-						$message = "Prodotto aggiunto correttamente";
-					}
-					$img = "img_" . $id . ".jpg";	
-					move_uploaded_file($_FILES["image"]["tmp_name"], $vars["IMG_PATH"].$img);	
-				} else if ($_POST["id"]) {
-					$db->updateProduct($_POST["id"], $_POST["name"], 
-					$_POST["price"], $_POST["size"], $_POST["shape"]);
-					$message = "Prodotto modificato correttamente";
-				}
-				$vars["products"] = $db->getProducts();
-				$content = get_include_contents("./src/catalogo/view.php");
-			} else {
-				if (isset($_GET["id"])) {
-					$vars["item"] = $db->getProducts([$_GET["id"]])[0];				
-				} else {
-					$vars["item"] = ["id" => "", "name" => "", "price" => "", 
+			$vars["item"] = ["id" => "", "name" => "", "price" => "", 
 					"size" => "", "shape" => "", "path" => ""];
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				switch (checkImage($_FILES["image"])) {
+					case FILE_OK:
+						if ($id = $_POST["id"]) {
+							$db->updateProduct($_POST["id"], $_POST["name"], 
+								$_POST["price"], $_POST["size"], $_POST["shape"]);
+							$message = "Prodotto modificato correttamente";
+						} else {
+							$id = $db->addProduct($_POST["name"], $_POST["price"],
+								$_POST["size"], $_POST["shape"]);
+							$message = "Prodotto aggiunto correttamente";
+						}
+						$img = "img_$id.jpg";
+						move_uploaded_file($_FILES["image"]["tmp_name"], $IMG_PATH.$img);
+						$vars["products"] = $db->getProducts();
+						$content = get_include_contents("./src/catalogo/view.php");
+						break;
+					case NO_FILE:
+						if ($_POST["id"]) {
+							$db->updateProduct($_POST["id"], $_POST["name"], 
+								$_POST["price"], $_POST["size"], $_POST["shape"]);
+							$message = "Prodotto modificato correttamente";
+						}
+						$vars["products"] = $db->getProducts();
+						$content = get_include_contents("./src/catalogo/view.php");
+						break;
+					case EXT_ERROR:
+						if($_POST["id"]) {
+							$vars["item"] = $db->getProducts([$_POST["id"]])[0];	
+						}
+						$error = "Inserire un'immagine .jpg";
+						$content = get_include_contents("./src/catalogo/update.php");
+						break;
 				}
+			} else {				
+				if (isset($_GET["id"]))
+					$vars["item"] = $db->getProducts([$_GET["id"]])[0];	
 				$content = get_include_contents("./src/catalogo/update.php");
 			}
 			break;

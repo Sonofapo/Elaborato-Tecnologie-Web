@@ -1,5 +1,6 @@
 <?php echo get_include_contents("./src/templates/header.php") ?>
 <main>
+	<?php echo get_include_contents("./src/templates/prompt.php") ?>
     <h3 class="text-center mt-3">
 		<?php echo $vars["item"]["id"] ? "Modifica il" : "Aggiungi un" ?> prodotto
 	</h3>

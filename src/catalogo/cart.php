@@ -14,7 +14,7 @@
 			<?php $total += $product["price"] * $product["quantity"] ?>
 			<div class="product-card">
 				<div class="product-img">
-					<img src="<?php echo $vars["IMG_PATH"].$product["path"] ?>"
+					<img src="<?php echo $IMG_PATH.$product["path"] ?>"
 						alt="<?php echo $product["name"] . "-" . $product["size"] . "-" . $product["shape"] ?>" />
 				</div>
 				<div class="product-info">
