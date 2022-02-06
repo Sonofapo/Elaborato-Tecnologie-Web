@@ -11,7 +11,7 @@
 	}
 	if (isset($_SESSION["uid"])) {
 		$UID = $_SESSION["uid"];
-		$vars["user"] = $db->getUserById($UID);
+		$vars["user"] = $db->getUsernameById($UID);
 		$vars["isVendor"] = $db->isVendor($UID);
 	}
 

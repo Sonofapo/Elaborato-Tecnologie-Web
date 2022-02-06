@@ -20,7 +20,7 @@ class DB {
 	public function subscribe($username, $password) {
 		if ($this->login($username, $password) === false) {
 			$password = md5($password);
-			$this->query("INSERT INTO users (username, password, isVendor) VALUES (?, ?, false)", [$username, $password], "ss");
+			$this->query("INSERT INTO users (username, password) VALUES (?, ?)", [$username, $password], "ss");
 			return true;
 		}
 		return false;
@@ -28,28 +28,20 @@ class DB {
 
 	public function login($username, $password) {
 		$password = md5($password);
-		$res = $this->query("SELECT id, username FROM users WHERE username = ? AND password = ?", [$username, $password], "ss");
+		$res = $this->query("SELECT id FROM users WHERE username = ? AND password = ?", [$username, $password], "ss");
 		return $res[0]["id"] ?? false;
 	}
 
-	public function getUserById($id) {
+	public function getUsernameById($id) {
 		$res = $this->query("SELECT username FROM users WHERE id = ?", [$id], "i");
 		return $res[0]["username"] ?? false;
 	}
 
 	public function filter ($shapes, $sizes, $price) {
-		$query = "SELECT id FROM products ";
-		if ($shapes)
-			$query .= " WHERE shape IN " . get_in_params($shapes);
-		else
-			$query .= "WHERE 1=1";
-		if ($sizes)
-			$query .= " AND size IN " . get_in_params($sizes);
-		else
-			$query .= " AND 1=1";
-		if ($price)
-			$query .= " AND price <= ?";
-		
+		$query = "SELECT id FROM products";
+		$query .= " WHERE " . $shapes ? "shapes IN ".get_in_params($shapes) : "1 = 1";
+		$query .= " AND " . $sizes ? " size IN ".get_in_params($sizes) : "1 = 1";
+		if ($price) $query .= " AND price <= ?";
 		$vars  = array_merge($shapes, $sizes, $price ? [$price] : []);
 		$types = str_repeat("s", count($shapes) + count($sizes)) . ($price ? "i" : "");
 		if ($objs = $this->query($query, $vars, $types))
@@ -58,7 +50,7 @@ class DB {
 	}
 
 	public function getProducts($ids = null) {
-		$query = "SELECT id, name, price, size, shape, path FROM products";
+		$query = "SELECT id, name, price, shape, size, path FROM products";
 		if ($ids === null) {
 			return $this->query($query);
 		} else if (empty($ids)) {
@@ -70,37 +62,36 @@ class DB {
 	}
 
 	public function addOrder($products, $userId) {
-		$query = "INSERT INTO orders (id_user, date) VALUES (?, NOW())";
+		$query = "INSERT INTO orders (date, userId) VALUES (NOW(), ?)";
 		$this->query($query, [$userId], "i");
-		$query = "SELECT MAX(id) as maxId FROM orders";
-		$maxId = $this->query($query)[0]["maxId"];
+		$maxId = $this->query("SELECT MAX(id) as max FROM orders")[0]["max"];
 		foreach ($products as $p) {
-			$query = "INSERT INTO product_order (id_order, id_product, quantity) VALUES (?, ?, ?)";
+			$query = "INSERT INTO orderProducts (orderId, productId, quantity) VALUES (?, ?, ?)";
 			$this->query($query, [$maxId, $p["id"], $p["quantity"]], "iii");
 		}
 	}
 
 	public function getOrders($userId) {
-		$checkUser = ($check = $this->isVendor($userId)) ? "1 = 1" : "orders.id_user = ?";
-		$query = "SELECT orders.date, orders.id, SUM(products.price * product_order.quantity) AS total 
-			FROM orders, products, product_order WHERE $checkUser AND orders.id = product_order.id_order 
-			AND products.id = product_order.id_product GROUP by (orders.id) ORDER BY orders.id DESC";
+		$checkUser = ($check = $this->isVendor($userId)) ? "1 = 1" : "userId = ?";
+		$query = "SELECT date, orders.id, SUM(price * quantity) AS total FROM orders, products, orderProducts
+			WHERE $checkUser AND orders.id = orderId AND products.id = productId
+			GROUP BY orders.id ORDER BY orders.id DESC";
 		return $this->query($query, $check ? [] : [$userId], $check ? "" : "i");
 	}
 
 	public function getOrderProducts($orderId) {
-		$query = "SELECT name, path, quantity FROM products, product_order 
-					WHERE product_order.id_order = ? AND product_order.id_product = products.id";
+		$query = "SELECT name, path, quantity FROM products, orderProducts
+			WHERE orderId = ? AND productId = products.id";
 		return $this->query($query, [$orderId], "i");
 	}
 
 	public function getCards($userId) {
-		$query = "SELECT id, name, pan, cvv, date FROM cards WHERE user_id = ?";
+		$query = "SELECT id, name, pan, cvv, date FROM cards WHERE userId = ?";
 		return $this->query($query, [$userId], "i");
 	}
 
 	public function addCard($name, $pan, $cvv, $exp, $userId) {
-		$query = "INSERT INTO cards (name, pan, cvv, date, user_id) VALUES (?, ?, ?, ?, ?)";
+		$query = "INSERT INTO cards (name, pan, cvv, date, userId) VALUES (?, ?, ?, ?, ?)";
 		$this->query($query, [$name, $pan, $cvv, $exp, $userId], "ssssi");
 	}
 
@@ -109,27 +100,24 @@ class DB {
 		return $this->query($query, [$userId], "i")[0]["isVendor"] ? true : false;
 	}
 
-	public function updateProduct($id, $name, $price, $size, $shape, $path) {
-		$query = "UPDATE products SET name = ?, price = ?, size = ?, shape = ? WHERE id = ?";
+	public function updateProduct($id, $name, $price, $size, $shape) {
+		$query = "UPDATE products SET name = ?, price = ?, shape = ?, size = ? WHERE id = ?";
 		$this->query($query, [$name, $price, $size, $shape, $id], "sdssi");
-		if ($path) {
-			$query = "UPDATE products SET path = ? WHERE id = ?";
-			$this->query($query, [$path, $id], "si");
-		}
 	}
 
-	public function addProduct($name, $price, $size, $shape, $path) {
-		$query = "INSERT INTO products (name, price, size, shape, path) VALUES (?, ?, ?, ?, ?)";
-		$this->query($query, [$name, $price, $size, $shape, $path], "sdsss");
+	public function addProduct($name, $price, $size, $shape) {
+		$maxId = $this->query("SELECT MAX(id) as max FROM products")[0]["max"] + 1;
+		$query = "INSERT INTO products (name, price, shape, size, path) VALUES (?, ?, ?, ?, ?)";
+		$this->query($query, [$name, $price, $size, $shape, "img_$maxId.jpg"], "sdsss");
 	}
 
 	public function addMessage($userId, $message) {
-		$query = "INSERT INTO messages (message, user_id, date) VALUES (?, ?, NOW())";
+		$query = "INSERT INTO messages (message, userId, date) VALUES (?, ?, NOW())";
 		$this->query($query, [$message, $userId], "si");
 	}
 
 	public function getMessages($userId) {
-		$query = "SELECT message, date FROM messages WHERE user_id = ?";
+		$query = "SELECT message, date FROM messages WHERE userId = ?";
 		return $this->query($query, [$userId], "i");
 	}
 
