@@ -101,14 +101,15 @@ class DB {
 	}
 
 	public function updateProduct($id, $name, $price, $size, $shape) {
-		$query = "UPDATE products SET name = ?, price = ?, shape = ?, size = ? WHERE id = ?";
+		$query = "UPDATE products SET name = ?, price = ?, size = ?, shape = ? WHERE id = ?";
 		$this->query($query, [$name, $price, $size, $shape, $id], "sdssi");
 	}
 
 	public function addProduct($name, $price, $size, $shape) {
 		$maxId = $this->query("SELECT MAX(id) as max FROM products")[0]["max"] + 1;
-		$query = "INSERT INTO products (name, price, shape, size, path) VALUES (?, ?, ?, ?, ?)";
+		$query = "INSERT INTO products (name, price, size, shape, path) VALUES (?, ?, ?, ?, ?)";
 		$this->query($query, [$name, $price, $size, $shape, "img_$maxId.jpg"], "sdsss");
+		return $maxId;
 	}
 
 	public function addMessage($userId, $message) {
