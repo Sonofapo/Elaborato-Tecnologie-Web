@@ -14,33 +14,6 @@ $(document).ready(function() {
 		$(this).toggleClass("selected");
 	});
 
-	$("button.add-to-cart").click(function() {
-		let input = $(this).parent().siblings().find("input.add-qty");
-		let qty = input.val();
-		if (qty <= 50) {
-			updateCart($(this).attr("id"), qty, $("span#user-id").text(), false);
-			toggleAnimation($(this), "clicked", 3000);
-		} else
-			displayError("Puoi inserire al massimo 50 oggetti per volta");
-		input.val(1);
-	});
-
-	$("button.remove-from-cart").click(function() {
-		updateCart($(this).attr("id"), 0, userId());
-		location.reload();
-	});
-
-	$("input.remove-qty").on("change", function() {
-		let input = $(this).val();
-		updateCart($(this).attr("id"), input, userId());
-		location.reload();
-	});
-
-	$("button#empty-cart").click(function() {
-		deleteCookie(userId());
-		location.reload();
-	});
-
 	$("input.min-today").prop("min", new Date().toISOString().split("T")[0]);
 
 	$("input#pan").on("input", function () {
@@ -60,32 +33,90 @@ $(document).ready(function() {
 		$("form#search-f").submit();
 	});
 
+	/** CART */
+	$("button.add-to-cart").click(function() {
+		let input = $(this).parent().siblings().find("input.add-quantity");
+		let quantity = input.val();
+		if (quantity > 0) {
+			if (insertProduct($(this).attr("id"), quantity))
+				toggleAnimation($(this), "clicked", 3000);
+			else
+				displayError("Puoi inserire al massimo 100 oggetti");
+		} else
+			displayError("Inserire un valore valido");
+		input.val(1);
+	});
+
+	$("button.remove-from-cart").click(function() {
+		removeProduct($(this).attr("id"));
+		location.reload();
+	});
+
+	$("input.update-quantity").each(function() {
+		let prev = $(this).val();
+		$(this).change(function() {
+			let quantity = $(this).val();
+			if (quantity > 1) {
+				let name = "prod-" + $(this).attr("id").split("-")[1];
+				if (insertProduct(name, Number(quantity) - Number(prev)))
+					location.reload();
+				else {
+					displayError("Puoi inserire al massimo 100 oggetti");
+					$(this).val(prev);
+				}
+			} else {
+				displayError("Inserire un valore valido");
+				$(this).val(prev);
+			}
+		});
+	});
+
+	$("button#empty-cart").click(function() {
+		deleteCookie(userId());
+		location.reload();
+	});
+
 	setCounter();
 
 });
 
-function updateCart(productId, quantity, user, remove = true) {
-	let cart = getCookie(user);
-	console.log(cart.length + Number(quantity));
-	if (!remove && cart.length + Number(quantity) > 100) {
-		displayError("Puoi inserire al massimo 100 prodotti nel carrello");
-	} else {
-		productId = "prod-" + productId.split("-")[1];
-		if (remove)
-			cart = cart.filter(e => { return e != productId });
-		for (let i = 0; i < quantity; i++)
-			cart.push(productId);
-		setCookie(user, JSON.stringify(cart), 1);
-		setCounter();
-	}
+function removeProduct(product) {
+	let cart = getProducts(userId());
+	cart = cart.filter(e => e["name"] != product);
+	setCookie(userId(), JSON.stringify({ "products" : cart }), 1);
 }
 
-function getCookie(name) {
+function insertProduct(product, quantity) {
+	let pass = false;
+	let cart = getProducts(userId());
+	let index = cart.findIndex(e => e["name"] == product);
+	quantity = Number(quantity);
+	if (index < 0 && countProducts(cart) + quantity <= 100) {
+		cart.push({ "name": product, "quantity": quantity });
+		pass = true;
+	} else if (countProducts(cart) + quantity <= 100) {
+		cart[index]["quantity"] += quantity;
+		pass = true;
+	}
+	if (pass) {
+		setCookie(userId(), JSON.stringify({ "products" : cart }), 1);
+		setCounter();
+	}
+	return pass;
+}
+
+function countProducts(cart) {
+	let counter = 0;
+	cart.forEach(e => counter += Number(e["quantity"]));
+	return counter;
+}
+
+function getProducts(userId) {
 	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
+	const parts = value.split(`; ${userId}=`);
 	if (parts.length === 2) {
 		let arr = parts.pop().split(";").shift();
-		return JSON.parse(arr);
+		return JSON.parse(arr)["products"];
 	}
 	return [];
 }
@@ -96,9 +127,9 @@ function setCookie(name, value, days) {
 }
 
 function setCounter() {
-	let cart = getCookie(userId());
-	if (cart.length) {
-		$("span#cart-counter").text(cart.length);
+	let cart = getProducts(userId());
+	if (countProducts(cart)) {
+		$("span#cart-counter").text(countProducts(cart));
 		$("span#cart-counter").css("opacity", "1");
 		toggleAnimation($("span#cart-counter"), "bounce-twice", 2000);
 	} else {

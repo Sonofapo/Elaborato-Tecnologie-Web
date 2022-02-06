@@ -33,12 +33,14 @@
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;
 		case "cart":
-			if (isset($_COOKIE[$UID]) && $list = json_decode($_COOKIE[$UID])) {
-				$ids = array_map("split_id", $list);
-				$qty = array_count_values($ids);
-				foreach ($db->getProducts(array_unique($ids)) as $product) {
-					$product["quantity"] =  $qty[$product["id"]];
-					$vars["products"][] = $product;
+			if (isset($_COOKIE[$UID]) && $list = json_decode($_COOKIE[$UID], true)) {
+				if (count($list["products"])) {
+					$ids = array_map("split_id", array_column($list["products"], "name"));
+					$quantities = array_column($list["products"], "quantity");
+					$vars["products"] = $db->getProducts($ids);
+					for ($i = 0; $i < count($vars["products"]); $i++) {
+						$vars["products"][$i]["quantity"] = $quantities[$i];
+					}
 				}
 			}
 			$content = get_include_contents("./src/catalogo/cart.php");
