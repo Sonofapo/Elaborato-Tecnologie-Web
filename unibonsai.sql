@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 07, 2022 alle 13:05
+-- Creato il: Feb 07, 2022 alle 18:43
 -- Versione del server: 10.5.12-MariaDB-0+deb11u1
 -- Versione PHP: 8.1.2
 
@@ -156,7 +156,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `isVendor`) VALUES
 (1, 'venditore', 'c1a70acc25af38c5408542ddd78acc4c', 1),
-(2, 'utente', '3ce98305181b1bac59d024a49b0ffd73', 0);
+(2, 'cliente', '4983a0ab83ed86e0e7213c8783940193', 0);
 
 --
 -- Indici per le tabelle scaricate

@@ -28,7 +28,7 @@ Il venditore è in grado di ottenere la lista di tutti gli ordini eseguiti dai c
 
 Il sito si appoggia su un database. Per fornire un struttura funzionante, il file ```unibonsai.sql``` contiene lo script di inizializzazione per creare tutte le tabelle necessarie per dimostrare il funzionamento del sito. Nello specifico si avrà a disposizione:
 
-- Un accesso con username "utente" e password "utente" che simula l'accesso come compratore
+- Un accesso con username "cliente" e password "cliente" che simula l'accesso come compratore
 - Un accesso con username "venditore" e password "venditore" che simula l'accesso come venditore
 - Un catalogo di 20 prodotti
 - Una carta di pagamento associata a "utente"
