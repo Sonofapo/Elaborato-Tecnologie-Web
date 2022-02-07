@@ -45,7 +45,7 @@ switch ($vars["mode"]) {
 					$db->addCard($c["name"], $c["pan"], $c["cvv"], $c["date"], $UID);
 				}
 
-				$ids = array_map("split_id", json_decode($_COOKIE[$UID]));
+				$ids = array_map("split_id", json_decode($_COOKIE[$UID], true));
 				$qty = array_count_values($ids);
 				$ids = array_unique($ids);
 				foreach ($ids as $p) {
