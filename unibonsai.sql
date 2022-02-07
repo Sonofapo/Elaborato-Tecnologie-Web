@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 07, 2022 alle 08:48
+-- Creato il: Feb 07, 2022 alle 13:05
 -- Versione del server: 10.5.12-MariaDB-0+deb11u1
 -- Versione PHP: 8.1.2
 
@@ -53,6 +53,7 @@ CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
   `text` text NOT NULL,
   `date` datetime NOT NULL,
+  `isRead` tinyint(1) NOT NULL DEFAULT 0,
   `userId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

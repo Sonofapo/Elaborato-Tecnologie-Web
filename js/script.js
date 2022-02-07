@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
-	$("button#expand-menu").click(() => $("ul#menu").slideToggle(200));
+	$("button#expand-menu").click(() => {
+		$("ul#menu").slideToggle(200);
+		$("span#notification-1").toggle();
+	});
 	$("button#search-button").click(() => $("aside#sidenav").width("100%"));
 	$("button#close-search").click(() => $("aside#sidenav").width("0"));
 
@@ -21,6 +24,13 @@ $(document).ready(function() {
 			return value.replace(/[^0-9]/g, "").
 				replace(/\W/gi, '').
 				replace(/(.{4})/g, '$1 ').trim();
+		});
+	});
+
+	$("input#cvv").on("input", function() {
+		$(this).val(function (index, value) {
+			return value.replace(/[^0-9]/g, "").
+				replace(/\W/gi, '').trim();
 		});
 	});
 
@@ -154,6 +164,6 @@ function toggleAnimation(object, name, timeout) {
 
 function displayError(message) {
 	let prompt = `<div class="fade-me"><div class="alert alert-danger">${message}</div></div>`;
-	setTimeout(() => $("div.fade-me").slideUp(200), 3000);
 	$("main").prepend(prompt);
+	setTimeout(() => $("div.fade-me").slideUp(200), 3000);
 }

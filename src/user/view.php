@@ -20,7 +20,9 @@
 					<label for="password">Password:</label>
 					<input class="form-control mb-3" type="password" id="password" name="password" required />
 					
-					<input class="btn btn-success mb-3" type="submit" value="<?php echo $vars["isLogin"] ? "accedi" : "registrati"?>" />
+					<button class="btn btn-success mb-3" type="submit">
+						<?php echo $vars["isLogin"] ? "accedi" : "registrati"?>
+					</button>
 				</form>
 				<p class="m-0">
 					oppure

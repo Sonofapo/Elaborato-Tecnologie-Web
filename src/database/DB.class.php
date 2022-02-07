@@ -12,9 +12,10 @@ class DB {
 		$q = $this->connection->prepare($statement);
 		if ($vars && $types)
 			$q->bind_param($types, ...$vars);
-		$q->execute();
+		$success = $q->execute();
 		if ($res = $q->get_result())
 			return $res->fetch_all(MYSQLI_ASSOC);
+		return $success;
 	}
 
 	public function subscribe($username, $password) {
@@ -113,6 +114,11 @@ class DB {
 			$o["size"], $o["shape"], $o["path"]], "isdsss");
 	}
 
+	public function removeProduct($productId) {
+		$query = "DELETE FROM products WHERE id = ?";
+		return $this->query($query, [$productId], "i");
+	}
+
 	public function getNextProductId() {
 		return $this->query("SELECT MAX(id) as max FROM products")[0]["max"] + 1;
 	}
@@ -123,8 +129,19 @@ class DB {
 	}
 
 	public function getMessages($userId) {
-		$query = "SELECT text, date FROM messages WHERE userId = ? ORDER BY date DESC";
+		$query = "SELECT text, date, isRead FROM messages WHERE userId = ? ORDER BY date DESC";
 		return $this->query($query, [$userId], "i");
+	}
+
+	public function unreadMessages($userId) {
+		$query = "SELECT COUNT(*) as count FROM messages WHERE userId = ? AND isRead = false";
+		return $this->query($query, [$userId], "i")[0]["count"] > 0;
+	}
+
+	public function readAllMessages($userId) {
+		$query = "UPDATE messages SET isRead = true WHERE userId = ?";
+		$this->query($query, [$userId], "i");
+		return false;
 	}
 
 	public function getVendors() {

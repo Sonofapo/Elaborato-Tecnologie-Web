@@ -92,6 +92,7 @@ div.product-card div {
 
 div.product-img {
 	height: 120px;
+	width: 120px;
 	margin: 5px;
 }
 
@@ -210,6 +211,7 @@ div#home a:hover {
 
 	div.product-img {
 		height: 170px;
+		width: 170px;
 	}
 
 	div.product-card {

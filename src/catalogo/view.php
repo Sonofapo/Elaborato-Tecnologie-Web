@@ -68,7 +68,7 @@
 					<span class="fa fa-plus"></span>
 				</a>
 				<?php else: ?>
-				<span id="cart-counter"></span>
+				<span class="notification-dot" id="cart-counter"></span>
 				<a href="?action=catalogo&mode=cart" id="cart" title="Carrello">
 					<span class="fa fa-shopping-cart"></span>
 				</a>

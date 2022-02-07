@@ -24,6 +24,8 @@
 				<?php if ($vars["isVendor"]): ?>
 				<a class="btn btn-primary" title="modifica"
 					href="?action=catalogo&mode=update&id=<?php echo $product["id"] ?>">Modifica</a>
+				<a class="btn btn-danger" title="elimina"
+					href="?action=catalogo&mode=remove&id=<?php echo $product["id"] ?>">Rimuovi</a>
 				<?php else: ?>
 				<button class="btn btn-primary add-to-cart" id="prod-<?php echo $product["id"] ?>" title="aggiungi al carrello">
 					<span class="button-text">Agg. al carrello</span>
