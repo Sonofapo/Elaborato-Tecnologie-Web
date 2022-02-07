@@ -27,6 +27,13 @@ $(document).ready(function() {
 		});
 	});
 
+	$("input#cvv").on("input", function() {
+		$(this).val(function (index, value) {
+			return value.replace(/[^0-9]/g, "").
+				replace(/\W/gi, '').trim();
+		});
+	});
+
 	$("span.clear-filter").click(function() {
 		let category = $(this).parent().prop("id").replace("filter", "search");
 		$("#"+category).find("input[type=checkbox]").each(function() {
