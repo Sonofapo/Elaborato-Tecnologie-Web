@@ -1,7 +1,23 @@
 <?php echo get_include_contents("./src/templates/header.php") ?>
 <main>
     <section id="alerts">
-        <h2>Le tue Notifiche</h2>
+		<h2><?php echo count($vars["messages"]) ? "Le tue Notifiche" : "Non hai notifiche" ?></h2>
+		<div class="container">
+			<ul class="mb-3">
+				<?php foreach($vars["messages"] as $message): ?>
+				<li>
+					<div class="p-2">
+						<div>
+							<?php echo $message["text"] ?>
+						</div>
+						<div class="date">
+							<?php echo date("d/m/Y (G:i)", strtotime($message["date"]))?>
+						</div>
+					</div>	
+				</li>
+				<?php endforeach ?>
+			</ul>
+		</div>
     </section>
     <section id="orders">
 		<?php ?>

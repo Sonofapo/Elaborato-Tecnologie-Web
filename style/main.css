@@ -158,6 +158,32 @@ img.order-img {
 	border-radius: 2px;
 }
 
+/********** MESSAGE LIST **********/
+section#alerts {
+	text-align: center;
+}
+
+section#alerts ul {
+	margin: 0;
+	padding: 0;
+	border: solid #08313a 1px;
+	border-radius: 2px;
+}
+
+section#alerts li {
+	list-style: none;
+}
+
+section#alerts li:nth-child(odd) {
+	background-color: rgb(218, 218, 218);
+}
+
+section#alerts li div.date {
+	text-align: right;
+	font-size: small;
+	font-style: italic;
+}
+
 @media screen and (min-width: 768px) {
 	div#product-list {
 		margin: 0 30px;

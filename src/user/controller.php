@@ -21,6 +21,7 @@ switch ($vars["mode"]) {
 			$psw = $_POST["password"];
 			if ($db->subscribe($usr, $psw)) {
 				$_SESSION["uid"] = $db->login($usr, $psw);
+				$db->addMessage($_SESSION["uid"], "Benvenuto in UniBonsai!");
 				header("Location: index.php");
 			} else {
 				$error = "Utente già presente.";
@@ -44,17 +45,10 @@ switch ($vars["mode"]) {
 					$c["pan"] = str_replace(' ', '', $c["pan"]);
 					$db->addCard($c["name"], $c["pan"], $c["cvv"], $c["date"], $UID);
 				}
-
-				$ids = array_map("split_id", json_decode($_COOKIE[$UID], true));
-				$qty = array_count_values($ids);
-				$ids = array_unique($ids);
-				foreach ($ids as $p) {
-					$_p["id"] = $p;
-					$_p["quantity"] =  $qty[$p];
-					$_ids[] = $_p;
-				}
-				$db->addOrder($_ids, $UID);
-
+				$orderId = $db->addOrder(getCart($UID), $UID);
+				$db->addMessage($UID, "L'ordine #$orderId è stato registrato correttamente");
+				foreach ($db->getVendors() as $vendor)
+					$db->addMessage($vendor, "L'utente '".$db->getUsernameById($UID)."' ha effettuato l'ordine #$orderId");
 				$message = "Acquisto avvenuto correttamente";
 				$vars["products"] = $db->getProducts();
 				setcookie($UID, "", time() - 3600, "/");
@@ -68,6 +62,7 @@ switch ($vars["mode"]) {
 		$vars["body"] = $content;
 		break;
 	case "profile": 
+		$vars["messages"] = $db->getMessages($UID);
 		$vars["orders"] = generate_order_list();
 		$vars["body"] = get_include_contents("./src/user/profile.php");
 		break;
