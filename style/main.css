@@ -92,6 +92,7 @@ div.product-card div {
 
 div.product-img {
 	height: 120px;
+	width: 120px;
 	margin: 5px;
 }
 
@@ -192,6 +193,7 @@ section#alerts li div.date {
 
 	div.product-img {
 		height: 170px;
+		width: 170px;
 	}
 
 	div.product-card {

@@ -157,6 +157,6 @@ function toggleAnimation(object, name, timeout) {
 
 function displayError(message) {
 	let prompt = `<div class="fade-me"><div class="alert alert-danger">${message}</div></div>`;
-	setTimeout(() => $("div.fade-me").slideUp(200), 3000);
 	$("main").prepend(prompt);
+	setTimeout(() => $("div.fade-me").slideUp(200), 3000);
 }
