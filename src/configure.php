@@ -69,7 +69,7 @@ function generate_product($isEmpty = false) {
 }
 
 function check_image($name, $destination) {
-	return !$_FILES[$name]["tmp_name"] || 
+	return !$_FILES[$name]["tmp_name"] ||
 		@mime_content_type($_FILES[$name]["tmp_name"]) == "image/jpeg" &&
 		move_uploaded_file($_FILES[$name]["tmp_name"], $destination);
 }

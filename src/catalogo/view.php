@@ -13,7 +13,7 @@
 				<div id="price-search" class="collapse" data-bs-parent="#accordion">
 					<ul class="body">
 						<li>
-							<input form="search-f" type="range" name="price" id="slider" 
+							<input form="search-f" type="range" name="price" id="slider"
 								min="1" max="200" value="<?php echo $vars["price"] ?? "200" ?>" />
 							<label for="slider">Prezzo max:
 								<span id="search-value"><?php echo $vars["price"] ?? "200" ?>&euro;</span>

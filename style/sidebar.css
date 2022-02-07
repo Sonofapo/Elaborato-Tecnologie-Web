@@ -46,7 +46,7 @@ div#left-side h2 > a:hover {
 }
 
 h2.header {
-	margin: 0;	
+	margin: 0;
 	background-color: #20454E;
 }
 
@@ -98,10 +98,6 @@ button#apply-filter {
 	margin-top: 20px;
 	width: 40%;
 	max-width: 80px;
-	/* border: none;
-	border-radius: 2px;
-	color: white;
-	background-color: #08313A; */
 }
 
 /* MEDIA QUERIES */

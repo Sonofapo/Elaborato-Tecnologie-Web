@@ -17,12 +17,12 @@
 				inputmode="numeric" pattern="[0-9\s]{19}" maxlength="19" />
 
 			<label for="cvv">CVV</label>
-			<input class="form-control mb-3" type="tel" id="cvv" name="cvv"	
+			<input class="form-control mb-3" type="tel" id="cvv" name="cvv"
 				inputmode="numeric" pattern="[0-9]{3}" maxlength="3" />
 
 			<label for="date">Data di scadenza</label>
 			<input class="form-control mb-3 min-today" type="date" id="date" name="date" />
-			
+
 			<div class="text-center my-4">oppure</div>
 			<label for="cards">Seleziona una delle tue carte</label>
 			<select name="cards" class="form-select" id="cards">

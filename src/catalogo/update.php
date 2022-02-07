@@ -12,14 +12,14 @@
 			<input type="hidden" name="id" value="<?php echo $vars["item"]["id"] ?>">
 
 			<label for="name">Nome</label>
-			<input type="text" class="form-control mb-3" id="name" name="name" 
+			<input type="text" class="form-control mb-3" id="name" name="name"
 				pattern="[a-zA-Z\s]{1,30}" maxlength="30" required
 				value="<?php echo $vars["item"]["name"] ?? "" ?>" />
 
 			<label for="price">Prezzo</label>
 			<div class="input-group mb-3">
 				<span class="input-group-text">€</span>
-				<input type="number" class="form-control" id="price" name="price" 
+				<input type="number" class="form-control" id="price" name="price"
 					pattern="^\d+(?:\.\d{1,2})?$" min="0.01" max="200.00" required step="0.01"
 					value="<?php echo $vars["item"]["price"] ?>" />
 			</div>
@@ -54,7 +54,7 @@
 			</select>
 
 			<div class="text-center mt-4">
-				<button type="submit" class="btn btn-primary" 
+				<button type="submit" class="btn btn-primary"
 					title="<?php echo $vars["item"]["id"] ? "modifica" : "aggiungi" ?>">
 					<?php echo $vars["item"]["id"] ? "Modifica" : "Aggiungi" ?>
 				</button>

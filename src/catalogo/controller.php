@@ -4,7 +4,7 @@
 			$vars["products"] = $db->getProducts();
 			$vars["filters"] = generate_filters();
 			$content = get_include_contents("./src/catalogo/view.php");
-			break;			
+			break;
 		case "filter":
 			$shapes	= $_REQUEST["shape"] ?? [];
 			$sizes	= $_REQUEST["size"] ?? [];
@@ -29,7 +29,7 @@
 				$vars["price"] = $price;
 			$vars["products"] = $db->getProducts($db->filter($text1, $text2, $price));
 			if (empty($vars["products"]) && $searched)
-				$error = "Non sono state trovate corrispondenze"; 
+				$error = "Non sono state trovate corrispondenze";
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;
 		case "cart":
