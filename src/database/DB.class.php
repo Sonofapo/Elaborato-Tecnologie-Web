@@ -99,15 +99,17 @@ class DB {
 		$query = "SELECT isVendor FROM users WHERE id = ?";
 		return $this->query($query, [$userId], "i")[0]["isVendor"] ? true : false;
 	}
-	
+
 	public function updateProduct($o) {
 		$query = "UPDATE products SET name = ?, price = ?, size = ?, shape = ? WHERE id = ?";
-		$this->query($query, [$o["name"], $o["price"], $o["size"], $o["shape"], $o["id"]], "sdssi");
+		$this->query($query, [strtolower($o["name"]), $o["price"], $o["size"],
+			$o["shape"], $o["id"]], "sdssi");
 	}
 
 	public function addProduct($o) {
 		$query = "INSERT INTO products (id, name, price, size, shape, path) VALUES (?, ?, ?, ?, ?, ?)";
-		$this->query($query, [$o["id"], $o["name"], $o["price"], $o["size"], $o["shape"], $o["path"]], "isdsss");
+		$this->query($query, [$o["id"], strtolower($o["name"]), $o["price"],
+			$o["size"], $o["shape"], $o["path"]], "isdsss");
 	}
 
 	public function getNextProductId() {
