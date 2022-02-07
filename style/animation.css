@@ -76,6 +76,7 @@ span#cart-counter {
 	line-height: 20px;
 	font-size: 0.7em;
 	color: white;
+	opacity: 0;
 }
 
 .bounce-twice {

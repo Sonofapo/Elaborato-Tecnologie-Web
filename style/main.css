@@ -135,13 +135,21 @@ button#empty-cart {
 }
 
 /********** ORDER LIST ***********/
-section#orders, section#alerts{
+div#profile section {
+	margin: 5px;
 	text-align: center;
-	background-color: rgba(199, 199, 199, 0.452);
 }
 
-section#orders h2 a, section#alerts h2 a, div#accordion a{
-	color: black;
+div#profile h2 {
+	background-color: #20454E;
+	border-radius: 2px;
+}
+
+div#profile section h2 a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: white;
 }
 
 table {
@@ -160,18 +168,15 @@ table td, table th {
 
 img.order-img {
 	height: 50px;
+	width: 50px;
 	border-radius: 2px;
 }
 
 /********** MESSAGE LIST **********/
-section#alerts {
-	text-align: center;
-}
-
 section#alerts ul {
 	margin: 0;
 	padding: 0;
-	border: solid #08313a 1px;
+	border: solid #20454E 1px;
 	border-radius: 2px;
 }
 
@@ -180,7 +185,7 @@ section#alerts li {
 }
 
 section#alerts li:nth-child(odd) {
-	background-color: rgb(218, 218, 218);
+	background-color: rgb(242, 242, 242);
 }
 
 section#alerts li div.date {
@@ -189,20 +194,6 @@ section#alerts li div.date {
 	font-style: italic;
 }
 
-div#home {
-	text-align: center;
-	margin-top: 20px;
-}
-
-div#home a {
-	padding: 5px 8px;
-	border-radius: 2px;
-}
-
-div#home a:hover {
-	color: white;
-	background-color: rgb(108,117,125);
-}
 @media screen and (min-width: 768px) {
 	div#product-list {
 		margin: 0 30px;
