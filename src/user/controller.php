@@ -61,8 +61,9 @@ switch ($vars["mode"]) {
 		}
 		$vars["body"] = $content;
 		break;
-	case "profile": 
+	case "profile":
 		$vars["messages"] = $db->getMessages($UID);
+		$vars["undread"] = $db->readAllMessages($UID);
 		$vars["orders"] = generate_order_list();
 		$vars["body"] = get_include_contents("./src/user/profile.php");
 		break;

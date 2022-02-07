@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
-	$("button#expand-menu").click(() => $("ul#menu").slideToggle(200));
+	$("button#expand-menu").click(() => {
+		$("ul#menu").slideToggle(200);
+		$("span#notification-1").toggle();
+	});
 	$("button#search-button").click(() => $("aside#sidenav").width("100%"));
 	$("button#close-search").click(() => $("aside#sidenav").width("0"));
 

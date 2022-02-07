@@ -73,22 +73,17 @@
 
 /********** COUNTER **********/
 span#cart-counter {
-	position: relative;
-	opacity: 0;
 	left: 20px;
 	top: -10px;
 	width: 20px;
 	height: 20px;
 	line-height: 20px;
 	font-size: 0.7em;
-	border-radius: 50%;
-	display: inline-block;
 	color: white;
-	background: red;
 }
 
 .bounce-twice {
-	animation: bounce-2 2s ease forwards;
+	animation: bounce-2 2s ease infinite;
 }
 
 @keyframes bounce-2 {
@@ -101,4 +96,16 @@ span#cart-counter {
 	60% {
 		transform: translateY(-3px);
 	}
+}
+
+/********** NOTIFICATION **********/
+span.notification-dot {
+	position: relative;
+	top: -8px;
+	left: 8px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	display: inline-block;
+	background: red;
 }

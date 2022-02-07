@@ -46,6 +46,7 @@ nav.flex-container {
 div.flex-1 {
 	flex: 100%;
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 }
 
@@ -67,7 +68,7 @@ div.flex-2 {
 		margin: 2px 10px 2px 0;
 	}
 
-	button#expand-menu {
+	div#expand-menu-div {
 		display: none;
 	}
 

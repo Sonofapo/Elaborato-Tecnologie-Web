@@ -123,8 +123,19 @@ class DB {
 	}
 
 	public function getMessages($userId) {
-		$query = "SELECT text, date FROM messages WHERE userId = ? ORDER BY date DESC";
+		$query = "SELECT text, date, isRead FROM messages WHERE userId = ? ORDER BY date DESC";
 		return $this->query($query, [$userId], "i");
+	}
+
+	public function unreadMessages($userId) {
+		$query = "SELECT COUNT(*) as count FROM messages WHERE userId = ? AND isRead = false";
+		return $this->query($query, [$userId], "i")[0]["count"] > 0;
+	}
+
+	public function readAllMessages($userId) {
+		$query = "UPDATE messages SET isRead = true WHERE userId = ?";
+		$this->query($query, [$userId], "i");
+		return false;
 	}
 
 	public function getVendors() {

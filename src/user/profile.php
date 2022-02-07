@@ -7,7 +7,7 @@
 				<?php foreach($vars["messages"] as $message): ?>
 				<li>
 					<div class="p-2">
-						<div>
+						<div class="<?php if (!$message["isRead"]) echo "bold" ?>">
 							<?php echo $message["text"] ?>
 						</div>
 						<div class="date">
