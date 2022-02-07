@@ -134,9 +134,13 @@ button#empty-cart {
 }
 
 /********** ORDER LIST ***********/
-section#orders {
+section#orders, section#alerts{
 	text-align: center;
 	background-color: rgba(199, 199, 199, 0.452);
+}
+
+section#orders h2 a, section#alerts h2 a, div#accordion a{
+	color: black;
 }
 
 table {
@@ -184,6 +188,20 @@ section#alerts li div.date {
 	font-style: italic;
 }
 
+div#home {
+	text-align: center;
+	margin-top: 20px;
+}
+
+div#home a {
+	padding: 5px 8px;
+	border-radius: 2px;
+}
+
+div#home a:hover {
+	color: white;
+	background-color: rgb(108,117,125);
+}
 @media screen and (min-width: 768px) {
 	div#product-list {
 		margin: 0 30px;
