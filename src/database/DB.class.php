@@ -99,17 +99,19 @@ class DB {
 		$query = "SELECT isVendor FROM users WHERE id = ?";
 		return $this->query($query, [$userId], "i")[0]["isVendor"] ? true : false;
 	}
-
-	public function updateProduct($id, $name, $price, $size, $shape) {
+	
+	public function updateProduct($o) {
 		$query = "UPDATE products SET name = ?, price = ?, size = ?, shape = ? WHERE id = ?";
-		$this->query($query, [$name, $price, $size, $shape, $id], "sdssi");
+		$this->query($query, [$o["name"], $o["price"], $o["size"], $o["shape"], $o["id"]], "sdssi");
 	}
 
-	public function addProduct($name, $price, $size, $shape) {
-		$maxId = $this->query("SELECT MAX(id) as max FROM products")[0]["max"] + 1;
-		$query = "INSERT INTO products (name, price, size, shape, path) VALUES (?, ?, ?, ?, ?)";
-		$this->query($query, [$name, $price, $size, $shape, "img_$maxId.jpg"], "sdsss");
-		return $maxId;
+	public function addProduct($o) {
+		$query = "INSERT INTO products (id, name, price, size, shape, path) VALUES (?, ?, ?, ?, ?, ?)";
+		$this->query($query, [$o["id"], $o["name"], $o["price"], $o["size"], $o["shape"], $o["path"]], "isdsss");
+	}
+
+	public function getNextProductId() {
+		return $this->query("SELECT MAX(id) as max FROM products")[0]["max"] + 1;
 	}
 
 	public function addMessage($userId, $message) {

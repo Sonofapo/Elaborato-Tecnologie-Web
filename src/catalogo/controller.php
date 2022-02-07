@@ -54,45 +54,29 @@
 			}
 			break;
 		case "update" or "add":
-			$vars["item"] = ["id" => "", "name" => "", "price" => "", 
-					"size" => "", "shape" => "", "path" => ""];
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				switch (checkImage($_FILES["image"])) {
-					case FILE_OK:
-						if ($id = $_POST["id"]) {
-							$db->updateProduct($_POST["id"], $_POST["name"], 
-								$_POST["price"], $_POST["size"], $_POST["shape"]);
-							$message = "Prodotto modificato correttamente";
-						} else {
-							$id = $db->addProduct($_POST["name"], $_POST["price"],
-								$_POST["size"], $_POST["shape"]);
-							$message = "Prodotto aggiunto correttamente";
-						}
-						$img = "img_$id.jpg";
-						move_uploaded_file($_FILES["image"]["tmp_name"], $IMG_PATH.$img);
-						$vars["products"] = $db->getProducts();
-						$content = get_include_contents("./src/catalogo/view.php");
-						break;
-					case NO_FILE:
-						if ($_POST["id"]) {
-							$db->updateProduct($_POST["id"], $_POST["name"], 
-								$_POST["price"], $_POST["size"], $_POST["shape"]);
-							$message = "Prodotto modificato correttamente";
-						}
-						$vars["products"] = $db->getProducts();
-						$content = get_include_contents("./src/catalogo/view.php");
-						break;
-					case EXT_ERROR:
-						if($_POST["id"]) {
-							$vars["item"] = $db->getProducts([$_POST["id"]])[0];	
-						}
-						$error = "Inserire un'immagine .jpg";
-						$content = get_include_contents("./src/catalogo/update.php");
-						break;
+				$vars["item"] = generate_product();
+				if ($_POST["id"])
+					$db->updateProduct($vars["item"]);
+				else
+					$vars["item"]["id"] = $db->getNextProductId();
+				$vars["item"]["path"] = "img_".$vars["item"]["id"].".jpg";
+				if (check_image("image", IMG_PATH."/img_".$vars["item"]["id"].".jpg")) {
+					$message = "Prodotto ".($_POST["id"] ? "modificato" : "aggiunto")." correttamente";
+					if (!$_POST["id"])
+						$db->addProduct($vars["item"]);
+					$vars["products"] = $db->getProducts();
+					$content = get_include_contents("./src/catalogo/view.php");
+				} else {
+					$error = "Errore. Assicurarsi che l'immagine sia valida e di tipo .jpg";
+					$vars["item"] = generate_product();
+					$content = get_include_contents("./src/catalogo/update.php");
 				}
-			} else {				
-				if (isset($_GET["id"]))
-					$vars["item"] = $db->getProducts([$_GET["id"]])[0];	
+			} else {
+				if (isset($_GET["id"]) && !empty($_GET["id"])) {
+					$vars["item"] = $db->getProducts([$_GET["id"]])[0];
+				} else
+					$vars["item"] = generate_product(true);
 				$content = get_include_contents("./src/catalogo/update.php");
 			}
 			break;

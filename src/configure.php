@@ -6,12 +6,14 @@ $db = new DB();
 
 # abilitazione della sessione
 session_start();
+
+# richiesta di non mantenere cache
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 # variabili di configurazione
-$IMG_PATH = "./img/products/";
+define("IMG_PATH", "./img/products");
 
 # funzioni di supporto
 function get_include_contents(string $file) {
@@ -58,16 +60,18 @@ function generate_filters() {
 	];
 }
 
-define("FILE_OK", 1);
-define("NO_FILE", 2);
-define("EXT_ERROR", 3);
+function generate_product($isEmpty = false) {
+	if ($isEmpty)
+		return array_fill_keys(["id", "name", "price", "size", "shape", "path"], "");
+	else
+		return ["id" => $_POST["id"], "name" => $_POST["name"], "price" => $_POST["price"],
+			"size" => $_POST["size"], "shape" => $_POST["shape"]];
+}
 
-function checkImage($file) {
-	if (!$file["error"] && $file["type"] == "image/jpeg") {
-		return FILE_OK;
-	} else if ($file["type"] != "image/jpeg")
-		return EXT_ERROR;
-	return NO_FILE;
+function check_image($name, $destination) {
+	return !$_FILES[$name]["tmp_name"] || 
+		@mime_content_type($_FILES[$name]["tmp_name"]) == "image/jpeg" &&
+		move_uploaded_file($_FILES[$name]["tmp_name"], $destination);
 }
 
 ?>
