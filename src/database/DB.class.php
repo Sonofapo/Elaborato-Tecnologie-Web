@@ -39,8 +39,8 @@ class DB {
 
 	public function filter ($shapes, $sizes, $price) {
 		$query = "SELECT id FROM products";
-		$query .= " WHERE " . $shapes ? "shapes IN ".get_in_params($shapes) : "1 = 1";
-		$query .= " AND " . $sizes ? " size IN ".get_in_params($sizes) : "1 = 1";
+		$query .= " WHERE " . ($shapes ? "shape IN ".get_in_params($shapes) : "1 = 1");
+		$query .= " AND " . ($sizes ? " size IN ".get_in_params($sizes) : "1 = 1");
 		if ($price) $query .= " AND price <= ?";
 		$vars  = array_merge($shapes, $sizes, $price ? [$price] : []);
 		$types = str_repeat("s", count($shapes) + count($sizes)) . ($price ? "i" : "");
