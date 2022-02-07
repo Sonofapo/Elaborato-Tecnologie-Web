@@ -56,7 +56,7 @@ $(document).ready(function() {
 		let prev = $(this).val();
 		$(this).change(function() {
 			let quantity = $(this).val();
-			if (quantity > 1) {
+			if (quantity > 0) {
 				let name = "prod-" + $(this).attr("id").split("-")[1];
 				if (insertProduct(name, Number(quantity) - Number(prev)))
 					location.reload();

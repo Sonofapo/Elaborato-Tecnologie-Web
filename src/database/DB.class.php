@@ -65,10 +65,11 @@ class DB {
 		$query = "INSERT INTO orders (date, userId) VALUES (NOW(), ?)";
 		$this->query($query, [$userId], "i");
 		$maxId = $this->query("SELECT MAX(id) as max FROM orders")[0]["max"];
-		foreach ($products as $p) {
+		foreach ($products as $id => $q) {
 			$query = "INSERT INTO orderProducts (orderId, productId, quantity) VALUES (?, ?, ?)";
-			$this->query($query, [$maxId, $p["id"], $p["quantity"]], "iii");
+			$this->query($query, [$maxId, $id, $q], "iii");
 		}
+		return $maxId;
 	}
 
 	public function getOrders($userId) {
@@ -117,13 +118,18 @@ class DB {
 	}
 
 	public function addMessage($userId, $message) {
-		$query = "INSERT INTO messages (message, userId, date) VALUES (?, ?, NOW())";
+		$query = "INSERT INTO messages (text, userId, date) VALUES (?, ?, NOW())";
 		$this->query($query, [$message, $userId], "si");
 	}
 
 	public function getMessages($userId) {
-		$query = "SELECT message, date FROM messages WHERE userId = ?";
+		$query = "SELECT text, date FROM messages WHERE userId = ? ORDER BY date DESC";
 		return $this->query($query, [$userId], "i");
+	}
+
+	public function getVendors() {
+		$query = "SELECT id FROM users WHERE isVendor = true";
+		return $this->query($query);
 	}
 
 }

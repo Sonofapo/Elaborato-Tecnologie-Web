@@ -1,7 +1,7 @@
 <?php echo get_include_contents("./src/templates/header.php") ?>
 <main>
 	<section>
-		<?php if (isset($vars["products"])) : ?>
+		<?php if (count($vars["products"])) : ?>
 		<div id="sec-header">
 			<h3>Il tuo carrello</h3>
 			<div>

@@ -74,4 +74,15 @@ function check_image($name, $destination) {
 		move_uploaded_file($_FILES[$name]["tmp_name"], $destination);
 }
 
+function getCart($uid) {
+	if (isset($_COOKIE[$uid]) && $list = json_decode($_COOKIE[$uid], true)) {
+		if (count($list["products"])) {
+			$ids = array_map("split_id", array_column($list["products"], "name"));
+			$quantities = array_column($list["products"], "quantity");
+			return array_combine($ids, $quantities);
+		}
+	}
+	return [];
+}
+
 ?>
