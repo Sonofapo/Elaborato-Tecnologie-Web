@@ -26,7 +26,9 @@
 	<?php echo $vars["body"] ?>
 <footer>
 	<div class="text-center bg-secondary">
-		<a href="#top" title="Torna ad inizio pagina"><span class="fa fa-home"></span> Home</a>
+		<a href="#top" title="Torna ad inizio pagina">
+			<span class="fa fa-angle-double-up fa-lg"></span> Torna su
+		</a>
 	</div>
 </footer>
 </body>
