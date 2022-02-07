@@ -27,7 +27,7 @@
 					<?php foreach($order["prods"] as $item): ?>
 						<tr>
 							<td headers="img-<?php echo $o ?>">
-								<img class="order-img" src="<?php echo $IMG_PATH . $item["path"]?>" alt="" />
+								<img class="order-img" src="<?php echo IMG_PATH.$item["path"]?>" alt="" />
 							</td>
 							<td headers="name-<?php echo $o ?>">
 								<?php echo ucfirst($item["name"])?>

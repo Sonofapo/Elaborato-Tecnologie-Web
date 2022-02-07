@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 06, 2022 alle 08:16
+-- Creato il: Feb 07, 2022 alle 08:48
 -- Versione del server: 10.5.12-MariaDB-0+deb11u1
 -- Versione PHP: 8.1.2
 
@@ -115,26 +115,26 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `shape`, `size`, `path`) VALUES
-(1, 'azalea', 49.95, 'squadrato', 'medio', 'img_1.jpg'),
-(2, 'azalea', 52.35, 'tondeggiante', 'medio', 'img_2.jpg'),
-(3, 'betulla', 83.48, 'tondeggiante', 'medio', 'img_3.jpg'),
-(4, 'carmona', 19.95, 'squadrato', 'piccolo', 'img_4.jpg'),
-(5, 'carmona', 25.95, 'tondeggiante', 'piccolo', 'img_5.jpg'),
-(6, 'ginepro', 179.68, 'squadrato', 'grande', 'img_6.jpg'),
-(7, 'ginepro', 119.95, 'tondeggiante', 'medio', 'img_7.jpg'),
-(8, 'ginepro', 145.24, 'tondeggiante', 'piccolo', 'img_8.jpg'),
-(9, 'ginseng', 30.81, 'squadrato', 'piccolo', 'img_9.jpg'),
-(10, 'ginseng', 60.37, 'tondeggiante', 'grande', 'img_10.jpg'),
-(11, 'ginseng', 19.94, 'tondeggiante', 'piccolo', 'img_11.jpg'),
-(12, 'melo', 85.12, 'tondeggiante', 'medio', 'img_12.jpg'),
-(13, 'melo', 101.01, 'tondeggiante', 'piccolo', 'img_13.jpg'),
-(14, 'olmo', 68.83, 'squadrato', 'medio', 'img_14.jpg'),
-(15, 'pepe', 76.59, 'squadrato', 'medio', 'img_15.jpg'),
-(16, 'pepe', 86.47, 'tondeggiante', 'medio', 'img_16.jpg'),
-(17, 'pepe', 110.48, 'tondeggiante', 'piccolo', 'img_17.jpg'),
-(18, 'quercia', 150.65, 'squadrato', 'medio', 'img_18.jpg'),
-(19, 'quercia', 167.32, 'tondeggiante', 'medio', 'img_19.jpg'),
-(20, 'quercia', 189.98, 'tondeggiante', 'piccolo', 'img_20.jpg');
+(1, 'azalea', 49.95, 'squadrato', 'medio', '/img_1.jpg'),
+(2, 'azalea', 52.35, 'tondeggiante', 'medio', '/img_2.jpg'),
+(3, 'betulla', 83.48, 'tondeggiante', 'medio', '/img_3.jpg'),
+(4, 'carmona', 19.95, 'squadrato', 'piccolo', '/img_4.jpg'),
+(5, 'carmona', 25.95, 'tondeggiante', 'piccolo', '/img_5.jpg'),
+(6, 'ginepro', 179.68, 'squadrato', 'grande', '/img_6.jpg'),
+(7, 'ginepro', 119.95, 'tondeggiante', 'medio', '/img_7.jpg'),
+(8, 'ginepro', 145.24, 'tondeggiante', 'piccolo', '/img_8.jpg'),
+(9, 'ginseng', 30.81, 'squadrato', 'piccolo', '/img_9.jpg'),
+(10, 'ginseng', 60.37, 'tondeggiante', 'grande', '/img_10.jpg'),
+(11, 'ginseng', 19.94, 'tondeggiante', 'piccolo', '/img_11.jpg'),
+(12, 'melo', 85.12, 'tondeggiante', 'medio', '/img_12.jpg'),
+(13, 'melo', 101.01, 'tondeggiante', 'piccolo', '/img_13.jpg'),
+(14, 'olmo', 68.83, 'squadrato', 'medio', '/img_14.jpg'),
+(15, 'pepe', 76.59, 'squadrato', 'medio', '/img_15.jpg'),
+(16, 'pepe', 86.47, 'tondeggiante', 'medio', '/img_16.jpg'),
+(17, 'pepe', 110.48, 'tondeggiante', 'piccolo', '/img_17.jpg'),
+(18, 'quercia', 150.65, 'squadrato', 'medio', '/img_18.jpg'),
+(19, 'quercia', 167.32, 'tondeggiante', 'medio', '/img_19.jpg'),
+(20, 'quercia', 189.98, 'tondeggiante', 'piccolo', '/img_20.jpg');
 
 -- --------------------------------------------------------
 
