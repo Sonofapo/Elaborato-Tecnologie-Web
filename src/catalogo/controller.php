@@ -47,14 +47,17 @@
 				header("Location: index.php");
 			}
 			break;
-		case "update" or "add":
+		case "add":
+		case "update":
+			if (!in_array($UID, array_column($db->getVendors(), "id")))
+				die("Accesso non consentito");
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$vars["item"] = generate_product();
 				if ($_POST["id"])
 					$db->updateProduct($vars["item"]);
 				else
 					$vars["item"]["id"] = $db->getNextProductId();
-				$vars["item"]["path"] = "img_".$vars["item"]["id"].".jpg";
+				$vars["item"]["path"] = "/img_".$vars["item"]["id"].".jpg";
 				if (check_image("image", IMG_PATH."/img_".$vars["item"]["id"].".jpg")) {
 					$message = "Prodotto ".($_POST["id"] ? "modificato" : "aggiunto")." correttamente";
 					if (!$_POST["id"])
@@ -73,6 +76,16 @@
 					$vars["item"] = generate_product(true);
 				$content = get_include_contents("./src/catalogo/update.php");
 			}
+			break;
+		case "remove":
+			if (!in_array($UID, array_column($db->getVendors(), "id")))
+				die("Accesso non consentito");
+			$message = "Prodotto rimosso correttamente";
+			$id = $_GET["id"] ?? -1;
+			if ($db->removeProduct($id))
+				@unlink(IMG_PATH."/img_$id.jpg");
+			$vars["products"] = $db->getProducts();
+			$content = get_include_contents("./src/catalogo/view.php");
 			break;
 		default:
 			die("Pagina non disponibile.");

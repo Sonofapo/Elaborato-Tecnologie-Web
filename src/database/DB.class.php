@@ -12,9 +12,10 @@ class DB {
 		$q = $this->connection->prepare($statement);
 		if ($vars && $types)
 			$q->bind_param($types, ...$vars);
-		$q->execute();
+		$success = $q->execute();
 		if ($res = $q->get_result())
 			return $res->fetch_all(MYSQLI_ASSOC);
+		return $success;
 	}
 
 	public function subscribe($username, $password) {
@@ -111,6 +112,11 @@ class DB {
 		$query = "INSERT INTO products (id, name, price, size, shape, path) VALUES (?, ?, ?, ?, ?, ?)";
 		$this->query($query, [$o["id"], strtolower($o["name"]), $o["price"],
 			$o["size"], $o["shape"], $o["path"]], "isdsss");
+	}
+
+	public function removeProduct($productId) {
+		$query = "DELETE FROM products WHERE id = ?";
+		return $this->query($query, [$productId], "i");
 	}
 
 	public function getNextProductId() {
