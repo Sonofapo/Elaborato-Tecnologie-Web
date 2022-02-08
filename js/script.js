@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+	/** ANIMATIONS */
 	$("button#expand-menu").click(() => {
 		$("ul#menu").slideToggle(200);
 		$("span#notification-1").toggle();
@@ -9,12 +10,13 @@ $(document).ready(function() {
 
 	setTimeout(() => $("div.fade-me").slideUp(200), 3000);
 
-	$("input#slider").on("input", function() {
-		$("span#search-value").html($(this).val());
-	});
-
 	$("h2.header").click(function() {
 		$(this).toggleClass("selected");
+	});
+
+	/** INPUT CHECK AND VALIDATION */
+	$("input#slider").on("input", function() {
+		$("span#search-value").html($(this).val());
 	});
 
 	$("input.min-today").prop("min", new Date().toISOString().split("T")[0]);
@@ -32,15 +34,6 @@ $(document).ready(function() {
 			return value.replace(/[^0-9]/g, "").
 				replace(/\W/gi, '').trim();
 		});
-	});
-
-	$("span.clear-filter").click(function() {
-		let category = $(this).parent().prop("id").replace("filter", "search");
-		$("#"+category).find("input[type=checkbox]").each(function() {
-			$(this).prop("checked", false);
-		});
-		$("#"+category).find("input[type=range]").val("200");
-		$("form#search-f").submit();
 	});
 
 	/** CART */
@@ -88,6 +81,15 @@ $(document).ready(function() {
 
 	setCounter();
 
+	/** OTHERS */
+	$("span.clear-filter").click(function() {
+		let category = $(this).parent().prop("id").replace("filter", "search");
+		$("#"+category).find("input[type=checkbox]").each(function() {
+			$(this).prop("checked", false);
+		});
+		$("#"+category).find("input[type=range]").val("200");
+		$("form#search-f").submit();
+	});
 });
 
 function removeProduct(product) {

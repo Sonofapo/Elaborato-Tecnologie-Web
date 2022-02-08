@@ -1,9 +1,9 @@
 <?php echo get_include_contents("./src/templates/header.php") ?>
 <main>
 	<?php echo get_include_contents("./src/templates/prompt.php") ?>
-    <h3 class="text-center mt-3">
+    <h2 class="text-center mt-3">
 		<?php echo $vars["item"]["id"] ? "Modifica il" : "Aggiungi un" ?> prodotto
-	</h3>
+	</h2>
 	<div class="col-10 col-md-8 col-lg-6 col-xl-4
 		offset-1 offset-md-2 offset-lg-3 offset-xl-4">
 		<form action="index.php" method="post" enctype="multipart/form-data">
@@ -20,7 +20,7 @@
 			<div class="input-group mb-3">
 				<span class="input-group-text">€</span>
 				<input type="number" class="form-control" id="price" name="price"
-					pattern="^\d+(?:\.\d{1,2})?$" min="0.01" max="200.00" required step="0.01"
+					min="0.01" max="200.00" required step="0.01"
 					value="<?php echo $vars["item"]["price"] ?>" />
 			</div>
 
@@ -29,8 +29,8 @@
 				<?php  if (!$vars["item"]["id"]) echo "required" ?> />
 
 			<label for="size">Misura</label>
-			<select name="size" class="form-select mb-3" id="size" required>
-				<option disabled selected></option>
+			<select class="form-select mb-3" name="size" id="size" required>
+				<option disabled value="" <?php if (!$vars["item"]["size"]) echo "selected" ?>>seleziona</option>
 				<option value="piccolo" <?php echo $vars["item"]["size"] == "piccolo" ? "selected" : "" ?>>
 					piccolo
 				</option>
@@ -43,8 +43,8 @@
 			</select>
 
 			<label for="shape">Forma</label>
-			<select name="shape" class="form-select" id="shape">
-				<option disabled selected></option>
+			<select class="form-select mb-3" name="shape" id="shape" required>
+				<option disabled value="" <?php if (!$vars["item"]["size"]) echo "selected" ?>>seleziona</option>
 				<option value="tondeggiante" <?php echo $vars["item"]["shape"] == "tondeggiante" ? "selected" : "" ?>>
 					tondeggiante
 				</option>

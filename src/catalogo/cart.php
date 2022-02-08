@@ -3,7 +3,7 @@
 	<section>
 		<?php if (count($vars["products"])) : ?>
 		<div id="sec-header">
-			<h3>Il tuo carrello</h3>
+			<h2>Il tuo carrello</h2>
 			<div>
 				<button class="btn btn-danger" id="empty-cart" title="svuota carrello">Svuota</button>
 			</div>

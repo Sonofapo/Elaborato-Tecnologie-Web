@@ -1,5 +1,4 @@
 <?php echo get_include_contents("./src/templates/header.php") ?>
-<!-----------------------------------------------------------FOOTER DIVERSO(????)------------------------------------------------------------------>
 <main>
 	<div id="profile" class="container">
 		<section id="alerts">
