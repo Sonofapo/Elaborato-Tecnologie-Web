@@ -31,5 +31,5 @@ Il sito si appoggia su un database. Per fornire un struttura funzionante, il fil
 - Un accesso con username "cliente" e password "cliente" che simula l'accesso come compratore
 - Un accesso con username "venditore" e password "venditore" che simula l'accesso come venditore
 - Un catalogo di 20 prodotti
-- Una carta di pagamento associata a "utente"
-- Un ordine eseguito da "utente" con diversi prodotti in diverse quantità
+- Una carta di pagamento associata a "cliente"
+- Un ordine eseguito da "cliente" con diversi prodotti in diverse quantità
