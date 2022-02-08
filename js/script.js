@@ -14,6 +14,23 @@ $(document).ready(function() {
 		$(this).toggleClass("selected");
 	});
 
+	$("li.hover-click").click(function() {
+		let checkbox = $(this).find("input[type=checkbox]");
+		let value = !checkbox.is(":checked");
+		checkbox.prop("checked", value);
+		if (value)
+			$(this).find("label").addClass("checked");
+		else
+			$(this).find("label").removeClass("checked");
+	});
+
+	$("input[type=checkbox]").each(function() {
+		if ($(this).is(":checked"))
+			$(this).siblings("label").addClass("checked");
+		else
+			$(this).siblings("label").removeClass("checked");
+	});
+
 	/** INPUT CHECK AND VALIDATION */
 	$("input#slider").on("input", function() {
 		$("span#search-value").html($(this).val());

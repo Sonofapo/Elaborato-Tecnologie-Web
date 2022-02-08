@@ -6,22 +6,6 @@
 		</div>
 		<div id="accordion">
 			<?php echo get_include_contents("./src/templates/filters.php") ?>
-			<section>
-				<h2 class="header">
-					<a class="collapsed" data-bs-toggle="collapse" href="#price-search" title="price">Prezzo</a>
-				</h2>
-				<div id="price-search" class="collapse" data-bs-parent="#accordion">
-					<ul class="body">
-						<li>
-							<input form="search-f" type="range" name="price" id="slider"
-								min="1" max="200" value="<?php echo $vars["price"] ?? "200" ?>" />
-							<label for="slider">Prezzo max:
-								<span id="search-value"><?php echo $vars["price"] ?? "200" ?>&euro;</span>
-							</label>
-						</li>
-					</ul>
-				</div>
-			</section>
 		</div>
 		<form action="index.php" method="post" id="search-f">
 			<input type="hidden" name="action" value="catalogo">
@@ -41,19 +25,19 @@
 			<span class="bold">Filtri</span>
 			<?php if (isset($vars["filters"]["shape"]["text"])) : ?>
 			<div id="shape-filter">
-				<span class="clear-filter">&times;</span>
+				<span class="clear-filter" title="rimuovi filtro forma">&times;</span>
 				Forma: <?php echo $vars["filters"]["shape"]["text"] ?>
 			</div>
 			<?php endif ?>
 			<?php if (isset($vars["filters"]["size"]["text"])) : ?>
 			<div id="size-filter">
-				<span class="clear-filter">&times;</span>
+				<span class="clear-filter" title="rimuovi filtro misura">&times;</span>
 				Misura: <?php echo $vars["filters"]["size"]["text"] ?>
 			</div>
 			<?php endif ?>
 			<?php if (isset($vars["price"])) : ?>
 			<div id="price-filter">
-				<span class="clear-filter">&times;</span>
+				<span class="clear-filter" title="rimuovi filtro prezzo">&times;</span>
 				Prezzo max: <?php echo $vars["price"] ?>&euro;
 			</div>
 			<?php endif ?>
