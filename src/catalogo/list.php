@@ -4,8 +4,10 @@
 	<div class="product-card">
 		<div class="product-title bold">
 			<?php if ($vars["isVendor"]): ?>
-			<a href="?action=catalogo&mode=remove&id=<?php echo $product["id"] ?>"
-				class="delete-product" title="rimuovi prodotto"><span>&times;</span></a>			
+				<a href="#confirm-delete" class="delete-product" data-bs-toggle="modal" 
+					id="<?php echo $product["id"] ?>">
+					<span>&times;</span>
+				</a>
 			<?php endif ?>
 			<?php echo ucfirst($product["name"]) ?>
 		</div>
@@ -54,3 +56,23 @@
 	</div>
 	<?php endforeach ?>
 </div>
+<?php if ($vars["isVendor"]): ?>
+<div class="modal" id="confirm-delete">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				Rimuovere il prodotto?
+				<form id="delete-form" action="index.php" method="post">
+					<input type="hidden" name="action" value="catalogo" />
+					<input type="hidden" name="mode" value="remove" />
+					<input type="hidden" name="id" value="" id="delete-id" />
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Annulla</button>
+				<button type="submit" class="btn btn-danger btn-sm" form="delete-form">Rimuovi</button>
+			</div>
+		</div>
+	</div>
+</div>
+<?php endif ?>

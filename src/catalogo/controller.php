@@ -84,10 +84,10 @@
 		case "remove":
 			if (!in_array($UID, array_column($db->getVendors(), "id")))
 				die("Accesso non consentito");
+			$id = $_POST["id"] ?? -1;
+			$db->removeProduct($id);
+			@unlink(IMG_PATH."/img_$id.jpg");
 			$message = "Prodotto rimosso correttamente";
-			$id = $_GET["id"] ?? -1;
-			if ($db->removeProduct($id))
-				@unlink(IMG_PATH."/img_$id.jpg");
 			$vars["products"] = $db->getProducts();
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;
