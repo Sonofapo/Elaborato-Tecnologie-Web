@@ -75,63 +75,92 @@ main section h3, main section h2 {
 }
 
 /********** PRODUCT LIST ***********/
-div#product-list {
-	padding: 0 10px;
+.product-list {
+	width: 100%;
 }
 
-div.product-card {
-	margin-bottom: 10px;
-	border-radius: 2px;
+.bold {
+	font-weight: bold;
+}
+
+.product-card {
+	padding: 10px;
+	margin: 10px;
+	width: calc(100% - 20px);
 	background-color: rgba(199, 199, 199, 0.452);
+	border-radius: 2px;
+	border: solid 1px rgba(199, 199, 199);
 }
 
-div.product-card div {
-	display: inline-block;
-	vertical-align: middle;
+.product-title {
+	margin-bottom: 10px;
+	text-align: center;
+	font-size: 26px;
+	line-height: 26px;
+	position: relative;
 }
 
-div.product-img {
-	height: 120px;
-	width: 120px;
-	margin: 5px;
+.product-body {
+	display: flex;
 }
 
-div.product-img img {
-	max-height: 100%;
+.product-image {
+	margin-right: 10px;
+	flex-basis: 150px;
+	height: 150px;
+}
+
+.product-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: scale-down;
 	border-radius: 2px;
 }
 
-div.product-info {
-	width: calc(100% - 140px);
-	height: 100%;
-	padding-left: 5px;
+.product-data {
+	flex: calc(100% - 160px);
+	display: flex;
+	flex-direction: column;
 }
 
-div.line {
-	width: 110px !important;
-	display: inline-flex !important;
+.product-price, .product-buy {
+	flex-grow: 0;
 }
 
-div.product-info p {
-	margin: 0;
+.product-info {
+	padding-top: 10px;
+	flex-grow: 1;
 }
 
-div.product-info p:first-of-type {
-	font-size: larger;
+.product-info span {
+	display: block;
 }
 
-div.product-info div:first-child {
-	margin-bottom: 10px;
+.product-info span:last-child {
+	font-weight: 500;
 }
 
-div.product-info div:last-child {
-	float: right;
+.product-buy {
+	text-align: right;
 }
 
-div.product-info label, div.product-info a,
-span.button-text, div.product-info button,
-button#empty-cart {
-	font-size: small;
+.product-price input {
+	width: 75px;
+}
+
+.product-price {
+	padding-top: 5px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.delete-product {
+	position: absolute;
+	right: 0;
+	top: -5px;
+	cursor: pointer;
 }
 
 /********** ORDER LIST ***********/
@@ -195,32 +224,14 @@ section#alerts li div.date {
 }
 
 @media screen and (min-width: 768px) {
-	div#product-list {
-		margin: 0 30px;
-		text-align: center;
+	.product-list {
+		display: inline-flex;
+		flex-wrap: wrap;
+		justify-content: center;
 	}
 
-	div.product-img {
-		height: 170px;
-		width: 170px;
-	}
-
-	div.product-card {
-		min-width: 400px;
-		text-align: left;
-	}
-
-	div.product-info {
-		width: calc(100% - 190px);
-		padding: 0;
-	}
-
-	div.product-info div:first-child {
-		margin-bottom: 15px;
-	}
-
-	div#product-list div {
-		display: inline-block;
+	.product-card {
+		max-width: 400px;
 	}
 
 	section#orders div {

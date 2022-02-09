@@ -1,47 +1,52 @@
 <?php echo get_include_contents("./src/templates/header.php") ?>
 <main>
 	<section>
-		<?php if (count($vars["products"])) : ?>
+		<?php if (count($vars["products"])): ?>
 		<div id="sec-header">
 			<h2>Il tuo carrello</h2>
 			<div>
 				<button class="btn btn-danger" id="empty-cart" title="svuota carrello">Svuota</button>
 			</div>
 		</div>
-		<div id="product-list">
+		<div class="product-list">
 			<?php $total = 0 ?>
-			<?php foreach ($vars["products"] as $product) : ?>
+			<?php foreach ($vars["products"] as $product): ?>
 			<?php $total += $product["price"] * $product["quantity"] ?>
 			<div class="product-card">
-				<div class="product-img">
-					<img src="<?php echo IMG_PATH.$product["path"] ?>"
-						alt="<?php echo $product["name"] . "-" . $product["size"] . "-" . $product["shape"] ?>" />
+				<div class="product-title bold">
+					<?php echo ucfirst($product["name"]) ?>
 				</div>
-				<div class="product-info">
-					<div class="d-flex justify-content-between align-items-center">
-						<div>
-							<p class="bold"><?php echo ucfirst($product["name"]) ?></p>
-							<p><?php echo $product["price"] * $product["quantity"] ?>&euro;</p>
-						</div>
-						<div class="input-group line">
-							<label class="input-group-text"
-								for="qty-<?php echo $product["id"] ?>">Qta</label>
-							<input class="form-control update-quantity" type="number" name="quantity"
-								min="1" max="100" value="<?php echo  $product["quantity"] ?>"
-								id="qty-<?php echo $product["id"] ?>" />
-						</div>
+				<div class="product-body">
+					<div class="product-image">
+						<img src="<?php echo IMG_PATH.$product["path"] ?>"
+							alt="<?php echo $product["name"]."-".$product["size"]."-".$product["shape"] ?>" />
 					</div>
-					<div>
-						<button class="remove-from-cart btn btn-danger" title="rimouvi prodotto"
-							id="prod-<?php echo $product["id"] ?>">Rimuovi</button>
+					<div class="product-data">
+						<div class="product-price">
+							<span><?php echo $product["price"] ?>&euro;</span>
+							<span>
+								<input class="form-control update-quantity" type="number" min="1" max="100"
+									value="<?php echo  $product["quantity"] ?>" title="quantità prodotto"
+									id="quantity-prod-<?php echo $product["id"] ?>" />
+							</span>
+						</div>
+						<div class="product-info">
+							<span>Caratteristiche:</span>
+							<span><?php echo $product["size"]." - ".$product["shape"] ?></span>
+						</div>
+						<div class="product-buy">
+							<button class="btn btn-danger btn-sm remove-from-cart" title="rimouvi prodotto"
+								id="prod-<?php echo $product["id"] ?>">Rimuovi</button>
+						</div>
 					</div>
 				</div>
 			</div>
 			<?php endforeach ?>
 		</div>
 		<div class="text-center mt-4">
-			<p>Totale: <?php echo $total ?>&euro;</p>
-			<a class="btn btn-success" href="?action=catalogo&mode=purchase" title="procedi al pagamento">Procedi al pagamento</a>
+			<p>Totale: <span class="bold"><?php echo $total ?>&euro;</span></p>
+			<a href="?action=catalogo&mode=purchase" class="btn btn-success" 
+				title="procedi al pagamento">Procedi al pagamento</a>
 		</div>
 		<?php else: ?>
 		<h2>Il tuo carrello è vuoto</h2>

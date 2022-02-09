@@ -55,7 +55,7 @@ $(document).ready(function() {
 
 	/** CART */
 	$("button.add-to-cart").click(function() {
-		let input = $(this).parent().siblings().find("input.add-quantity");
+		let input = $(this).parent().siblings(".product-price").find(".add-quantity");
 		let quantity = input.val();
 		if (quantity > 0) {
 			if (insertProduct($(this).attr("id"), quantity))
@@ -77,7 +77,7 @@ $(document).ready(function() {
 		$(this).change(function() {
 			let quantity = $(this).val();
 			if (quantity > 0) {
-				let name = "prod-" + $(this).attr("id").split("-")[1];
+				let name = $(this).attr("id").slice("quantity-".length);
 				if (insertProduct(name, Number(quantity) - Number(prev)))
 					location.reload();
 				else {
