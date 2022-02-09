@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 07, 2022 alle 18:43
+-- Creato il: Feb 09, 2022 alle 09:54
 -- Versione del server: 10.5.12-MariaDB-0+deb11u1
 -- Versione PHP: 8.1.2
 
@@ -108,6 +108,7 @@ CREATE TABLE `products` (
   `price` float NOT NULL,
   `shape` varchar(20) NOT NULL,
   `size` varchar(10) NOT NULL,
+  `availability` int(11) NOT NULL,
   `path` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -115,27 +116,27 @@ CREATE TABLE `products` (
 -- Dump dei dati per la tabella `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `shape`, `size`, `path`) VALUES
-(1, 'azalea', 49.95, 'squadrato', 'medio', '/img_1.jpg'),
-(2, 'azalea', 52.35, 'tondeggiante', 'medio', '/img_2.jpg'),
-(3, 'betulla', 83.48, 'tondeggiante', 'medio', '/img_3.jpg'),
-(4, 'carmona', 19.95, 'squadrato', 'piccolo', '/img_4.jpg'),
-(5, 'carmona', 25.95, 'tondeggiante', 'piccolo', '/img_5.jpg'),
-(6, 'ginepro', 179.68, 'squadrato', 'grande', '/img_6.jpg'),
-(7, 'ginepro', 119.95, 'tondeggiante', 'medio', '/img_7.jpg'),
-(8, 'ginepro', 145.24, 'tondeggiante', 'piccolo', '/img_8.jpg'),
-(9, 'ginseng', 30.81, 'squadrato', 'piccolo', '/img_9.jpg'),
-(10, 'ginseng', 60.37, 'tondeggiante', 'grande', '/img_10.jpg'),
-(11, 'ginseng', 19.94, 'tondeggiante', 'piccolo', '/img_11.jpg'),
-(12, 'melo', 85.12, 'tondeggiante', 'medio', '/img_12.jpg'),
-(13, 'melo', 101.01, 'tondeggiante', 'piccolo', '/img_13.jpg'),
-(14, 'olmo', 68.83, 'squadrato', 'medio', '/img_14.jpg'),
-(15, 'pepe', 76.59, 'squadrato', 'medio', '/img_15.jpg'),
-(16, 'pepe', 86.47, 'tondeggiante', 'medio', '/img_16.jpg'),
-(17, 'pepe', 110.48, 'tondeggiante', 'piccolo', '/img_17.jpg'),
-(18, 'quercia', 150.65, 'squadrato', 'medio', '/img_18.jpg'),
-(19, 'quercia', 167.32, 'tondeggiante', 'medio', '/img_19.jpg'),
-(20, 'quercia', 189.98, 'tondeggiante', 'piccolo', '/img_20.jpg');
+INSERT INTO `products` (`id`, `name`, `price`, `shape`, `size`, `availability`, `path`) VALUES
+(1, 'azalea', 49.95, 'squadrato', 'medio', 50, '/img_1.jpg'),
+(2, 'azalea', 52.35, 'tondeggiante', 'medio', 26, '/img_2.jpg'),
+(3, 'betulla', 83.48, 'tondeggiante', 'medio', 82, '/img_3.jpg'),
+(4, 'carmona', 19.95, 'squadrato', 'piccolo', 28, '/img_4.jpg'),
+(5, 'carmona', 25.95, 'tondeggiante', 'piccolo', 0, '/img_5.jpg'),
+(6, 'ginepro', 179.68, 'squadrato', 'grande', 91, '/img_6.jpg'),
+(7, 'ginepro', 119.95, 'tondeggiante', 'medio', 67, '/img_7.jpg'),
+(8, 'ginepro', 145.24, 'tondeggiante', 'piccolo', 64, '/img_8.jpg'),
+(9, 'ginseng', 30.81, 'squadrato', 'piccolo', 17, '/img_9.jpg'),
+(10, 'ginseng', 60.37, 'tondeggiante', 'grande', 95, '/img_10.jpg'),
+(11, 'ginseng', 19.94, 'tondeggiante', 'piccolo', 20, '/img_11.jpg'),
+(12, 'melo', 85.12, 'tondeggiante', 'medio', 16, '/img_12.jpg'),
+(13, 'melo', 101.01, 'tondeggiante', 'piccolo', 22, '/img_13.jpg'),
+(14, 'olmo', 68.83, 'squadrato', 'medio', 58, '/img_14.jpg'),
+(15, 'pepe', 76.59, 'squadrato', 'medio', 26, '/img_15.jpg'),
+(16, 'pepe', 86.47, 'tondeggiante', 'medio', 53, '/img_16.jpg'),
+(17, 'pepe', 110.48, 'tondeggiante', 'piccolo', 86, '/img_17.jpg'),
+(18, 'quercia', 150.65, 'squadrato', 'medio', 72, '/img_18.jpg'),
+(19, 'quercia', 167.32, 'tondeggiante', 'medio', 2, '/img_19.jpg'),
+(20, 'quercia', 189.98, 'tondeggiante', 'piccolo', 95, '/img_20.jpg');
 
 -- --------------------------------------------------------
 
