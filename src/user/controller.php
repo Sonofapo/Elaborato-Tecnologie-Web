@@ -5,7 +5,7 @@ switch ($vars["mode"]) {
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$usr = $_POST["username"];
 			$psw = $_POST["password"];
-			if (($_uid = $db->login($usr, $psw)) !== false) {			
+			if (($_uid = $db->login($usr, $psw)) !== false) {
 				$_SESSION["uid"] = $_uid;
 				header("Location: index.php");
 			} else {
@@ -45,7 +45,18 @@ switch ($vars["mode"]) {
 					$c["pan"] = str_replace(' ', '', $c["pan"]);
 					$db->addCard($c["name"], $c["pan"], $c["cvv"], $c["date"], $UID);
 				}
-				$orderId = $db->addOrder(getCart($UID), $UID);
+				# aggiornamento quantità resiudie nel catalogo
+				$cart = getCart($UID);
+				foreach ($db->getProducts(array_keys($cart)) as $p) {
+					$_id = $p["id"];
+					$_name = $p["name"];
+					$db->setAvailability($_id, $p["availability"] - $cart[$_id]);
+					if ($p["availability"] - $cart[$_id] < 1)
+						foreach ($db->getVendors() as $vendor)
+							$db->addMessage($vendor, "Il prodotto #$_id ($_name) è terminato");
+				}
+				# creazione dell'ordine
+				$orderId = $db->addOrder($cart, $UID);
 				$db->addMessage($UID, "L'ordine #$orderId è stato registrato correttamente");
 				foreach ($db->getVendors() as $vendor)
 					$db->addMessage($vendor, "L'utente '".$db->getUsernameById($UID)."' ha effettuato l'ordine #$orderId");

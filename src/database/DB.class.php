@@ -51,7 +51,7 @@ class DB {
 	}
 
 	public function getProducts($ids = null) {
-		$query = "SELECT id, name, price, shape, size, path FROM products";
+		$query = "SELECT id, name, price, shape, size, availability, path FROM products";
 		if ($ids === null) {
 			return $this->query($query);
 		} else if (empty($ids)) {
@@ -103,15 +103,20 @@ class DB {
 	}
 
 	public function updateProduct($o) {
-		$query = "UPDATE products SET name = ?, price = ?, size = ?, shape = ? WHERE id = ?";
+		$query = "UPDATE products SET name = ?, price = ?, size = ?, shape = ?, availability = ? WHERE id = ?";
 		$this->query($query, [strtolower($o["name"]), $o["price"], $o["size"],
-			$o["shape"], $o["id"]], "sdssi");
+			$o["shape"], $o["availability"], $o["id"]], "sdssii");
 	}
 
 	public function addProduct($o) {
-		$query = "INSERT INTO products (id, name, price, size, shape, path) VALUES (?, ?, ?, ?, ?, ?)";
+		$query = "INSERT INTO products (id, name, price, size, shape, availability, path) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		$this->query($query, [$o["id"], strtolower($o["name"]), $o["price"],
-			$o["size"], $o["shape"], $o["path"]], "isdsss");
+			$o["size"], $o["shape"], $o["availability"], $o["path"]], "isdssis");
+	}
+
+	public function setAvailability($productId, $availability) {
+		$query = "UPDATE products SET availability = ? WHERE id = ?";
+		return $this->query($query, [$availability, $productId], "ii");
 	}
 
 	public function removeProduct($productId) {

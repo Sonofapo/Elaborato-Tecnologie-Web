@@ -20,9 +20,14 @@
 			<div class="input-group mb-3">
 				<span class="input-group-text">€</span>
 				<input type="number" class="form-control" id="price" name="price"
-					min="0.01" max="200.00" required step="0.01"
+					min="0.01" max="200.00" step="0.01" required
 					value="<?php echo $vars["item"]["price"] ?>" />
 			</div>
+
+			
+			<label for="availability">Disponibilità</label>
+			<input type="number" class="form-control mb-3" id="availability" name="availability"
+				min="0" max="100" step="1" required value="<?php echo $vars["item"]["availability"] ?>" />
 
 			<label for="image">Immagine</label>
 			<input type="file" class="form-control mb-3" id="image" name="image" accept=".jpg"
