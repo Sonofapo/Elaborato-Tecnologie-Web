@@ -7,7 +7,7 @@ $db = new DB();
 # abilitazione della sessione
 session_start();
 
-# richiesta di non mantenere cache
+# richiesta per non mantenere cache
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
@@ -73,7 +73,7 @@ function check_image($name, $destination) {
 function getCart($uid) {
 	if (isset($_COOKIE[$uid]) && $list = json_decode($_COOKIE[$uid], true)) {
 		if (count($list["products"])) {
-			$ids = array_column($list["products"], "name");
+			$ids = array_column($list["products"], "productId");
 			$quantities = array_column($list["products"], "quantity");
 			return array_combine($ids, $quantities);
 		}

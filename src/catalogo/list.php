@@ -1,5 +1,6 @@
 <div class="product-list">
 	<?php foreach ($vars["products"] as $product): ?>
+	<?php $av = $product["availability"] ?>
 	<div class="product-card">
 		<div class="product-title bold">
 			<?php if ($vars["isVendor"]): ?>
@@ -18,11 +19,11 @@
 					<span>
 						<?php if ($vars["isVendor"]): ?>
 						<input class="form-control availability" type="number" min="0" 
-							value="<?php echo $product["availability"] ?>" title="quantità prodotto" />
+							value="<?php echo $av ?>" title="disponibilità" />
 						<?php else: ?>
 						<input class="form-control add-quantity" type="number" min="1"
-							max="<?php echo $product["availability"] ?>"
-							value="<?php echo $product["availability"]  > 0 ?>" title="quantità prodotto" />
+							max="<?php echo $av ?>" <?php if (!$av) echo "disabled" ?>
+							value="<?php echo $av > 0 ?>" title="disponibilità" />
 						<?php endif ?>
 					</span>
 				</div>
@@ -35,8 +36,12 @@
 					<a href="?action=catalogo&mode=update&id=<?php echo $product["id"] ?>"
 						class="btn btn-primary btn-sm" title="modifica">Modifica</a>
 					<?php else: ?>
-					<button class="btn btn-primary btn-sm add-to-cart" title="aggiungi al carrello">
-						<span class="button-text">Agg. al carrello</span>
+					<span class="product-availability">Disp. <?php echo $av ?></span>
+					<button class="btn btn-<?php echo $av ? "primary" : "secondary" ?> btn-sm add-to-cart"
+						<?php if (!$av) echo "disabled" ?> title="aggiungi al carrello">
+						<span class="button-text">
+							<?php echo $av ? "Agg. al carrello" : "Non disponibile" ?>
+						</span>
 						<span class="added"><span class="fa fa-check"></span></span>
 						<span class="cart-ico fa fa-shopping-cart"></span>
 					</button>

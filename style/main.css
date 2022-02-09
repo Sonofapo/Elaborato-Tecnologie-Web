@@ -136,12 +136,19 @@ main section h3, main section h2 {
 	display: block;
 }
 
-.product-info span:last-child {
+.product-info span:nth-child(2) {
 	font-weight: 500;
 }
 
 .product-buy {
-	text-align: right;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.product-availability {
+	font-size: 12px;
+	font-style: italic;
 }
 
 .product-price input {

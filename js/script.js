@@ -41,57 +41,40 @@ $(document).ready(function() {
 	$("input#pan").on("input", function () {
 		$(this).val(function (index, value) {
 			return value.replace(/[^0-9]/g, "").
-				replace(/\W/gi, '').
-				replace(/(.{4})/g, '$1 ').trim();
+				replace(/\W/gi, "").replace(/(.{4})/g, "$1 ").trim();
 		});
 	});
 
 	$("input#cvv").on("input", function() {
 		$(this).val(function (index, value) {
-			return value.replace(/[^0-9]/g, "").
-				replace(/\W/gi, '').trim();
+			return value.replace(/[^0-9]/g, "").replace(/\W/gi, "").trim();
 		});
 	});
 
 	/** CART */
 	$("button.add-to-cart").click(function() {
 		let input = $(this).parent().siblings(".product-price").find(".add-quantity");
-		let quantity = input.val();
-		if (quantity > 0 && quantity <= input.attr("max")) {
-			if (insertProduct($(this).parents(".product-data").attr("id"), quantity))
-				toggleAnimation($(this), "clicked", 3000);
-			else
-				displayError("Puoi inserire al massimo 100 oggetti");
-		} else if (quantity > input.attr("max"))
-			displayError("Disponibilità massima: " + input.attr("max"));
-		else
-			displayError("Inserire un valore valido");
+		let quantity = parseInt(input.val());
+		let max = parseInt(input.attr("max"));
+		if (insertProduct(productId($(this)), quantity, max))
+			toggleAnimation($(this), "clicked", 3000);
 		input.val(1);
 	});
 
 	$("button.remove-from-cart").click(function() {
-		removeProduct($(this).attr("id"));
+		removeProduct(productId($(this)));
 		location.reload();
 	});
 
 	$("input.update-quantity").each(function() {
-		let prev = $(this).val();
+		let prev = parseInt($(this).val());
+		let max = parseInt($(this).attr("max"));
 		$(this).change(function() {
-			let quantity = $(this).val();
-			if (quantity > 0 && quantity <= $(this).attr("max")) {
-				let name = $(this).parents(".product-data").attr("id");
-				if (insertProduct(name, Number(quantity) - Number(prev)))
-					location.reload();
-				else {
-					displayError("Puoi inserire al massimo 100 oggetti");
-					$(this).val(prev);
-				}
-			} else if (quantity > $(this).attr("max"))
-				displayError("Disponibilità massima: " + $(this).attr("max"));
-			else {
-				displayError("Inserire un valore valido");
+			let quantity = parseInt($(this).val());
+			if (insertProduct(productId($(this)), quantity, max, true))
+				location.reload();
+			else
 				$(this).val(prev);
-			}
 		});
 	});
 
@@ -99,8 +82,6 @@ $(document).ready(function() {
 		deleteCookie(userId());
 		location.reload();
 	});
-
-	setCounter();
 
 	/** OTHERS */
 	$("span.clear-filter").click(function() {
@@ -110,15 +91,6 @@ $(document).ready(function() {
 		});
 		$("#"+category).find("input[type=range]").val("200");
 		$("form#search-f").submit();
-	});
-
-	$("button.add-to-cart").each(function() {
-		let input = $(this).parent().siblings(".product-price").find(".add-quantity");
-		if (input.val() == 0) {
-			input.attr("disabled", true);
-			$(this).removeClass("btn-primary").addClass("btn-secondary").attr("disabled", true)
-				.find(".button-text").text("Non disponibile");
-		}
 	});
 
 	$("input.availability").each(function() {
@@ -140,26 +112,35 @@ $(document).ready(function() {
 		});
 	});
 
-
+	setCounter();
 });
 
-function removeProduct(product) {
+/** CART */
+function removeProduct(productId) {
 	let cart = getProducts(userId());
-	cart = cart.filter(e => e["name"] != product);
+	cart = cart.filter(e => e["productId"] != productId);
 	setCookie(userId(), JSON.stringify({ "products" : cart }), 1);
 }
 
-function insertProduct(product, quantity) {
+function insertProduct(product, quantity, max, update = false) {
 	let pass = false;
 	let cart = getProducts(userId());
-	let index = cart.findIndex(e => e["name"] == product);
-	quantity = Number(quantity);
-	if (index < 0 && countProducts(cart) + quantity <= 100) {
-		cart.push({ "name": product, "quantity": quantity });
-		pass = true;
+	let index = cart.findIndex(e => e["productId"] == product);
+	let cart_quantity = index > -1 && !update ? cart[index]["quantity"] : 0;
+	if (quantity + cart_quantity > max) {
+		displayError("Disponibilità massima: " + max);
+	} else if (quantity < 1) {
+		displayError("Inserire una quantità valida");
 	} else if (countProducts(cart) + quantity <= 100) {
-		cart[index]["quantity"] += quantity;
+		if (index < 0)
+			cart.push({ "productId": product, "quantity": quantity });
+		else if (update)
+			cart[index]["quantity"] = quantity;
+		else
+			cart[index]["quantity"] += quantity;
 		pass = true;
+	} else {
+		displayError("Puoi inserire massimo 100 prodotti nel carrello");
 	}
 	if (pass) {
 		setCookie(userId(), JSON.stringify({ "products" : cart }), 1);
@@ -170,7 +151,7 @@ function insertProduct(product, quantity) {
 
 function countProducts(cart) {
 	let counter = 0;
-	cart.forEach(e => counter += Number(e["quantity"]));
+	cart.forEach(e => counter += parseInt(e["quantity"]));
 	return counter;
 }
 
@@ -184,9 +165,22 @@ function getProducts(userId) {
 	return [];
 }
 
+/** COOKIES */
 function setCookie(name, value, days) {
 	const d = new Date((new Date).getTime + (days * 86400000));
 	document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=/`;
+}
+
+function deleteCookie(name) {
+	document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+/** ANIMATIONS */
+function toggleAnimation(object, name, timeout) {
+	object.addClass(name);
+	setTimeout(function() {
+		object.removeClass(name);
+	}, timeout);
 }
 
 function setCounter() {
@@ -200,19 +194,13 @@ function setCounter() {
 	}
 }
 
+/** UTILITY FUNCTIONS */
 function userId() {
 	return $("span#user-id").text();
 }
 
-function deleteCookie(name) {
-	document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-}
-
-function toggleAnimation(object, name, timeout) {
-	object.addClass(name);
-	setTimeout(function() {
-		object.removeClass(name);
-	}, timeout);
+function productId(element) {
+	return element.parents(".product-data").attr("id");
 }
 
 function displayError(message) {

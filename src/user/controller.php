@@ -45,7 +45,12 @@ switch ($vars["mode"]) {
 					$c["pan"] = str_replace(' ', '', $c["pan"]);
 					$db->addCard($c["name"], $c["pan"], $c["cvv"], $c["date"], $UID);
 				}
-				$orderId = $db->addOrder(getCart($UID), $UID);
+				# aggiornamento quantità resiudie nel catalogo
+				$cart = getCart($UID);
+				foreach ($db->getProducts(array_keys($cart)) as $p)
+					$db->setAvailability($p["id"], $p["availability"] - $cart[$p["id"]]);
+				# creazione dell'ordine
+				$orderId = $db->addOrder($cart, $UID);
 				$db->addMessage($UID, "L'ordine #$orderId è stato registrato correttamente");
 				foreach ($db->getVendors() as $vendor)
 					$db->addMessage($vendor, "L'utente '".$db->getUsernameById($UID)."' ha effettuato l'ordine #$orderId");
