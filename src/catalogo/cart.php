@@ -21,11 +21,12 @@
 						<img src="<?php echo IMG_PATH.$product["path"] ?>"
 							alt="<?php echo $product["name"]."-".$product["size"]."-".$product["shape"] ?>" />
 					</div>
-					<div class="product-data">
+					<div class="product-data" id="<?php echo $product["id"] ?>">
 						<div class="product-price">
 							<span><?php echo $product["price"] ?>&euro;</span>
 							<span>
-								<input class="form-control update-quantity" type="number" min="1" max="100"
+								<input class="form-control update-quantity" type="number" min="1" 
+									max="<?php echo $product["availability"] ?>"
 									value="<?php echo  $product["quantity"] ?>" title="quantità prodotto"
 									id="quantity-prod-<?php echo $product["id"] ?>" />
 							</span>

@@ -77,6 +77,10 @@
 				$content = get_include_contents("./src/catalogo/update.php");
 			}
 			break;
+		case "availability":
+			if ($data = json_decode(file_get_contents("php://input"), true))
+				return $db->setAvailability($data["id"], $data["availability"]);
+			header("HTTP/1.1 500 Internal Server Error");
 		case "remove":
 			if (!in_array($UID, array_column($db->getVendors(), "id")))
 				die("Accesso non consentito");

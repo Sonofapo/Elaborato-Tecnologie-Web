@@ -26,10 +26,6 @@ function get_include_contents(string $file) {
 	throw new ErrorException("$file not found");
 }
 
-function split_id($id) {
-	return explode("-", $id)[1];
-}
-
 function generate_order_list() {
 	global $UID, $db;
 	$orders = $db->getOrders($UID);
@@ -62,10 +58,10 @@ function generate_filters() {
 
 function generate_product($isEmpty = false) {
 	if ($isEmpty)
-		return array_fill_keys(["id", "name", "price", "size", "shape", "path"], "");
+		return array_fill_keys(["id", "name", "price", "size", "shape", "availability", "path"], "");
 	else
 		return ["id" => $_POST["id"], "name" => $_POST["name"], "price" => $_POST["price"],
-			"size" => $_POST["size"], "shape" => $_POST["shape"]];
+			"size" => $_POST["size"], "shape" => $_POST["shape"], "availability" => $_POST["availability"]];
 }
 
 function check_image($name, $destination) {
@@ -77,7 +73,7 @@ function check_image($name, $destination) {
 function getCart($uid) {
 	if (isset($_COOKIE[$uid]) && $list = json_decode($_COOKIE[$uid], true)) {
 		if (count($list["products"])) {
-			$ids = array_map("split_id", array_column($list["products"], "name"));
+			$ids = array_column($list["products"], "name");
 			$quantities = array_column($list["products"], "quantity");
 			return array_combine($ids, $quantities);
 		}

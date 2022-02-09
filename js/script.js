@@ -57,12 +57,14 @@ $(document).ready(function() {
 	$("button.add-to-cart").click(function() {
 		let input = $(this).parent().siblings(".product-price").find(".add-quantity");
 		let quantity = input.val();
-		if (quantity > 0) {
-			if (insertProduct($(this).attr("id"), quantity))
+		if (quantity > 0 && quantity <= input.attr("max")) {
+			if (insertProduct($(this).parents(".product-data").attr("id"), quantity))
 				toggleAnimation($(this), "clicked", 3000);
 			else
 				displayError("Puoi inserire al massimo 100 oggetti");
-		} else
+		} else if (quantity > input.attr("max"))
+			displayError("Disponibilità massima: " + input.attr("max"));
+		else
 			displayError("Inserire un valore valido");
 		input.val(1);
 	});
@@ -76,15 +78,17 @@ $(document).ready(function() {
 		let prev = $(this).val();
 		$(this).change(function() {
 			let quantity = $(this).val();
-			if (quantity > 0) {
-				let name = $(this).attr("id").slice("quantity-".length);
+			if (quantity > 0 && quantity <= $(this).attr("max")) {
+				let name = $(this).parents(".product-data").attr("id");
 				if (insertProduct(name, Number(quantity) - Number(prev)))
 					location.reload();
 				else {
 					displayError("Puoi inserire al massimo 100 oggetti");
 					$(this).val(prev);
 				}
-			} else {
+			} else if (quantity > $(this).attr("max"))
+				displayError("Disponibilità massima: " + $(this).attr("max"));
+			else {
 				displayError("Inserire un valore valido");
 				$(this).val(prev);
 			}
@@ -107,6 +111,36 @@ $(document).ready(function() {
 		$("#"+category).find("input[type=range]").val("200");
 		$("form#search-f").submit();
 	});
+
+	$("button.add-to-cart").each(function() {
+		let input = $(this).parent().siblings(".product-price").find(".add-quantity");
+		if (input.val() == 0) {
+			input.attr("disabled", true);
+			$(this).removeClass("btn-primary").addClass("btn-secondary").attr("disabled", true)
+				.find(".button-text").text("Non disponibile");
+		}
+	});
+
+	$("input.availability").each(function() {
+		let input = $(this);
+		let prev = input.val();
+		input.change(function() {
+			$.ajax({
+				type: "post",
+				url:  "index.php?action=catalogo&mode=availability",
+				data: JSON.stringify({
+					id: input.parents(".product-data").attr("id"),
+					availability: input.val()
+				}),
+				contentType: "application/json; charset=utf-8",
+				error: function(response) {
+					input.val(prev);
+				}
+			});		
+		});
+	});
+
+
 });
 
 function removeProduct(product) {
