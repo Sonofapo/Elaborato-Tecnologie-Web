@@ -4,7 +4,8 @@
 	<div class="product-card">
 		<div class="product-title bold">
 			<?php if ($vars["isVendor"]): ?>
-			<span class="delete-product" title="rimuovi prodotto">&times;</span>
+			<a href="?action=catalogo&mode=remove&id=<?php echo $product["id"] ?>"
+				class="delete-product" title="rimuovi prodotto"><span>&times;</span></a>			
 			<?php endif ?>
 			<?php echo ucfirst($product["name"]) ?>
 		</div>
@@ -33,8 +34,9 @@
 				</div>
 				<div class="product-buy">
 					<?php if ($vars["isVendor"]): ?>
+					<span></span>
 					<a href="?action=catalogo&mode=update&id=<?php echo $product["id"] ?>"
-						class="btn btn-primary btn-sm" title="modifica">Modifica</a>
+						class="btn btn-primary btn-sm" title="modifica">Modifica scheda</a>
 					<?php else: ?>
 					<span class="product-availability">Disp. <?php echo $av ?></span>
 					<button class="btn btn-<?php echo $av ? "primary" : "secondary" ?> btn-sm add-to-cart"

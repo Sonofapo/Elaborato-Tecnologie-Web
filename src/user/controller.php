@@ -5,7 +5,7 @@ switch ($vars["mode"]) {
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$usr = $_POST["username"];
 			$psw = $_POST["password"];
-			if (($_uid = $db->login($usr, $psw)) !== false) {			
+			if (($_uid = $db->login($usr, $psw)) !== false) {
 				$_SESSION["uid"] = $_uid;
 				header("Location: index.php");
 			} else {
@@ -47,8 +47,14 @@ switch ($vars["mode"]) {
 				}
 				# aggiornamento quantità resiudie nel catalogo
 				$cart = getCart($UID);
-				foreach ($db->getProducts(array_keys($cart)) as $p)
-					$db->setAvailability($p["id"], $p["availability"] - $cart[$p["id"]]);
+				foreach ($db->getProducts(array_keys($cart)) as $p) {
+					$_id = $p["id"];
+					$_name = $p["name"];
+					$db->setAvailability($_id, $p["availability"] - $cart[$_id]);
+					if ($p["availability"] - $cart[$_id] < 1)
+						foreach ($db->getVendors() as $vendor)
+							$db->addMessage($vendor, "Il prodotto #$_id ($_name) è terminato");
+				}
 				# creazione dell'ordine
 				$orderId = $db->addOrder($cart, $UID);
 				$db->addMessage($UID, "L'ordine #$orderId è stato registrato correttamente");

@@ -107,8 +107,11 @@ $(document).ready(function() {
 				contentType: "application/json; charset=utf-8",
 				error: function(response) {
 					input.val(prev);
+				},
+				success: function() {
+					displayMessage("Modifica effettuata");
 				}
-			});		
+			});
 		});
 	});
 
@@ -128,9 +131,9 @@ function insertProduct(product, quantity, max, update = false) {
 	let index = cart.findIndex(e => e["productId"] == product);
 	let cart_quantity = index > -1 && !update ? cart[index]["quantity"] : 0;
 	if (quantity + cart_quantity > max) {
-		displayError("Disponibilità massima: " + max);
+		displayMessage("Disponibilità massima: " + max, true);
 	} else if (quantity < 1) {
-		displayError("Inserire una quantità valida");
+		displayMessage("Inserire una quantità valida", true);
 	} else if (countProducts(cart) + quantity <= 100) {
 		if (index < 0)
 			cart.push({ "productId": product, "quantity": quantity });
@@ -140,7 +143,7 @@ function insertProduct(product, quantity, max, update = false) {
 			cart[index]["quantity"] += quantity;
 		pass = true;
 	} else {
-		displayError("Puoi inserire massimo 100 prodotti nel carrello");
+		displayMessage("Puoi inserire massimo 100 prodotti nel carrello", true);
 	}
 	if (pass) {
 		setCookie(userId(), JSON.stringify({ "products" : cart }), 1);
@@ -203,8 +206,9 @@ function productId(element) {
 	return element.parents(".product-data").attr("id");
 }
 
-function displayError(message) {
-	let prompt = `<div class="fade-me"><div class="alert alert-danger">${message}</div></div>`;
+function displayMessage(message, isError = false) {
+	let c = isError ? "danger" : "success";
+	let prompt = `<div class="fade-me"><div class="alert alert-${c}">${message}</div></div>`;
 	$("main").prepend(prompt);
 	setTimeout(() => $("div.fade-me").slideUp(200), 3000);
 }

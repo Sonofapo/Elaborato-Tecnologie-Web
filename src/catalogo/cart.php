@@ -36,6 +36,7 @@
 							<span><?php echo $product["size"]." - ".$product["shape"] ?></span>
 						</div>
 						<div class="product-buy">
+							<span></span>
 							<button class="btn btn-danger btn-sm remove-from-cart" title="rimouvi prodotto">
 								Rimuovi
 							</button>

@@ -167,7 +167,11 @@ main section h3, main section h2 {
 	position: absolute;
 	right: 0;
 	top: -5px;
-	cursor: pointer;
+	color: black;
+}
+
+.delete-product:hover {
+	color: red;
 }
 
 /********** ORDER LIST ***********/
@@ -205,6 +209,7 @@ table td, table th {
 img.order-img {
 	height: 50px;
 	width: 50px;
+	object-fit: scale-down;
 	border-radius: 2px;
 }
 
