@@ -4,7 +4,7 @@ switch ($vars["mode"]) {
 	case "login":
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$usr = $_POST["username"];
-			$psw = $_POST["password"];
+			$psw = md5($_POST["password"]);
 			if (($_uid = $db->login($usr, $psw)) !== false) {
 				$_SESSION["uid"] = $_uid;
 				header("Location: index.php");
@@ -18,7 +18,7 @@ switch ($vars["mode"]) {
 	case "subscribe":
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$usr = $_POST["username"];
-			$psw = $_POST["password"];
+			$psw = md5($_POST["password"]);
 			if ($db->subscribe($usr, $psw)) {
 				$_SESSION["uid"] = $db->login($usr, $psw);
 				$db->addMessage($_SESSION["uid"], "Benvenuto in UniBonsai!");
@@ -72,6 +72,22 @@ switch ($vars["mode"]) {
 		}
 		$vars["body"] = $content;
 		break;
+	case "password":
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			$old = md5($_POST["old-password"]);
+			$new = md5($_POST["new-password"]);
+			$chk = md5($_POST["confirm-password"]);
+			if ($db->getPasswordById($UID) == $old && $new != $old && $new == $chk)
+				if ($db->updatePassword($UID, $new)) {
+					$message = "Cambio password effettuato correttamente";
+					$db->addMessage($UID, "È stata cambiata la password");
+				} else
+					$error = "Errore nell'aggiornamento, riprovare";
+			else
+				$error = "Assicurarsi che la nuova password sia diversa da quella vecchia
+					e di averla confermata correttamente";
+		}
+	//no break per ritorno a pagina profilo
 	case "profile":
 		$vars["messages"] = $db->getMessages($UID);
 		$vars["undread"] = $db->readAllMessages($UID);

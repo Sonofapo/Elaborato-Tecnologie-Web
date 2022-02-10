@@ -20,7 +20,6 @@ class DB {
 
 	public function subscribe($username, $password) {
 		if ($this->login($username, $password) === false) {
-			$password = md5($password);
 			$this->query("INSERT INTO users (username, password) VALUES (?, ?)", [$username, $password], "ss");
 			return true;
 		}
@@ -28,7 +27,6 @@ class DB {
 	}
 
 	public function login($username, $password) {
-		$password = md5($password);
 		$res = $this->query("SELECT id FROM users WHERE username = ? AND password = ?", [$username, $password], "ss");
 		return $res[0]["id"] ?? false;
 	}
@@ -36,6 +34,15 @@ class DB {
 	public function getUsernameById($id) {
 		$res = $this->query("SELECT username FROM users WHERE id = ?", [$id], "i");
 		return $res[0]["username"] ?? false;
+	}
+
+	public function getPasswordById($id) {
+		$res = $this->query("SELECT password FROM users WHERE id = ?", [$id], "i");
+		return $res[0]["password"] ?? false;
+	}
+
+	public function updatePassword($id, $password) {
+		return $this->query("UPDATE users SET password = ? WHERE id = ?", [$password, $id], "si");
 	}
 
 	public function filter ($shapes, $sizes, $price) {

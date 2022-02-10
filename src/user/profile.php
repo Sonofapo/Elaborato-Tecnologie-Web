@@ -1,9 +1,10 @@
 <?php echo get_include_contents("./src/templates/header.php") ?>
 <main>
+	<?php echo get_include_contents("./src/templates/prompt.php") ?>
 	<div id="profile" class="container">
 		<section id="alerts">
 			<h2>
-				<a class="collapsed" href="#alerts-body" data-bs-toggle="collapse" title="notifiche">
+				<a class="collapse" href="#alerts-body" data-bs-toggle="collapse" title="notifiche">
 					<?php echo count($vars["messages"]) ? "Le tue " : "Non hai " ?>notifiche
 				</a>
 			</h2>
@@ -26,7 +27,7 @@
 		</section>
 		<section id="orders">
 			<h2>
-				<a class="collapsed" href="#orders-body" data-bs-toggle="collapse" title="ordini">
+				<a class="collapse" href="#orders-body" data-bs-toggle="collapse" title="ordini">
 					<?php if ($vars["isVendor"]): ?>
 						<?php echo count($vars["orders"]) ? "Resoconto " : "Non ci sono " ?>ordini
 					<?php else: ?>
@@ -66,6 +67,30 @@
 				<?php endforeach ?>
 			</div>
 			<?php endif ?>
+		</section>
+		<section id="change-psw">
+			<h2>
+				<a class="collapse" href="#change-psw-body" data-bs-toggle="collapse" 
+					title="cambia password">Cambia password</a>
+			</h2>
+			<div id="change-psw-body" data-bs-parent="#profile" class="collapse show py-3 col-10 
+				col-md-8 col-lg-6 col-xl-4 offset-1 offset-md-2 offset-lg-3 offset-xl-4">
+				<form action="index.php" method="post">
+					<input type="hidden" name="action" value="user" />
+					<input type="hidden" name="mode" value="password" />
+					
+					<label for="old-password">Vecchia password:</label>
+					<input class="form-control mb-3" type="password" id="old-password" name="old-password" required />
+					
+					<label for="new-password">Nuova password:</label>
+					<input class="form-control mb-3" type="password" id="new-password" name="new-password" required />
+
+					<label for="confirm-password">Conferma password:</label>
+					<input class="form-control mb-3" type="password" id="confirm-password" name="confirm-password" required />
+					
+					<button class="btn btn-success" type="submit">Modifica</button>
+				</form>
+			</div>
 		</section>
 	</div>
 </main>
