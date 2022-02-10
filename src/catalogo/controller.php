@@ -49,7 +49,7 @@
 			break;
 		case "add":
 		case "update":
-			if (!in_array($UID, array_column($db->getVendors(), "id")))
+			if (!in_array($UID, $db->getVendorIds()))
 				die("Accesso non consentito");
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$vars["item"] = generate_product();
@@ -82,7 +82,7 @@
 				return $db->setAvailability($data["id"], $data["availability"]);
 			header("HTTP/1.1 500 Internal Server Error");
 		case "remove":
-			if (!in_array($UID, array_column($db->getVendors(), "id")))
+			if (!in_array($UID, $db->getVendorIds()))
 				die("Accesso non consentito");
 			$id = $_POST["id"] ?? -1;
 			$db->removeProduct($id);

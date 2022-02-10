@@ -52,14 +52,12 @@ switch ($vars["mode"]) {
 					$_name = $p["name"];
 					$db->setAvailability($_id, $p["availability"] - $cart[$_id]);
 					if ($p["availability"] - $cart[$_id] < 1)
-						foreach ($db->getVendors() as $vendor)
-							$db->addMessage($vendor, "Il prodotto #$_id ($_name) è terminato");
+						broadcast_vendor("Il prodotto #$_id ($_name) è terminato");
 				}
 				# creazione dell'ordine
 				$orderId = $db->addOrder($cart, $UID);
 				$db->addMessage($UID, "L'ordine #$orderId è stato registrato correttamente");
-				foreach ($db->getVendors() as $vendor)
-					$db->addMessage($vendor, "L'utente '".$db->getUsernameById($UID)."' ha effettuato l'ordine #$orderId");
+				broadcast_vendor("L'utente '".$db->getUsernameById($UID)."' ha effettuato l'ordine #$orderId");
 				$message = "Acquisto avvenuto correttamente";
 				$vars["products"] = $db->getProducts();
 				setcookie($UID, "", time() - 3600, "/");

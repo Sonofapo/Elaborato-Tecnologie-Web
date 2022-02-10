@@ -156,9 +156,9 @@ class DB {
 		return false;
 	}
 
-	public function getVendors() {
+	public function getVendorIds() {
 		$query = "SELECT id FROM users WHERE isVendor = true";
-		return $this->query($query);
+		return array_column($this->query($query), "id");
 	}
 
 }

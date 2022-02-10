@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 09, 2022 alle 17:34
+-- Creato il: Feb 10, 2022 alle 09:33
 -- Versione del server: 10.5.12-MariaDB-0+deb11u1
 -- Versione PHP: 8.1.2
 
@@ -41,7 +41,7 @@ CREATE TABLE `cards` (
 --
 
 INSERT INTO `cards` (`id`, `name`, `pan`, `cvv`, `date`, `userId`) VALUES
-(1, 'utente', '4325695423698547', '954', '2025-07-18', 2);
+(1, 'utente', '4325695423698547', '954', '2025-07-18', 3);
 
 -- --------------------------------------------------------
 
@@ -56,6 +56,16 @@ CREATE TABLE `messages` (
   `isRead` tinyint(1) NOT NULL DEFAULT 0,
   `userId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `messages`
+--
+
+INSERT INTO `messages` (`id`, `text`, `date`, `isRead`, `userId`) VALUES
+(1, 'Benvenuto in UniBonsai!', '2022-02-10 10:18:24', 1, 3),
+(2, 'L\'ordine #2 è stato registrato correttamente', '2022-02-10 10:32:47', 1, 3),
+(3, 'L\'utente \'cliente\' ha effettuato l\'ordine #2', '2022-02-10 10:32:47', 1, 1),
+(4, 'L\'utente \'cliente\' ha effettuato l\'ordine #2', '2022-02-10 10:32:47', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -74,8 +84,9 @@ CREATE TABLE `orderProducts` (
 --
 
 INSERT INTO `orderProducts` (`orderId`, `productId`, `quantity`) VALUES
-(1, 6, 3),
-(1, 18, 1);
+(2, 6, 1),
+(2, 10, 1),
+(2, 14, 2);
 
 -- --------------------------------------------------------
 
@@ -94,7 +105,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `date`, `userId`) VALUES
-(1, '2022-02-06 09:15:46', 2);
+(2, '2022-02-10 10:32:47', 3);
 
 -- --------------------------------------------------------
 
@@ -118,19 +129,19 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `price`, `shape`, `size`, `availability`, `path`) VALUES
 (1, 'azalea', 49.95, 'squadrato', 'medio', 50, '/img_1.jpg'),
-(2, 'azalea', 52.35, 'tondeggiante', 'medio', 26, '/img_2.jpg'),
+(2, 'azalea', 52.35, 'tondeggiante', 'medio', 25, '/img_2.jpg'),
 (3, 'betulla', 83.48, 'tondeggiante', 'medio', 82, '/img_3.jpg'),
-(4, 'carmona', 19.95, 'squadrato', 'piccolo', 28, '/img_4.jpg'),
+(4, 'carmona', 19.95, 'squadrato', 'piccolo', 27, '/img_4.jpg'),
 (5, 'carmona', 25.95, 'tondeggiante', 'piccolo', 0, '/img_5.jpg'),
-(6, 'ginepro', 179.68, 'squadrato', 'grande', 91, '/img_6.jpg'),
+(6, 'ginepro', 179.68, 'squadrato', 'grande', 88, '/img_6.jpg'),
 (7, 'ginepro', 119.95, 'tondeggiante', 'medio', 67, '/img_7.jpg'),
 (8, 'ginepro', 145.24, 'tondeggiante', 'piccolo', 64, '/img_8.jpg'),
 (9, 'ginseng', 30.81, 'squadrato', 'piccolo', 17, '/img_9.jpg'),
-(10, 'ginseng', 60.37, 'tondeggiante', 'grande', 95, '/img_10.jpg'),
+(10, 'ginseng', 60.37, 'tondeggiante', 'grande', 93, '/img_10.jpg'),
 (11, 'ginseng', 19.94, 'tondeggiante', 'piccolo', 20, '/img_11.jpg'),
 (12, 'melo', 85.12, 'tondeggiante', 'medio', 16, '/img_12.jpg'),
 (13, 'melo', 101.01, 'tondeggiante', 'piccolo', 22, '/img_13.jpg'),
-(14, 'olmo', 68.83, 'squadrato', 'medio', 58, '/img_14.jpg'),
+(14, 'olmo', 68.83, 'squadrato', 'medio', 56, '/img_14.jpg'),
 (15, 'pepe', 76.59, 'squadrato', 'medio', 26, '/img_15.jpg'),
 (16, 'pepe', 86.47, 'tondeggiante', 'medio', 53, '/img_16.jpg'),
 (17, 'pepe', 110.48, 'tondeggiante', 'piccolo', 86, '/img_17.jpg'),
@@ -156,8 +167,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `isVendor`) VALUES
-(1, 'venditore', 'c1a70acc25af38c5408542ddd78acc4c', 1),
-(2, 'cliente', '4983a0ab83ed86e0e7213c8783940193', 0);
+(1, 'venditore1', '2863ae4ce939d2f313e46773d03f5d75', 1),
+(2, 'venditore2', '74e34c6241616abbef303484b786f80a', 1),
+(3, 'cliente', '4983a0ab83ed86e0e7213c8783940193', 0);
 
 --
 -- Indici per le tabelle scaricate
@@ -217,13 +229,13 @@ ALTER TABLE `cards`
 -- AUTO_INCREMENT per la tabella `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT per la tabella `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `products`
@@ -235,7 +247,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

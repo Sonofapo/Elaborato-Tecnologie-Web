@@ -81,4 +81,10 @@ function getCart($uid) {
 	return [];
 }
 
+function broadcast_vendor($message) {
+	global $db;
+	foreach ($db->getVendorIds() as $vendor)
+		$db->addMessage($vendor, $message);
+}
+
 ?>
