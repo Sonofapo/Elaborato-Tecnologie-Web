@@ -88,6 +88,7 @@ switch ($vars["mode"]) {
 	//no break per ritorno a pagina profilo
 	case "profile":
 		$vars["messages"] = $db->getMessages($UID);
+		$vars["countUnread"] = count(array_filter($vars["messages"], function($e) { return !$e["isRead"]; }));
 		$vars["undread"] = $db->readAllMessages($UID);
 		$vars["orders"] = generate_order_list();
 		$vars["body"] = get_include_contents("./src/user/profile.php");

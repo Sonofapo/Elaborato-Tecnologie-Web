@@ -6,6 +6,7 @@
 			<h2>
 				<a class="collapse" href="#alerts-body" data-bs-toggle="collapse" title="notifiche">
 					<?php echo count($vars["messages"]) ? "Le tue " : "Non hai " ?>notifiche
+					<?php if ($vars["countUnread"]) echo "(".$vars["countUnread"].")" ?>
 				</a>
 			</h2>
 			<?php if (count($vars["messages"])): ?>

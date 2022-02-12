@@ -1,7 +1,7 @@
 <div class="product-list">
 	<?php foreach ($vars["products"] as $product): ?>
 	<?php $av = $product["availability"] ?>
-	<div class="product-card">
+	<div class="product-card <?php if (!$av && $vars["isVendor"]) echo "bg-secondary" ?>">
 		<div class="product-title bold">
 			<?php if ($vars["isVendor"]): ?>
 				<a href="#confirm-delete" class="delete-product" data-bs-toggle="modal" 

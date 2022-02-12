@@ -133,12 +133,12 @@ function insertProduct(product, quantity, max, update = false) {
 	let pass = false;
 	let cart = getProducts(userId());
 	let index = cart.findIndex(e => e["productId"] == product);
-	let cart_quantity = index > -1 && !update ? cart[index]["quantity"] : 0;
+	let cart_quantity = index > -1 && update ? cart[index]["quantity"] : 0;
 	if (quantity + cart_quantity > max) {
 		displayMessage("Disponibilità massima: " + max, true);
 	} else if (quantity < 1) {
 		displayMessage("Inserire una quantità valida", true);
-	} else if (countProducts(cart) + quantity <= 100) {
+	} else if (countProducts(cart) + quantity - cart_quantity <= 100) {
 		if (index < 0)
 			cart.push({ "productId": product, "quantity": quantity });
 		else if (update)
