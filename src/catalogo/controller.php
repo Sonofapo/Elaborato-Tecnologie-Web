@@ -40,7 +40,7 @@
 			$content = get_include_contents("./src/catalogo/cart.php");
 			break;
 		case "purchase":
-			if (isset($_COOKIE[$UID]) && json_decode($_COOKIE[$UID])) {
+			if (isset($_COOKIE[$UID]) && json_decode($_COOKIE[$UID], true)) {
 				$vars["cards"] = $db->getCards($_SESSION["uid"]);
 				$content = get_include_contents("./src/catalogo/purchase.php");
 			} else {

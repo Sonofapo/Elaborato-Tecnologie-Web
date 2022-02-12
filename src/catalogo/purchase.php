@@ -1,6 +1,6 @@
 <?php echo get_include_contents("./src/templates/header.php") ?>
 <main>
-<?php echo get_include_contents("./src/templates/prompt.php") ?>
+	<?php echo get_include_contents("./src/templates/prompt.php") ?>
 	<h2 class="text-center mt-3">Procedi al pagamento</h2>
 	<div class="col-10 col-md-8 col-lg-6 col-xl-4
 		offset-1 offset-md-2 offset-lg-3 offset-xl-4">

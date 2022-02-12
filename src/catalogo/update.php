@@ -9,7 +9,7 @@
 		<form action="index.php" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="action" value="catalogo" />
 			<input type="hidden" name="mode" value="<?php echo $vars["item"]["id"] ? "update" : "add" ?>" />
-			<input type="hidden" name="id" value="<?php echo $vars["item"]["id"] ?>">
+			<input type="hidden" name="id" value="<?php echo $vars["item"]["id"] ?>" />
 
 			<label for="name">Nome</label>
 			<input type="text" class="form-control mb-3" id="name" name="name"

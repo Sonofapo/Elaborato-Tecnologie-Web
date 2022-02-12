@@ -39,32 +39,36 @@
 			<?php if (count($vars["orders"])): ?>
 			<div id="orders-body" class="collapse py-3 m-auto" data-bs-parent="#profile">
 				<?php foreach ($vars["orders"] as $order): ?>
-					<?php $o = $order["orderId"] ?>
-						<table class="table table-striped">
-							<tr>
-								<th scope="colgroup" colspan="3" id="order-<?php echo $o ?>">
-									Ordine #<?php echo $o?> del <?php echo date("d/m/Y (G:i)", strtotime($order["date"]))?>
-								</th>
-							</tr>
-							<tr>
-								<th scope="col" id="img-<?php echo $o ?>">Immagine</th>
-								<th scope="col" id="name-<?php echo $o ?>">Nome Prodotto</th>
-								<th scope="col" id="qty-<?php echo $o ?>">Quantità</th>
-							</tr>
-							<?php foreach ($order["prods"] as $item): ?>
-								<tr>
-									<td headers="img-<?php echo $o ?>">
-										<img class="order-img" src="<?php echo IMG_PATH.$item["path"]?>" alt="" />
-									</td>
-									<td headers="name-<?php echo $o ?>">
-										<?php echo ucfirst($item["name"])?>
-									</td>
-									<td headers="qty-<?php echo $o ?>">
-										<?php echo $item["quantity"]?>
-									</td>
-								</tr>
-							<?php endforeach ?>
-						</table>
+				<?php $o = $order["orderId"] ?>
+				<table class="table table-striped">
+					<thead>
+					<tr>
+						<th scope="colgroup" colspan="3" id="order-<?php echo $o ?>">
+							Ordine #<?php echo $o?> del <?php echo date("d/m/Y (G:i)", strtotime($order["date"]))?>
+						</th>
+					</tr>
+					<tr>
+						<th scope="col" id="img-<?php echo $o ?>">Immagine</th>
+						<th scope="col" id="name-<?php echo $o ?>">Nome Prodotto</th>
+						<th scope="col" id="qty-<?php echo $o ?>">Quantità</th>
+					</tr>
+					</thead>
+					<tbody>
+					<?php foreach ($order["prods"] as $item): ?>
+					<tr>
+						<td headers="img-<?php echo $o ?>">
+							<img class="order-img" src="<?php echo IMG_PATH.$item["path"]?>" alt="" />
+						</td>
+						<td headers="name-<?php echo $o ?>">
+							<?php echo ucfirst($item["name"])?>
+						</td>
+						<td headers="qty-<?php echo $o ?>">
+							<?php echo $item["quantity"]?>
+						</td>
+					</tr>
+					<?php endforeach ?>
+					</tbody>
+				</table>
 				<?php endforeach ?>
 			</div>
 			<?php endif ?>

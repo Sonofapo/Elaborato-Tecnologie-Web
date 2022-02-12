@@ -2,7 +2,7 @@
 <header>
 	<nav class="flex-container">
 		<div class="flex-1">
-			<img id="logo-img" src="./img/logo-bianco.png" alt="">
+			<img id="logo-img" src="./img/logo-bianco.png" alt="" />
 			<h1><a href="index.php" title="home">UniBonsai</a></h1>
 			<div id="expand-menu-div">
 				<span class="<?php if ($vars["unread"]) echo "notification-dot bounce-twice" ?>" 

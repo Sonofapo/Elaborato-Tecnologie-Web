@@ -10,7 +10,7 @@
 				py-3 px-5 border border-dark rounded">
 				<img id="login-img" src="./img/logo.png" alt="" />
 				<h2><?php echo $vars["isLogin"] ? "Accesso" : "Registrazione" ?></h2>
-				<form action="index.php" method="POST">
+				<form action="index.php" method="post">
 					<input type="hidden" name="action" value="user" />
 					<input type="hidden" name="mode" value="<?php echo $vars["isLogin"] ? "login" : "subscribe"?>" />
 					
@@ -26,7 +26,8 @@
 				</form>
 				<p class="m-0">
 					oppure
-					<a href="index.php?action=user&mode=<?php echo $vars["isLogin"] ? "subscribe" : "login" ?>">
+					<a href="index.php?action=user&mode=<?php echo $vars["isLogin"] ? "subscribe" : "login" ?>"
+						title="<?php echo $vars["isLogin"] ? "registrati" : "accedi"?>">
 						<?php echo $vars["isLogin"] ? "registrati" : "accedi"?>
 					</a>
 				</p>

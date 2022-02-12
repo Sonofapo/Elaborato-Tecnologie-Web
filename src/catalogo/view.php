@@ -8,8 +8,8 @@
 			<?php echo get_include_contents("./src/templates/filters.php") ?>
 		</div>
 		<form action="index.php" method="post" id="search-f">
-			<input type="hidden" name="action" value="catalogo">
-			<input type="hidden" name="mode" value="filter">
+			<input type="hidden" name="action" value="catalogo" />
+			<input type="hidden" name="mode" value="filter" />
 			<button class="btn btn-primary" type="submit" id="apply-filter" title="applica filtri">Applica</button>
 		</form>
 	</div>
