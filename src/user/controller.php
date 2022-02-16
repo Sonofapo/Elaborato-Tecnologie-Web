@@ -60,6 +60,7 @@ switch ($vars["mode"]) {
 				broadcast_vendor("L'utente '".$db->getUsernameById($UID)."' ha effettuato l'ordine #$orderId");
 				$message = "Acquisto avvenuto correttamente";
 				$vars["products"] = $db->getProducts();
+				$vars["filters"] = generate_filters();
 				setcookie($UID, "", time() - 3600, "/");
 				$content = get_include_contents("./src/catalogo/view.php");
 			} else {

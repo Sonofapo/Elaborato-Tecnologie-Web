@@ -63,6 +63,7 @@
 					if (!$_POST["id"])
 						$db->addProduct($vars["item"]);
 					$vars["products"] = $db->getProducts();
+					$vars["filters"] = generate_filters();
 					$content = get_include_contents("./src/catalogo/view.php");
 				} else {
 					$error = "Errore. Assicurarsi che l'immagine sia valida e di tipo .jpg";
@@ -89,6 +90,7 @@
 			@unlink(IMG_PATH."/img_$id.jpg");
 			$message = "Prodotto rimosso correttamente";
 			$vars["products"] = $db->getProducts();
+			$vars["filters"] = generate_filters();
 			$content = get_include_contents("./src/catalogo/view.php");
 			break;
 		default:
